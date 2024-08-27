@@ -1,0 +1,265 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/css/Msg_Notify/style.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        var notification;
+        var container = document.querySelector('#notification-container');
+        var visible = false;
+        var queue = [];
+
+        function createNotification() {
+            notification = document.createElement('div');
+            var btn = document.createElement('button');
+            var title = document.createElement('div');
+            var msg = document.createElement('div');
+            btn.className = 'notification-close';
+            title.className = 'notification-title';
+            msg.className = 'notification-message';
+            btn.addEventListener('click', hideNotification, false);
+            notification.addEventListener('animationend', hideNotification, false);
+            notification.addEventListener('webkitAnimationEnd', hideNotification, false);
+            notification.appendChild(btn);
+            notification.appendChild(title);
+            notification.appendChild(msg);
+        }
+
+        function updateNotification(type, title, message) {
+            notification.className = 'notification notification-' + type;
+            notification.querySelector('.notification-title').innerHTML = title;
+            notification.querySelector('.notification-message').innerHTML = message;
+        }
+
+        function showNotification(type, title, message) {
+            if (visible) {
+                queue.push([type, title, message]);
+                return;
+            }
+            if (!notification) {
+                createNotification();
+            }
+            updateNotification(type, title, message);
+            container.appendChild(notification);
+            visible = true;
+        }
+
+        function hideNotification() {
+            if (visible) {
+                visible = false;
+                container.removeChild(notification);
+                if (queue.length) {
+                    showNotification.apply(null, queue.shift());
+                }
+            }
+        }
+
+        document.querySelector('#success-btn').addEventListener('click', showNotification.bind(null, 'success', 'Success!', 'Your request was completed successfully.'), false);
+        document.querySelector('#error-btn').addEventListener('click', showNotification.bind(null, 'error', 'Error!', 'Your request did not complete successfully.'), false);
+        document.querySelector('#info-btn').addEventListener('click', showNotification.bind(null, 'info', 'Information', 'Don\'t forget to checkout the new features'), false);
+        document.querySelector('#warning-btn').addEventListener('click', showNotification.bind(null, 'warning', 'Warning!', 'Your battery is running low.'), false);
+
+    });
+</script>
+
+
+<div id="notification-container"></div>
+<button id="success-btn">Success</button>
+<button id="error-btn">Error</button>
+<button id="info-btn">Info</button>
+<button id="warning-btn">Warning</button>
+
+<div class="container">
+    <script>
+        localStorage.setItem("loginID", null);
+        @*alert();
+       // alert('@TempData["sdata"]');
+        @{
+            TempData["UserName"]="Tempdata";
+        }*@
+
+
+    </script>
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Users</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> System Users</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    <a title="Add New Record" href='@Url.Action("Create", "User")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table  cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Cell
+                                    </th>
+                                    <th>
+                                        Login ID
+                                    </th>
+                                    <th>
+                                        Password
+                                    </th>
+                                    <th>
+                                        ORG ID
+                                    </th>
+                                    <th>
+                                        Is Active
+                                    </th>
+                                    <th>
+                                        Create Date
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @item.UserName
+                                        </td>
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                        <td>
+                                            @item.ContactNo
+                                        </td>
+
+                                        
+                                        <td>
+                                            @item.LoginID
+                                        </td>
+                                        <td>
+                                            @item.Password
+                                        </td>
+                                        <td>
+                                            @item.Org_Id
+                                        </td>
+                                        <td>
+                                            @item.IsActive
+                                        </td>
+                                        <td>
+                                            @item.CreateDate
+                                        </td>
+                                        <td>
+                                            <a title="Edit" href="@Url.Action("Edit", "User", new { id = item.UserID }) "><i class="icon-pencil widget-icon-xlarge"></i></a>  |
+                                            <a title="Detail" href="@Url.Action("Details", "User", new { id = item.UserID }) "><i class="icon-list widget-icon-xlarge"></i></a> |
+                                            <a title="Delete" href="@Url.Action("Delete", "User", new { id = item.UserID }) "><i class="icon-trash widget-icon-xlarge"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Search Modal Start-->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.DropDownList("UserID", null, "Select User")*@
+                                    <input />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                        @*<input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->
+
+
+

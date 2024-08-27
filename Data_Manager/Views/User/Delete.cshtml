@@ -1,0 +1,117 @@
+﻿@model Data_Manager.Models.tbl_User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tbl_User</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LoginID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoginID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SQ1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SQ1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SA1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SA1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,184 @@
+﻿@model Data_Manager.Models.tbl_SalesTypeSetupForm
+
+
+@{
+    ViewBag.Title = "Create Product Name";
+
+
+}
+
+
+
+<div class="row">
+    
+    <div class="col-lg-6">
+        <a title="Back" href='@Url.Action("Index", "SalesType")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+<div class="row">
+    <div class="col-md-6">
+        <div class="block">
+            <div class="header">
+                <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Add New Product</h2>
+            </div>
+            <div class="content">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <fieldset>
+                    
+                                <div class="well">
+                                    <div class=" form-group form-group-sm">
+
+                                        <div class="row ">
+
+                                            <div class="form-group col-lg-6">
+                                                @Html.LabelFor(model => model.Name, "Product Name")
+                                                @Html.TextBoxFor(model => model.Name, new { @class = "validate[required] form-control" ,@placeholder ="example... S8+" })
+                                                @Html.ValidationMessageFor(model => model.Name)
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                @Html.LabelFor(model => model.CategoryID, "Category")
+                                                @Html.DropDownList("CategoryID", null, "Select Category Name", new { @class = "validate[required] form-control" })
+                                                @Html.ValidationMessageFor(model => model.Org_Id)
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                @Html.LabelFor(model => model.BrandID, "Brand")
+                                                @Html.DropDownList("BrandID", null, "Select Brand Name", new { @class = "validate[required] form-control" })
+                                                @Html.ValidationMessageFor(model => model.Org_Id)
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                @Html.LabelFor(model => model.IsActive, "Is Active")
+                                                @Html.DropDownListFor(model => model.IsActive, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem() {Text = "", Value=""},
+                                                        new SelectListItem() {Text = "Yes", Value="Y"},
+                                                        new SelectListItem() {Text = "No", Value="N"}
+                                                    }, new { @class = "validate[required]" })
+                                               @Html.ValidationMessageFor(model => model.IsActive)
+                                            </div>
+
+                                            @*<div class="form-group col-lg-3">
+                                        @Html.LabelFor(model => model., "Branch Name")
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                    <div class="form-group col-lg-3">
+
+                                        @Html.LabelFor(model => model.Name, "Region")
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+
+                                    </div>*@
+                                        </div>
+                                        @*<div class="row ">
+                                    <div class="form-group col-lg-3">
+                                        @Html.LabelFor(model => model.Name, "Division")
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        @Html.LabelFor(model => model.Name, "User Code")
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Name)
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                    @Html.LabelFor(model => model.ORGCODE, "Organization")
+                                    @Html.TextBoxFor(model => model.ORGCODE, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ORGCODE)
+                                    </div>
+                                </div>*@
+                                        <div class="row ">
+                                            <div class="col-lg-12">
+
+                                                <div class="form-group col-lg-11">
+                                                    <button type="submit" class="btn btn-base">
+                                                        <i class=" icon-plus"> </i>
+                                                        Save
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>                              
+                        </div>
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Add New Category</h2>
+            </div>
+            <div class="content">
+                @using (Html.BeginForm("CategoryName", "SalesType", FormMethod.Post, new { @id = "validate" }))
+                 {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                        <div class="row ">
+                            <div class="form-group col-lg-12">
+                                <label>Category Name</label>
+                                <input class="validate[required]" placeholder="example... Mobile" name="CategoryName" type="text" />
+                       
+                            </div>
+                        </div>
+                
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-11">
+                            <button type="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Add New Brand</h2>              
+            </div>
+            <div class="content">
+                @using (Html.BeginForm("BrandName", "SalesType", FormMethod.Post, new { @id = "validate" }))
+                                 {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                <div class="row ">
+                    <div class="form-group col-lg-12">
+                        <label>Brand Name</label>
+                        <input class="validate[required]" placeholder="example... Samsung" name="BrandName" type="text" />
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-11">                     
+                            <button type="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+

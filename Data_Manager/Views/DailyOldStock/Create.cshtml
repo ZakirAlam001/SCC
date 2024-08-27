@@ -1,0 +1,89 @@
+﻿@model Data_Manager.Models.tbl_oldstockinout
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_oldstockinout</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.oldstockid)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.oldstockid)
+            @Html.ValidationMessageFor(model => model.oldstockid)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StockType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StockType)
+            @Html.ValidationMessageFor(model => model.StockType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateBy)
+            @Html.ValidationMessageFor(model => model.CreateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DML_Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DML_Type)
+            @Html.ValidationMessageFor(model => model.DML_Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

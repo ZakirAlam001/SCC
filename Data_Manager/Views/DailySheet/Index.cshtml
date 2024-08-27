@@ -1,0 +1,1019 @@
+﻿
+<style>
+    table {
+        width: 100% !important;
+    }
+
+    tbody {
+        background: white;
+        color: black;
+    }
+
+    thead {
+        background: #5e5c58f2;
+        border: 0.2px solid white;
+        font-size: medium;
+    }
+
+    .col {
+        text-align: center;
+    }
+
+    .ffooter {
+        background: #cecaca96;
+        font-size: medium;
+        border-top: 2px solid #ffc806;
+        text-align: center;
+    }
+
+    .icon-list,.pointer {
+        cursor: pointer;
+    }
+</style>
+
+<div class="row">
+
+        <div class="col-lg-12">
+            <div style="margin: 0 auto;width: 260pt;">
+
+
+                <div title="Selected Date" class="block-fill-white input-group">
+                    <div class="input-group-addon "> <a title="Back" onclick="GetAllData($('#activedate').val(),'B')" a style="" class="widget-icon widget-icon-dark pointer"><i class="icon-arrow-left"></i></a> </div>
+
+                    <div title="LoadData" class="input-group-addon pointer" onclick="GetAllData($('#activedate').val(),'C')"><span class="icon-refresh"> </span> </div>
+                    <div class="input-group-addon"><span class="icon-calendar-empty"> </span> </div>
+                    <input @*onchange="GetAllData($('#activedate').val(),'C')"*@ id="activedate" style="font-weight: bold;font-size: 15px;color: #f70c0ccf; height: 40px;" value="" type="text" class="datepicker1 form-control  hasDatepicker col-md-3 activedate" autocomplete="off">
+                    <div class="input-group-addon "><a title="Forward" onclick="GetAllData($('#activedate').val(),'F')" style="" class="widget-icon widget-icon-dark pointer"><i class="icon-arrow-right"></i></a> </div>
+                </div>
+            </div>
+            
+
+
+        </div>
+
+    </div><br />
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(1);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Deposit  </h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="depositlist" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>Date</td>
+                                    <td>Description</td>
+                                    <td>Type</td>
+                                    <td>Amount</td>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a onclick="showhide('#customerpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(2);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Customer Order</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="customeroder" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td title="TransactionID">ID</td>
+                                    <td>Date</td>
+                                    <td>Name</td>
+                                    <td>Item</td>
+                                    <td>Rate</td>
+                                    <td>Qty</td>
+                                    <td>Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(3);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Vendor Order</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="vendorgrid" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td title="TransactionID">ID</td>
+                                    <td>Date</td>
+                                    <td>Name</td>
+                                    <td>Item</td>
+                                    <td>Rate</td>
+                                    <td>Qty</td>
+                                    <td>Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(7)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Loan Amount</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="loan" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>ID</td>
+                                    <td>Date</td>
+                                    <td>Name</td>
+                                    <td>Description</td>
+                                    <td>DR</td>
+                                    <td>CR</td>
+                                    <td>Balance</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(4)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Expense</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="expense" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>ID</td>
+                                    <td>Date</td>
+                                    <td>Description</td>
+                                    <td>Exp-Type</td>
+                                    <td>Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <h2 onclick="GetData(5)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Recieved</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="Cpayment" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>ID</td>
+                                    <td>Date</td>
+                                    <td>Name</td>
+                                    <td>Pay-Type</td>
+                                    <td>Description</td>
+                                    <td>Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="block">
+            <div class="header">
+                <h2 onclick="GetData(6)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Send</h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table id="Vpayment" border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>ID</td>
+                                    <td>Date</td>
+                                    <td>Name</td>
+                                    <td>Pay-Type</td>
+                                    <td>Description</td>
+                                    <td>Amount</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="block">
+            <div class="header">
+                <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Profit and Lost  </h2>
+            </div>
+            <div class="content">
+
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <td>No.</td>
+                                    <td>Total Sale</td>
+                                    <td>Total Loan</td>
+                                    <td>Payment Send</td>
+                                    <td>Payment Recv</td>
+                                    <td>Total Expense</td>
+                                    <td>Proft & Loss</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Gohar Pakwan</td>
+                                    <td>Counter</td>
+                                    <td>720</td>
+                                    <td>17</td>
+                                    <td>17</td>
+                                    <td>4400</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Gohar Food</td>
+                                    <td>Boneless</td>
+                                    <td>720</td>
+                                    <td>17</td>
+                                    <td>17</td>
+                                    <td>8500</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Al Syed Pakwan</td>
+                                    <td>Karhai</td>
+                                    <td>720</td>
+                                    <td>17</td>
+                                    <td>17</td>
+                                    <td>5600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@using (Html.BeginForm("Index", "GL_Transaction", FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Search Record </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class=" hide row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @*@*   @Html.DropDownList("EmpID", null, "Select SO")*@
+
+                                    @Html.DropDownList("Stock_ID", null, "Select Sales Item", new { @class = "validate[required] form-control" })
+                                    @*   @Html.DropDownList("EmpID", null, "Customer Name", new { @class = "validate[required] form-control" })*@
+                                    @Html.DropDownList("VendorId", null, "Vendor Name", new { @class = "validate[required] form-control" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" />
+                                        @* <input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" />
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                        <div id="customerpayment" class="row hide customerpayment">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i  class="widget-icon widget-icon-dark icon-plus"> </i> Add Customer Payment  </h2>
+                                </div>
+                                <div class="content">
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Name
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required] form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Payment Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <select class="" id="Payment_Type" name="Payment_Type">
+                                                            <option>Select</option>
+                                                            <option value="Cash">Cash</option>
+                                                            <option value="Bank">Bank</option>
+                                                            <option value="Cheque">Cheque</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="form-control" id="Customerdescription" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="button" onclick="CustomerPayment();" value="Save" />
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide row vendorpayment">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Vendor Payment  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Name
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("VendorId", null, "Select", new { @class = "VPVendorID validate[required] form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Payment Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <select class=" VPPType">
+                                                            <option>Select</option>
+                                                            <option value="Cash">Cash</option>
+                                                            <option value="Bank">Bank</option>
+                                                            <option value="Cheque">Cheque</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] VPamount " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="VPdate datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-lg-8">
+                                            <div class="editor-label">
+                                                Description
+                                            </div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <input class="form-control VPdescription" type="text">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="button" onclick="VendorPayment();" value="Save" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hide row expense">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Daily Expense  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="form-control Exdescription" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Payment Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <select class="validate[required] Exexpensetype" id="Expensetype" name="Expensetype">
+                                                            <option value=""></option>
+                                                            <option value="D-Salary">D-Salary</option>
+                                                            <option value="M-Salary">M-Salary</option>
+                                                            <option value="OfficeExp">OfficeExp</option>
+                                                            <option value="UtilityExp">UtilityExp</option>
+                                                            <option value="Others">Others</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] ExAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker Exdate" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="button" onclick="ExpenseAdd();" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row customerorder hide">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Customer Order  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Name
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required]  OEmpID" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Order Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required]  OItemType" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker ODescription" data-val="true" data-val-date="The field Recv_Date must be a date." type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Rate
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        <input onchange="Total(1);" class="validate[required] ORate" data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Weight(kg)
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        <input onchange="Total(1);" class="validate[required] OWeight" data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input readonly="readonly" value="0" class="validate[required] OTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker Odate" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <input type="button" onclick="SaleOrder();" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row vendorrorder hide">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Vendor Order  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Name
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("VendorID", null, "Select", new { @class = "validate[required]  OVendorID" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Order Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required]  OVItemType" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker OVDescription" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Rate
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        <input onchange="Total(2)" class="validate[required] OVRate" data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Weight(kg)
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="editor-field">
+                                                        <input onchange="Total(2)" class="validate[required] OVWeight" data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input readonly="readonly" value="0" class="validate[required] OVTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="datepicker1 validate[required]  hasDatepicker OVdate" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <input type="button" onclick="VendorSave();" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class=" row loanAmount hide">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Loan Payment  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Name
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("EmpID", null, "Select", new { @class = "LPLoanPersonID validate[required]" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] LPdescription " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Payment Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <select class="validate[required] LPPayment_Type" id="Payment_Type" name="Payment_Type">
+                                                        <option value=""></option>
+                                                        <option value="CR">Amount Payed</option>
+                                                        <option value="DR">Amount Recieved</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] LPAmount " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="LPdate datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="button" onclick="LoanPayment();" value="Save" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class=" row dailydeposit hide">
+                            <div class=" block">
+                                <div class="header">
+
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Deposit  </h2>
+                                </div>
+                                <div class="content">
+
+                                    <div class="row ">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Deposit Type
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        @Html.DropDownList("DepositType", new List<SelectListItem>
+                                                        {
+                                                                new SelectListItem{ Text="Select Deposit Type", },
+                                                                new SelectListItem{ Text="Cash", Value = "Cash" },
+                                                                new SelectListItem{ Text="Goods", Value = "Goods" },
+
+                                                         })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Amount
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] ddAmount " data-val="true" data-val-number="The field Amount must be a number." type="number">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="editor-label">
+                                                    Date
+                                                </div>
+                                                <div class="editor-field">
+                                                    <div class="input-group">
+                                                        <input class="dddate datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="editor-label">
+                                                    Description
+                                                </div>
+                                                <div class="editor-field">
+                                                    <input class="validate[required] dddescription " data-val="true" data-val-number="The field Amount must be a number." type="text">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <input type="button" onclick="DailyDeposit();" value="Save" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+  //  $('.hide').hide();
+    function showhide(id) {
+        alert(id)
+        $('#customerpayment').removeClass('hide');
+    }
+        ////
+</script>
+
+
+
+
+
+
+
+       
+
+<script src="~/js/ProjectFiles/dailysheet.js"></script>
+<script src="~/js/ProjectFiles/GridLoad.js"></script>
+<script type='text/javascript' src='~/js/plugins.js'></script>

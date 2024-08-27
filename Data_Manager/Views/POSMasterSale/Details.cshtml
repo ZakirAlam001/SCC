@@ -1,0 +1,113 @@
+﻿@model Data_Manager.Models.POS_MasterSale
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>POS_MasterSale</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ID_MS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ID_MS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MS_Code)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MS_Code)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Detetime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detetime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.No_of_Item)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.No_of_Item)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Net_Amount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Net_Amount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cash_Rcv)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cash_Rcv)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Balance)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Balance)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Change_due)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Change_due)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Org_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Org_Id)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

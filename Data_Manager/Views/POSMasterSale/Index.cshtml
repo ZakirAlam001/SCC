@@ -1,0 +1,187 @@
+﻿@model IEnumerable<Data_Manager.Models.POS_MasterSale>
+
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.printtext = DateTime.Now;
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Sale Master</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Counter Sale</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    @*<a title="Add New Record" href='@Url.Action("Create", "SaleMaster")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>*@
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #Inv No
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Net Amount
+                                    </th>
+                                    <th>
+                                        User
+                                    </th>
+                                    @*<th>
+                                        Create By
+                                    </th>*@
+
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a title="Print Bill" href="@Url.Action("posprint", "SaleMaster", new { saleMstId = item.ID_MS }) " target="_blank"><i class="icon-print"></i></a> @item.MS_Code#
+                                        </td>
+                                        <td>
+                                           @String.Format("{0:dd/MMM/yy hh:mm tt}", @item.Detetime)
+                                        </td>
+                                        <td class="price">
+                                            @item.Net_Amount
+                                        </td>
+                                        <td>
+                                            U-@item.UserID        
+                                        </td>
+                                        @*<td>
+                                           @item.CreateBy
+                                        </td>*@                                       
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot><tr style="background: white;    color: black; font-size: 20px;"><td></td><td></td><td>Total---> <span id="total"></span></td></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+@*<script>
+        if ('@ViewBag.delmsg' != null) {
+            alert('@ViewBag.delmsg');
+        }
+
+    </script>*@
+<!-- Search Modal Start-->
+@using (Html.BeginForm("Index", "POSMasterSale", FormMethod.Post))
+{
+
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                  <select name="search">
+                                      <option value="0">Today</option>
+                                      <option value="-3">Last 3-Days</option>
+                                      <option value="-7">Last Week</option>
+                                      <option value="-30">Last Month</option>
+                                      <option value="-90">Last 3 Months</option>
+                                      <option value="-180">Last 6 Month</option>
+                                      <option value="-360">Last Year</option>
+                                      <option value="-720">Last 2 Years</option>
+                                      <option value="-1080">Last 3 Years</option>
+                                      <option value="-1440">Last 4 Years</option>
+                                      <option value="-1800">Last 5 Years</option>
+                                      <option value="-3600">Last 10 Years</option>
+                                  </select>
+                                </div>
+                            </div>
+                         
+                            
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->
+<script>
+    var sum = 0;
+    // iterate through each td based on class and add the values
+    
+    //  
+    $(document).ready(function () {
+
+        $(".price").each(function () {
+
+            var value = $(this).text();
+            // add only if the value is number
+            if (!isNaN(value) && value.length != 0) {
+                sum += parseFloat(value);
+
+            }
+        });
+        $('#total').text(sum);
+        sum = 0;
+
+
+        $("#myTable1_filter input").change(function () {
+            $(".price").each(function () {
+
+                var value = $(this).text();
+                // add only if the value is number
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
+
+                }
+            });
+            $('#total').text(sum).change(500);
+            sum = 0;
+        });
+    });
+    
+</script>

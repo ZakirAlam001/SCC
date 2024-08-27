@@ -1,0 +1,113 @@
+﻿@model Data_Manager.Models.tbl_Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_Account</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BankAccountId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BankAccountId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_Bank.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_Bank.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccountTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccountNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpeningDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpeningDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpeningBalance)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpeningBalance)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChequeBookStart)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChequeBookStart)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChequeBookEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChequeBookEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Remarks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remarks)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,165 @@
+﻿@model Data_Manager.Models.tbl_Orgcode
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_Orgcode</legend>
+        @Html.HiddenFor(model => model.CreatedDate)
+        @Html.HiddenFor(model => model.CreatedBy)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Org_Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Org_Id)
+            @Html.ValidationMessageFor(model => model.Org_Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Cell)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Cell)
+            @Html.ValidationMessageFor(model => model.Cell)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NIC)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NIC)
+            @Html.ValidationMessageFor(model => model.NIC)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Adress)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Adress)
+            @Html.ValidationMessageFor(model => model.Adress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Logo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Logo)
+            @Html.ValidationMessageFor(model => model.Logo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedDate)
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy)
+            @Html.ValidationMessageFor(model => model.CreatedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Licence_from)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Licence_from)
+            @Html.ValidationMessageFor(model => model.Licence_from)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Licence_to)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Licence_to)
+            @Html.ValidationMessageFor(model => model.Licence_to)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.notice_Msg)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.notice_Msg)
+            @Html.ValidationMessageFor(model => model.notice_Msg)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.log)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.log)
+            @Html.ValidationMessageFor(model => model.log)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_Log)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.User_Log)
+            @Html.ValidationMessageFor(model => model.User_Log)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Licence_Key)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Licence_Key)
+            @Html.ValidationMessageFor(model => model.Licence_Key)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_Loan_Transaction_Backup>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Loan_Backup_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanPersonID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Durantion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Payment_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DR_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loan_Purpose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDelete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loan_Backup_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanPersonID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplyDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Durantion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Payment_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DR_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loan_Purpose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDelete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

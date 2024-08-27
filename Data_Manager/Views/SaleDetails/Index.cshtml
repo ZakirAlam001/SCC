@@ -1,0 +1,214 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_SaleDetail>
+
+@{
+    ViewBag.Title = "Sales Details";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Sales Details</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Customer</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                   @* <a title="Add New Record" href='@Url.Action("Create", "Customer")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>*@
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Invo#
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Item
+                                    </th>
+                                    <th>
+                                        Quantity
+                                    </th>
+                                    <th>
+                                        R.Price
+                                    </th>
+                                    <th>
+                                        Net Price
+                                    </th>
+                                    <th>
+                                        Create By
+                                    </th>
+                                    <th>
+                                        Create Date
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    @*<th>
+                                        Action
+                                    </th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@if (item.Sale_Status == "S")
+                                        {
+                                           @Html.DisplayFor(modelitem => item.ExpMstID)
+                                        }
+                                            else if (item.Sale_Status == "R")
+                                            {
+                                                <i title="Sale Return Item" style="color:red;" class="icon-undo"> </i><span> Return</span> 
+                                            }
+                                            
+                                        </td>
+                                        <td>
+                                            @if (item.Sale_Status == "S")
+                                            {
+                                                @Html.DisplayFor(modelitem => item.tbl_SaleMaster.tbl_Employee.Name)
+                                            }
+                                            else if (item.Sale_Status == "R")
+                                            {
+                                                Data_Manager.Models.Entities_Data db = new Data_Manager.Models.Entities_Data();
+                                                var name = db.tbl_Employee.Where(a => a.EmpID == item.Sale_return_ID).FirstOrDefault().Name;
+                                                <span>@name</span>
+                                            }
+                                          
+                                        </td>
+                                        <td>
+                                           @Html.DisplayFor(modelitem => item.tbl_SalesTypeSetupForm.Name)
+                                        </td>
+                                        <td >
+                                            @Html.DisplayFor(modelitem => item.Stock_Counts)
+                                        </td>
+                                        <td align="right">
+                                            @Html.DisplayFor(modelitem => item.Stock_Retial_Price)
+                                        </td>
+                                        <td align="right">
+                                            @Html.DisplayFor(modelitem => item.Net_Sale_Price)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelitem => item.CreateBy)
+                                        </td>
+
+                                        <td>
+                                            @String.Format("{0:dd/MMM/yy}", @item.CreateDate)
+                                        </td>
+                                        <td>
+                                            @if (item.Sale_Status == "S")
+                                            {
+                                                <i  class="icon-check"> </i> @Html.DisplayFor(modelitem => item.Sale_Status)
+                                            }
+                                            else if (item.Sale_Status == "R")
+                                            {
+                                               <i style="color:red;" class="icon-undo"> </i> @Html.DisplayFor(modelitem => item.Sale_Status)
+                                            }
+                                            
+                                        </td>
+                                        @*<td>
+                                            <a title="Edit" href="@Url.Action("Edit", "SaleDetails", new { id = item.SaleDetail_ID }) "><i class="icon-pencil widget-icon-xlarge"></i></a>  
+                                            </td>*@
+                                    </tr>
+                                }
+                            </tbody><tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Search Modal Start-->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.DropDownList("UserID", null, "Select User")*@
+                                    <input />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                        @*<input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->
+
+

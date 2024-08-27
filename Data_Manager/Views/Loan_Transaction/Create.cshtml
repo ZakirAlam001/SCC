@@ -1,0 +1,100 @@
+﻿@model Data_Manager.Models.tbl_Loan_Transactions
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "Loan_Transaction")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Create Loan Transaction</h1>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    <div class=" form-group form-group-sm">
+                        <div class="row ">
+
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.LoanPersonID, "Name")
+                               
+                                @Html.DropDownList("LoanPersonID",null ,String.Empty, new { @class = "validate[required]" })
+                                @Html.ValidationMessageFor(model => model.LoanPersonID)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Amount, "Amount")
+                                @Html.TextBoxFor(model => model.Amount, new {@type="number" ,@class = "validate[required] " })
+                                @Html.ValidationMessageFor(model => model.Amount)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.LoanType, "Loan Type")
+                                @Html.TextBoxFor(model => model.LoanType, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.LoanType)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Durantion, "Durantion")
+                                @Html.TextBoxFor(model => model.Durantion, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Durantion)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Payment_Type, "Payment Type")
+                                @Html.DropDownListFor(model => model.Payment_Type, new List<SelectListItem>
+                                {
+                                    new SelectListItem() {Text = "", Value=""},
+                                    new SelectListItem() {Text = "Amount Payed", Value="CR"},
+                                    new SelectListItem() {Text = "Amount Recieved", Value="DR"}
+                                }, new { @class = "validate[required]" })
+                                @Html.ValidationMessageFor(model => model.Payment_Type)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Loan_Purpose, "Purpose")
+                                @Html.TextBoxFor(model => model.Loan_Purpose, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Loan_Purpose)
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.ApplyDate, "ApplyDate")
+                                @Html.TextBoxFor(model => model.ApplyDate, new { @class = "datepicker1 validate[required]" })
+                                @Html.ValidationMessageFor(model => model.ApplyDate)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Description, "Description")
+                                @Html.TextBoxFor(model => model.Description, new { @class = "" })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-1">
+
+
+                        </div>
+                        <div class="form-group col-lg-11">
+                            <button type="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+

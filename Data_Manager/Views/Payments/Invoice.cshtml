@@ -1,0 +1,121 @@
+﻿@model  Data_Manager.Models.tbl_Payment_Rcv
+
+@{
+    Layout = null;
+    //List<Data_Manager.Models.tbl_SaleDetail> items = Model.tbl_SaleDetail.ToList();
+    //items=items.Where(a => a.Sale_Status == "S").ToList();
+    //List<Data_Manager.Models.tbl_SaleDetail> items1 = Model.tbl_SaleDetail.ToList();
+    //items1 = items1.Where(a => a.Sale_Status == "R").ToList();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print Invoice</title>   
+</head>
+<body>
+   
+    
+    <div style="font-size:12px; color: black; font-family: monospace;
+            width: 250px;
+
+   
+            border: 1px solid #c4c7c7;
+            padding: 10px 10px 20px 10px;
+          
+            z-index: 0;" id="print-area-2" class="print-area">
+        @*<div style="text-align:right;"><a href="" id="print" >Print</a></div>*@
+        @*<div id="page">*@
+            <h2>Pay-Invoice @Model.Payment_ID </h2><span></span><hr />
+            <p class="">
+                <strong>ATTA ENGINEERING WORKS </strong><span style="float:right">User: @Session["name"] </span><br>
+               
+
+
+            </p>
+
+
+            @DateTime.Now.ToString("dd/MMM/yy hh:mm tt")<br>
+        @*Vendor : @Html.DisplayFor(modelitem => Model.tbl_Vendor.Name)*@
+            Customer : <b>@Html.DisplayFor(modelitem => @Model.tbl_Employee.Name)</b>
+            <hr />
+
+
+            <table width="250" border="1" align="left" cellspacing="0">
+                <thead style="text-align: left;">
+                    <tr>
+
+                        <th>Description</th>
+                        <th>Pay Type</th>
+                        @*<th style="WIDTH: 79PX;">Unit</th>*@
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody style="font-size: 10px !important;">
+                   @* @foreach (var item in Model)*@
+                    
+                        <tr>
+
+                            <td>@Html.DisplayFor(modelitem => Model.Description)   </td>
+                            <td>@Model.Payment_Type</td>
+                            @*<td>@Convert.ToInt32(item.tbl_Product.HoleSaleUnitPrice)</td>*@
+                            <td> @Model.Amount </td>
+                        </tr>
+                   
+
+                    <tr class="odd" style="font-weight:bold;">
+                        <td colspan="1"></td>
+                        <td>------</td>
+                        <td>------</td>
+                    </tr>
+                    <tr class="odd" style="font-weight:bold;">
+                        <td colspan="1"></td>
+                        <td>Net Amount</td>
+                        <td>Rs.@Convert.ToInt32(@Model.Amount)</td>
+                    </tr>
+                    @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Discount(@Convert.ToInt32(Model.Discount__)%)</td>
+                        <td>Rs.@Convert.ToInt32(Model.Discount_Amount)</td>
+                    </tr>*@
+                    @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Net Pay</td>
+                        <td>Rs.@Convert.ToInt32(Model.Net_Amount)</td>
+                    </tr>*@
+                    @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Advance</td>
+                        <td>Rs.@Convert.ToInt32(Model.Advance)</td>
+                    </tr>
+                    <tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Balance</td>
+                        <td>Rs.@Convert.ToInt32(Model.Balance)</td>
+                    </tr>*@
+                </tbody>
+            </table>  
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+<h3>Thank You</h3>
+            
+            Powered By: www.bitzenta.com <br />(0334 3787191)
+    </div>
+
+
+    <textarea id="printing-css" style="display:none;">html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}body{font:normal normal .8125em/1.4 Arial,Sans-Serif;background-color:white;color:#333}strong,b{font-weight:bold}cite,em,i{font-style:italic}a{text-decoration:none}a:hover{text-decoration:underline}a img{border:none}abbr,acronym{border-bottom:1px dotted;cursor:help}sup,sub{vertical-align:baseline;position:relative;top:-.4em;font-size:86%}sub{top:.4em}small{font-size:86%}kbd{font-size:80%;border:1px solid #999;padding:2px 5px;border-bottom-width:2px;border-radius:3px}mark{background-color:#ffce00;color:black}p,blockquote,pre,table,figure,hr,form,ol,ul,dl{margin:1.5em 0}hr{height:1px;border:none;background-color:#666}h1,h2,h3,h4,h5,h6{font-weight:bold;line-height:normal;margin:1.5em 0 0}h1{font-size:200%}h2{font-size:180%}h3{font-size:160%}h4{font-size:140%}h5{font-size:120%}h6{font-size:100%}ol,ul,dl{margin-left:3em}ol{list-style:decimal outside}ul{list-style:disc outside}li{margin:.5em 0}dt{font-weight:bold}dd{margin:0 0 .5em 2em}input,button,select,textarea{font:inherit;font-size:100%;line-height:normal;vertical-align:baseline}textarea{display:block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}pre,code{font-family:"Courier New",Courier,Monospace;color:inherit}pre{white-space:pre;word-wrap:normal;overflow:auto}blockquote{margin-left:2em;margin-right:2em;border-left:4px solid #ccc;padding-left:1em;font-style:italic}table[border="1"] th,table[border="1"] td,table[border="1"] caption{border:1px solid;padding:.5em 1em;text-align:left;vertical-align:top}th{font-weight:bold}table[border="1"] caption{border:none;font-style:italic}.no-print{display:none}</textarea>
+    <iframe id="printing-frame" name="print_frame" src="about:blank" style="display:none;"></iframe>
+    <script>
+        window.addEventListener("load", function () {
+
+            window.print();
+
+
+        });
+      
+    </script>
+
+</body>
+</html>

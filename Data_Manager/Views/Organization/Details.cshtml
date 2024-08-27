@@ -1,0 +1,134 @@
+﻿@model Data_Manager.Models.tbl_Orgcode
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_Orgcode</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Org_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Org_Id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Cell)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Cell)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Phone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NIC)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NIC)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Adress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Adress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Logo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Logo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Licence_from)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Licence_from)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Licence_to)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Licence_to)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.notice_Msg)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.notice_Msg)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.log)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.log)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_Log)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_Log)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Licence_Key)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Licence_Key)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

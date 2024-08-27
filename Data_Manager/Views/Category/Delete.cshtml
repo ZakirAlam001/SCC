@@ -1,0 +1,89 @@
+﻿@model Data_Manager.Models.tbl_Category
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tbl_Category</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Org_Id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Org_Id)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

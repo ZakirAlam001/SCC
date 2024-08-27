@@ -1,0 +1,115 @@
+﻿@model Data_Manager.Models.tbl_Stock
+@{
+    ViewBag.Title = "Add Stock";
+    //Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "Stock")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm("Purchase_Return","Stock", FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Create Stock</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="">
+                            <div class=" form-group form-group-sm">
+                                <div class="row ">
+                                    <div class="item col-lg-10">
+                                        <div class="row ">
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.PurchaseType, "#Inv No")
+                                                @Html.TextBoxFor(model => model.StockMstId, new { @class = "" })
+                                                @*@Html.DropDownListFor(model => model.PurchaseType, new List<SelectListItem>
+                                                {
+                                                    new SelectListItem() {Text = "Select *", Value=""},
+                                                    new SelectListItem() {Text = "Local", Value="Local"},
+                                                    new SelectListItem() {Text = "Import", Value="Import"}
+                                                }, new { @class = "validate[required]" })
+                                                    @Html.ValidationMessageFor(model => model.PurchaseType)*@
+                                            </div>
+                                            <div class="form-group col-lg-3">
+                                                @Html.LabelFor(model => model.SaleTypeID, "Item  *")
+                                                @Html.DropDownList("SaleTypeID", null, "Select Item", new { @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.SaleTypeID)
+                                            </div>
+
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Quantity, "Quantity  *")
+                                                @Html.TextBoxFor(model => model.Quantity, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Quantity)
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Unit_Amount, "HS Unit Price *")
+                                                @Html.TextBoxFor(model => model.Unit_Amount, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Unit_Amount)
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Sale_Amount, "Retail Price  *")
+                                                @Html.TextBoxFor(model => model.Sale_Amount, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Sale_Amount)
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-5">
+                                                @Html.LabelFor(model => model.Description, "Description")
+                                                @Html.TextBoxFor(model => model.Description, new { })
+                                                @Html.ValidationMessageFor(model => model.Description)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="border: 0.5px solid red;" class=" well col-lg-2">
+                                        <div class="row">
+                                            @Html.LabelFor(model => model.VendorId, "Vendor  *")
+                                            @Html.DropDownList("VendorId", null, "Select Item", new { @class = "validate[required]", @Style = "border: 1px solid red;" })
+
+                                            @Html.LabelFor(model => model.Description, "Purchase Date  *")
+                                            <input id="date" type="text" class="datepicker1 validate[required]" />
+                                            @*  @Html.TextBoxFor(model => model.Org_Id, new { @class = "datepicker1 validate[required] " })*@
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row ">
+                                    <div class="form-group col-lg-3">
+                                        <button class="btn btn-default " style="" id="addRowBtn"><i class=" icon-list"> </i>Save Return</button>
+                                        @*<a onclick="saveRecord()" id=" submit" class="btn btn-base">
+                                            <i class=" icon-save"> </i>
+                                            Save
+                                        </a>*@
+                                        @*<a  onclick="row()">Row</a>*@
+                                        @* <a onclick="saveRecord()">save</a>*@
+                                        <input style="display:none" type="text" id="invostatus" name="invostatus" />
+                                    </div>
+                                    <div class="form-group col-lg-11">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+  
+}
+<script type='text/javascript' src='~/js/plugins.js'></script>
+
+

@@ -1,0 +1,235 @@
+﻿@model Data_Manager.Models.tbl_SaleDetail
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "SaleDetails")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Sale Return</h1>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    <div class=" form-group form-group-sm">
+                        <div class="row ">
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Sale_return_ID, "Invoice")
+                                @Html.DropDownList("ExpMstID", null, "Sale Return Inv", new { @class = "validate[required] " })
+                                @*@Html.ValidationMessageFor(model => model.EmpID)*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Sale_return_ID, "Name")
+                                @Html.DropDownList("Sale_return_ID", null, "Name", new { @class = "validate[required] " })
+                                @*@Html.ValidationMessageFor(model => model.EmpID)*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.SaleTypeID, "Item")
+                                @Html.DropDownList("SaleTypeID",null, "Select Item" , new { @class = "validate[required] " })
+                                @*@Html.ValidationMessageFor(model => model.EmpID)*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Stock_Counts, "Count")
+                                @Html.TextBoxFor(model => model.Stock_Counts, new { @class = "validate[required] " , @Value="0"})
+                                @*@Html.ValidationMessageFor(model => model.EmpID)*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Net_Sale_Price, "Return Amount")
+                                @Html.TextBoxFor(model => model.Net_Sale_Price, new { @class = "validate[required] " })
+                                @*@Html.ValidationMessageFor(model => model.EmpID)*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Description, "Description")
+                                @Html.TextBoxFor(model => model.Description, new { @class = "validate[required] " })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-1">
+
+
+                        </div>
+                        <div class="form-group col-lg-11">
+                            <button type="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@*@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_SaleDetail</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SaleDetail_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SaleDetail_ID)
+            @Html.ValidationMessageFor(model => model.SaleDetail_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExpMstID, "tbl_SaleMaster")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ExpMstID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ExpMstID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SaleTypeID, "tbl_SalesTypeSetupForm")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SaleTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.SaleTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stock_ID, "tbl_Stock")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Stock_ID", String.Empty)
+            @Html.ValidationMessageFor(model => model.Stock_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stock_Retial_Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Stock_Retial_Price)
+            @Html.ValidationMessageFor(model => model.Stock_Retial_Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stock_Counts)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Stock_Counts)
+            @Html.ValidationMessageFor(model => model.Stock_Counts)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Net_Sale_Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Net_Sale_Price)
+            @Html.ValidationMessageFor(model => model.Net_Sale_Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsDelete)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsDelete)
+            @Html.ValidationMessageFor(model => model.IsDelete)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDate)
+            @Html.ValidationMessageFor(model => model.CreateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateDate)
+            @Html.ValidationMessageFor(model => model.UpdateDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateBy)
+            @Html.ValidationMessageFor(model => model.CreateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UpdateBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateBy)
+            @Html.ValidationMessageFor(model => model.UpdateBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sale_Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sale_Status)
+            @Html.ValidationMessageFor(model => model.Sale_Status)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

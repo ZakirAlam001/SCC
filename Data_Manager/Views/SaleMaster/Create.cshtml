@@ -1,0 +1,369 @@
+﻿@model Data_Manager.Models.tbl_SaleMaster
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="back" class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "SaleMaster")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+
+    </div>
+</div><br />
+
+<fieldset>
+    <form id="validate">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><a class="widget-icon widget-icon-dark" title="Record List" href='@Url.Action("Index", "SaleMaster")'><i class=" icon-list"> </i> </a><i class="widget-icon widget-icon-dark icon-plus"> </i> Create Invoice</h1>
+            </div>
+            <div class="panel-body">
+                <div id="validate" class="well">
+                    <div class=" form-group form-group-sm" id="totalDiv">
+                        <div class="row ">
+                            <div class="form-group col-lg-2">
+                                <label>
+                                    Customer
+                                </label>
+                                @Html.DropDownListFor(x => x.EmpID, (IEnumerable<SelectListItem>)ViewBag.EmpID, "Select Customer", new { @class = "validate[required]" })
+                                @*@Html.DropDownList("EmpID", null, "Select SO")*@
+                            </div>
+                           
+                            <div class="form-group col-lg-2">
+                                <label>
+                                    Invoice By
+                                </label>
+                                @Html.DropDownListFor(x => x.invoiceid, (IEnumerable<SelectListItem>)ViewBag.InvoiceID,"" , new { @class = "validate[required]" })
+                                @*@Html.DropDownList("EmpID", null, "Select SO")*@
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <label>Description</label>
+                                @Html.TextBoxFor(model => model.Description, new { @class = "validate[required]" })
+                            </div>
+
+                            <div class="form-group col-lg-2">
+                                <label>Date</label>
+                                @Html.TextBoxFor(model => model.ApplyDate, new { @class = "validate[required] datepicker1" })
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <label>Total Amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="icon"> <b>Rs.</b></i>
+                                    </div>
+                                    @Html.TextBoxFor(model => model.Total_Amount, new { @readonly = true, @class = "validate[required] dis Total_Amount" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <style>
+                        #productsContainer label {
+                            color: #dfb626 !important;
+                        }
+
+                        #productsContainer .row {
+                          //  margin-bottom: -26px !important;
+                        }
+
+                        .dis {
+                            font-weight: bold;
+                            border: 1px solid rgba(223, 182, 38, 0.44);
+                            color: #dfb626;
+                        }
+                    </style>
+                    <div class="well" id="productsContainer">
+                        <div class="singleProduct">
+                            <div class=" form-group form-group-sm">
+                                <div class="row ">
+
+                                    <div class="form-group col-lg-2">
+                                        <label>Product Item</label>
+                                        @Html.DropDownList("Stock_ID", null, "Select Items", new { @class = "validate[required]  Stock_ID", @onchange = "productChanged(this);abc(this);" })
+                                    </div>
+                                    @*<div class="form-group col-lg-2">
+                                            <label>Item Category</label>
+                                            @Html.DropDownList("SaleType", null, "Select Sale Type", new { @class = "validate[required] saletype", @onchange = "" })
+                                        </div>*@
+                                    <script>
+
+
+                                        function abc(elem) {
+
+                                            var txt = $(elem).find('option:selected').text();
+                                            // alert(txt);
+                                            // alert(txt)
+                                            //$(elem).find("option:contains('" + txt + "')").closest(".saletype").attr('selected', true);
+
+                                        }
+
+
+                                    </script>
+
+                                    <div class="form-group col-lg-2">
+                                        <label>Retail Price</label>
+                                        <input type="number" class="dis txtRetailPrice validate[required]" onchange="UnitChanged(this)" readonly="true" ondblclick="$(this).attr('readonly',false)" ; />
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>Quantity</label>
+                                        <input type="number" class="txtQuantity validate[required]" onchange="UnitChanged(this)" />
+                                    </div>
+                                    <div class="form-group col-lg-1">
+                                        <label>Discount%</label>
+                                        <div class="input-group">
+                                             <input value="0" type="number" pattern="^\d+(\.|\,)\d{2}$" onchange="UnitChanged(this)" class="validate[required] txtdiscount" />
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-1">
+                                        <label>Amount</label>
+                                        <div class="input-group">
+                                            <input value="0" type="number" pattern="^\d+(\.|\,)\d{2}$" onchange="UnitChanged(this)" class="validate[required] txtdiscountamount" />
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>Payable Amount </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="icon"> <b>Rs.</b></i>
+                                            </div>
+                                            <input disabled type="number" pattern="^\d+(\.|\,)\d{2}$" onchange="UnitChanged(this)" class="validate[required] txtPayableAmount" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-2">
+                                        <label>Action </label><br />
+                                        <button type="button" class="btn btn-base" onclick="AddProduct(this)"><i class=" icon-plus"> </i> </button>
+                                        <button type="button" class="btn btn-base" onclick="RemoveProduct(this)"><i class=" icon-remove"> </i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row ">
+                        <div class="form-group col-lg-2">
+
+                            <button type="button" class="btn btn-base" onclick="createInvoice()"><i class=" icon-save"> </i> Save</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+</fieldset>
+@*}*@
+<script type="text/javascript">
+
+    //Get Mater Record
+    var MASTER_RECORD_ID;
+    function createInvoice() {
+        var EmpID = $('#EmpID :selected').val();
+        var Total_Amount = $('.Total_Amount').val();
+        var Description = $('#Description').val();
+        var ApplyDate = $('#ApplyDate').val();
+        var Discount = 0;
+        var Discount_Amount = 0;
+        var invoiceid = $('#invoiceid').val();
+        
+        //alert(EmpID );
+        //alert(Total_Amount);
+        //alert(Description);
+        //alert(ApplyDate);
+        //Get Details Record Json List
+        //$('.singleProduct').each(function (i, elem) {
+        //    grossAmount += parseInt($(elem).find('.txtPayableAmount').val());
+        //});
+        // List of Item Json
+        var products = [];
+        $('.singleProduct').each(function (i, elem) {
+            var item = {
+                "Stock_ID": $(elem).find('#Stock_ID :selected').val(),
+                "Stock_Counts": $(elem).find('.txtQuantity').val(),
+                "Item_Price": $(elem).find('.txtRetailPrice').val(),
+                "Net_Price": $(elem).find('.txtPayableAmount').val(),
+                "Discount": $(elem).find('.txtdiscount').val(),
+                "Discount_Amount": $(elem).find('.txtdiscountamount').val()
+            }
+            products.push(item);
+        });
+        products = JSON.stringify(products);
+        // console.log(products);
+        // Form Submit  Ajax  Start   Createe                               List[]
+        $.post('@Url.Action("Createe", "SaleMaster")', { Products: products, EmpID: EmpID, Total_Amount: Total_Amount, Description: Description, ApplyDate: ApplyDate, Discount: Discount, Discount_Amount: Discount_Amount, invoiceid: invoiceid })
+        .done(function (data) {
+            //alert();
+            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
+            //waitingDialog.hide();
+            //setTimeout(function () {
+            MASTER_RECORD_ID = data;
+
+            $('#printConfirmationModal').modal('show');
+            $('html, body').animate({ scrollTop: 0 }, 500);
+            //}, 2000)
+
+        })
+            .fail(function (data) {
+                $('.btn-base').css('background', 'red')
+                alert("Invalid Salections");
+                //$('#txtAdvance').get(0).focus();
+                //   $("#txtAdvance").focus(true);
+            })
+        //.always(function () { console.log("always") });
+    }
+    // Form Submit  Ajax  End
+
+    //Drop Down Select Calculation
+    function calculateTotal() {
+        var grossAmount = 0;
+        $('.singleProduct').each(function (i, elem) {
+            grossAmount = parseFloat(parseFloat(grossAmount) + parseFloat($(elem).find('.txtPayableAmount').val())).toFixed(2);
+        });
+
+        $("div#totalDiv").find('.Total_Amount').val(grossAmount);
+        /******/
+        //var discountperc = 0;
+        //discountperc = $('#cards :selected').val();
+        //if (discountperc == "") {
+        //    var alreadyValue = $("div#totalDiv").find('.discountPercen').val();
+        //    if (alreadyValue == "") {
+        //        $("div#totalDiv").find('.discountPercen').val(0)
+        //    } else {
+        //        discountperc = alreadyValue;
+        //    }
+        //} else {
+        //    $("div#totalDiv").find('.discountPercen').val(parseInt(discountperc));
+        //}
+        ///******/
+        //var discountAmount = parseInt((grossAmount / 100) * discountperc);
+        //$("div#totalDiv").find('.discountAmount').val(discountAmount);
+        ///******/
+        //var Total_Amount = grossAmount - discountAmount
+        //$("div#totalDiv").find('.Total_Amount').val(Total_Amount);
+        ///*****/
+        //calculateBalance();
+
+    }
+    function discountChanged() {
+        var grossAmount = $("div#totalDiv").find('.grossAmount').val();
+        var discountPerc = $("div#totalDiv").find('.discountPercen').val();
+        var discountAmount = parseInt((grossAmount / 100) * discountPerc);
+        $("div#totalDiv").find('.discountAmount').val(discountAmount);
+        /******/
+        var Total_Amount = grossAmount - discountAmount
+        $("div#totalDiv").find('.Total_Amount').val(Total_Amount.toFixed(2));
+    }
+
+    /// DropDowm Ajax Value
+    function productChanged(elem) {
+        var productId = $(elem).val();
+
+        var $main = $(elem).closest('.singleProduct');
+        if (productId == "") {
+            productId = 0;
+            $main.find('.txtUnitPrice').val("");
+            $main.find('.txtUnits').val("");
+            $main.find('.txtPayableAmount').val("");
+            calculateTotal();
+            return;
+        }
+
+        $.post('@Url.Action("GetProductPrice", "SaleMaster")', { ProductId: productId }, function (productPrice) {
+
+           // alert(productPrice);
+            $main.find('.txtRetailPrice').val(productPrice);
+            $main.find('.txtPayableAmount').val(0);
+            $main.find('.txtPayableAmount').focus();
+            calculateTotal();
+
+        }).fail(function (productPrice) {
+            alert("This Product not Purchase...! Please Purchase First");
+        })
+    }
+    function UnitChanged(elem) {
+        // alert()
+        var $main = $(elem).closest('.singleProduct'),
+             unitPrice = parseInt($main.find('.txtRetailPrice').val()),
+             //units = parseInt($(elem).val());
+             units = parseFloat($main.find('.txtQuantity').val()).toFixed(2);
+           discount = parseInt($main.find('.txtdiscount').val());
+        //  alert(discount);
+        
+        
+        sum = (unitPrice * units);
+        
+        if (discount > 0) {
+            discount = (sum / 100) * discount
+            sum = sum - discount;
+            $main.find('.txtdiscountamount').val(discount);
+        }
+        $main.find('.txtPayableAmount').val(sum);
+        calculateTotal();
+
+    }
+
+    function AddProduct(elem) {
+        var $productDiv = $(elem).closest('.singleProduct').clone(false);
+        $(elem).hide();
+        $productDiv.find('input').val("");
+        $('div#productsContainer').append($productDiv);
+    }
+    function RemoveProduct(elem) {
+        var $productDiv = $(elem).closest('.singleProduct').remove(false);
+        calculateTotal();
+    }
+
+    function calculateBalance() {
+        var advance = parseFloat($('#txtAdvance').val()).toFixed(2);
+        var total = parseFloat($('.Total_Amount').val()).toFixed(2);
+
+        $('#txtBalance').val(total - advance);
+    }
+    function printNo() {
+        window.location = '@Url.Action("Index")';
+        //    location.reload();
+    }
+    function printYes() {
+        var redirectTo = '@Url.Action("PrintInvoice", new { @saleMstId = "jsVariable" })';
+        redirectTo = redirectTo.replace("jsVariable", MASTER_RECORD_ID);
+        //   window.location = redirectTo;
+        // window.open(redirectTo);
+        location.reload();
+
+        //  function popitup(url) {
+        newwindow = window.open(redirectTo, 'Print Invoice', 'height=800,width=400');
+        if (window.focus) { newwindow.focus() }
+        // return false;
+        //  }
+    }
+</script>
+<script type='text/javascript' src='~/js/plugins.js'></script>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="printConfirmationModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Print Invoice</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to print this invoice </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="printNo()">No</button>
+                <button type="button" class="btn btn-primary" onclick="printYes()">Yes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $("#invoiceid").val(1);
+</script>

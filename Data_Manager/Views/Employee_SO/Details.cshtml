@@ -1,0 +1,120 @@
+﻿@model Data_Manager.Models.tbl_Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_Employee</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EmpID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmpID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_Designation.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_Designation.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CellNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CellNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NIC)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NIC)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Address)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PhoneNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNo)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ContactPerson)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactPerson)
+    </div>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsActive)
+    </div>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

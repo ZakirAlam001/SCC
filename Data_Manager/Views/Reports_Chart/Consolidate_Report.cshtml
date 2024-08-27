@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_Payment_Rcv>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Payment</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div id="all">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="block block-fill-white">
+                    <div class="header">
+                        <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Sales & Balance</h2>
+                        @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    </div>
+                    <div class="content">
+                        <div class=" table-responsive">
+                            <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>
+                                            Tot Sale Amount
+                                        </th>
+
+                                        <th>
+                                            Tot Return Amount
+                                        </th>
+                                        <th>
+                                            Tot Payment Rcv
+                                        </th>
+                                        <th>
+                                           Total Balance
+                                        </th>
+                                        <th>
+                                            Org
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.sale)
+                                    {
+                                        <tr>
+                                            @*<td>
+                                                    <a title="Print Payment Voucher" href="@Url.Action("PrintInvoice", "Payments", new { saleMstId = item.Payment_ID }) "><i class="icon-print"></i></a>
+                                                </td>*@
+                                            <td>
+                                                <i class="icon icon-star "></i> @item["Name"]
+                                            </td>
+                                            <td>
+                                                @item["Sale_Amount"]
+                                            </td>
+                                            <td>
+                                                @item["Return_Amount"]
+                                            </td>
+                                            <td>
+                                                @* <i>@String.Format("{0:n2}", @item.Amount) </i>*@
+                                                @item["Payed_Rcv"]
+                                            </td>
+                                            <td style="color: #fe0000;font-size: 15px;">
+                                                @item["Balance"]
+                                            </td>
+                                            <td>
+                                                @item["Org_Id"]
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot><tr></tr></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class=" col-md-12">
+
+                <div class="block block-fill-white ">
+                    <div class="header">
+                        <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Purchase & Balance</h2>
+                        @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    </div>
+                    <div class="content">
+                        <div class="table-responsive">
+                            <table id="" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>
+                                            Tot Purchase Amount
+                                        </th>
+
+                                        <th>
+                                            Tot Payed Amount
+                                        </th>
+                                        <th>
+                                           Total Balance
+                                        </th>
+
+                                        <th>
+                                            Org
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in ViewBag.Purchase)
+                                    {
+                                        <tr>
+                                            @*<td>
+                                                    <a title="Print Payment Voucher" href="@Url.Action("PrintInvoice", "Payments", new { saleMstId = item.Payment_ID }) "><i class="icon-print"></i></a>
+                                                </td>*@
+                                            <td>
+                                                <i class="icon icon-star "></i> @item1["Name"]
+                                            </td>
+                                            <td>
+                                                @item1["Total_Purchase"]
+                                            </td>
+                                            <td>
+                                                @item1["Payed_Amount"]
+                                            </td>
+                                            <td style="color: #fe0000;font-size: 15px;">
+                                                @* <i>@String.Format("{0:n2}", @item.Amount) </i>*@
+                                                @item1["Balance"]
+                                            </td>
+
+                                            <td>
+                                                @item1["Org_Id"]
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot><tr></tr></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Modal Start-->
+
+<script>
+    $('table').dataTable({
+        "bPaginate": false,
+        'bInfo': false,
+        'sorting': false
+    });
+    $(document).ready(function () {
+        alert($('table').html());
+    });
+</script>

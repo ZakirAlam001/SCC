@@ -1,0 +1,120 @@
+﻿@model Data_Manager.Models.tbl_SaleDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_SaleDetail</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SaleDetail_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SaleDetail_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_SaleMaster.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_SaleMaster.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_SalesTypeSetupForm.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_SalesTypeSetupForm.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_Stock.Invoice_No)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_Stock.Invoice_No)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stock_Retial_Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stock_Retial_Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stock_Counts)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stock_Counts)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Net_Sale_Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Net_Sale_Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Sale_Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Sale_Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

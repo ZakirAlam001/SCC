@@ -1,0 +1,92 @@
+﻿@model Data_Manager.Models.tbl_Account_Mst_Transaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_Account_Mst_Transaction</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Acc_Trans_ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Acc_Trans_ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Particular)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Particular)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EmpID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmpID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DR_Amount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DR_Amount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CR_Amount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CR_Amount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

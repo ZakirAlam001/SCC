@@ -1,0 +1,332 @@
+﻿@model Data_Manager.Models.tbl_Stock
+@{
+    ViewBag.Title = "Add Stock";
+    //Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "Stock")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Create Stock</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="">
+                            <div class=" form-group form-group-sm">
+                                <div class="row ">
+                                    <div class="item col-lg-10">
+                                        <div class="row ">
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.PurchaseType, "Purchase Type *")
+                                                @Html.DropDownListFor(model => model.PurchaseType, new List<SelectListItem>
+                                            {
+                                                new SelectListItem() {Text = "Select *", Value=""},
+                                                new SelectListItem() {Text = "Local", Value="Local"},
+                                                new SelectListItem() {Text = "Import", Value="Import"}
+                                            }, new { @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.PurchaseType)
+                                            </div>
+                                            <div class="form-group col-lg-3">
+                                                @Html.LabelFor(model => model.SaleTypeID, "Item  *")
+                                                @Html.DropDownList("SaleTypeID", null, "Select Item", new { @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.SaleTypeID)
+                                            </div>
+
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Quantity, "Quantity  *")
+                                                @Html.TextBoxFor(model => model.Quantity, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Quantity)
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Unit_Amount, "HS Unit Price *")
+                                                @Html.TextBoxFor(model => model.Unit_Amount, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Unit_Amount)
+                                            </div>
+                                            <div class="form-group col-lg-2">
+                                                @Html.LabelFor(model => model.Sale_Amount, "Retail Price  *")
+                                                @Html.TextBoxFor(model => model.Sale_Amount, new { @type = "number", @class = "validate[required]" })
+                                                @Html.ValidationMessageFor(model => model.Sale_Amount)
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-lg-5">
+                                                @Html.LabelFor(model => model.Description, "Description")
+                                                @Html.TextBoxFor(model => model.Description, new { })
+                                                @Html.ValidationMessageFor(model => model.Description)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="border: 0.5px solid red;" class=" well col-lg-2">
+                                        <div class="row">
+                                            @Html.LabelFor(model => model.VendorId, "Vendor  *")
+                                            @Html.DropDownList("VendorId", null, "Select Item", new { @class = "validate[required]", @Style = "border: 1px solid red;" })
+
+
+                                            @Html.LabelFor(model => model.Description, "Purchase Date  *")
+                                            <input id="date" type="text" class="datepicker1 validate[required]" />
+                                            @*  @Html.TextBoxFor(model => model.Org_Id, new { @class = "datepicker1 validate[required] " })*@
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row ">
+                                    <div class="form-group col-lg-3">
+                                        <button onclick="return false" class="btn btn-default " style="" id="addRowBtn"><i class=" icon-download"> </i> Add Item</button>
+                                        <a disabled onclick="saveRecord()" id="submit" class="btn btn-base">
+                                            <i class=" icon-save"> </i>
+                                            Save
+                                        </a>
+                                        @*<a  onclick="row()">Row</a>*@
+                                        @* <a onclick="saveRecord()">save</a>*@
+                                        <input style="display:none" type="text" id="invostatus" name="invostatus" />
+                                    </div>
+                                    <div class="form-group col-lg-11">
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <table datatable="false" class="table table-hover table-bordered table-striped sortable" border="1" cellspacing="0" style=" " id="table">
+                                <thead>
+                                    <tr style="background: #cecece;">
+
+                                        <th>Purchase Type</th>
+                                        <th>Item Name</th>
+                                        <th>Qty</th>
+                                        <th>HS Price</th>
+                                        <th>Retail Price</th>
+                                        <th>Total Amount</th>
+                                        <th>Description</th>
+                                        <th><i class="icon icon-trash"></i></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody></tbody>
+                                <tfoot>
+                                    <tr>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="" style="background:#cecece; font-size: 17px; color:black;" @*style="background: #cecece;"*@><span>Tot-> <span id="Gtotal"><b>00.0</b></span></span></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </fieldset>
+
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="printConfirmationModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Print Invoice</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to print this invoice </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" onclick="printNo()">No</button>
+                    <button type="submit" class="btn btn-primary" onclick="printYes()">Yes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+<script type='text/javascript' src='~/js/plugins.js'></script>
+
+
+
+<script>
+    // Start Data Table disabled
+    $(document).ready(function () {
+        $('tbody tr').remove();
+    });
+
+    $.fn.dataTable.ext.errMode = 'none';
+    $('#table').dataTable({
+        processing: false,
+        searching: false,
+        paging: false,
+        ordering: false,
+        dom: 'Blfrtip',
+        info: false,
+        emptyTable: false
+    })
+    // End Data Table disabled
+    var gtot = 0;
+    $(function () {
+        var tbl = $("#table tbody");
+
+        $("#addRowBtn").click(function () {
+            // alert('in');
+
+            var VendorId = $('#VendorId').val();
+            var PurchaseType = $('#PurchaseType').val();
+            var SaleTypeID = $('#SaleTypeID').val() + "-" + $('#SaleTypeID :selected').text();
+            //var res = Itemsname.split("@@");
+            //var Rate = res[1];
+            var Quantity = $('#Quantity').val();
+            var Unit_Amount = $('#Unit_Amount').val();
+            var Sale_Amount = $('#Sale_Amount').val();
+            //var Total_Amount = $('#Total_Amount').val();
+            var Description = $('#Description').val();
+
+            // var Unit_Amount = $('#Unit_Amount').val();
+            //   var Sale = $('#txtSale').val();
+            // var date = $('#txtDate').val();
+            var Total = Unit_Amount * Quantity;
+            if (VendorId == "" || PurchaseType == "" || SaleTypeID == "" || Quantity == "" || Unit_Amount == "" || Sale_Amount == "" || VendorId == "") {
+                alert("Invalid Selection Must Select (*)fields")
+            } else {
+                gtot = gtot + Total;
+                // $('#Gtotal').text(gtot.toFixed(2));
+                $('#Gtotal').text(gtot);
+                //$('#lblsubtotal').text(gtot);
+                //$('#lblgrandtotal').text(gtot - $('#disc').val());
+                //var discc = $('#disc').val();
+                // alert();
+                $("<tr class='items' style='border:1px solid gray; background: rgba(239, 4, 4, 0.12);'> <td class='rPurchaseType'>" + PurchaseType + "</td><td class='rSaleTypeID'>" + SaleTypeID + "</td><td class=rQuantity>" + Quantity + "</td><td class=rUnit_Amount >" + Unit_Amount + "</td><td class=rSale_Amount>" + Sale_Amount + "</td><td class=rTotal>" + Total.toFixed(2) + "</td><td class=rDescription>" + Description + "</td><td><button class='delRowBtn'>X</button></td></tr>").appendTo(tbl);
+
+
+                $('.item input').val('');
+                $('.item select').val('');
+                $('#submit').removeAttr("disabled")
+                //$('#disc').val(discc);
+                //$('#save').attr('disabled', false);
+            }
+        });
+
+        $(document.body).delegate(".delRowBtn", "click", function () {
+            var r = confirm("Conferm Delete!");
+            if (r == true) {
+                //  alert($(this).closest('tr').find('td').eq(2).text());
+                var sub = $(this).closest('tr').find('td').eq(5).text()
+                //  alert(sub);
+                $(this).closest("tr").remove();
+                //document.getElementById("scriptBox").focus();
+                //    alert(sub);
+                gtot = ((gtot) - (sub));
+                $('#Gtotal').text(gtot);
+                //$('#lblsubtotal').text(gtot);
+                //$('#lblgrandtotal').text(gtot - $('#disc').val());
+                //$('#disc').val($('#disc').val())
+            } else {
+            }
+            //alert($(this td:eq(3)).text());
+        });
+    });
+
+    function row() { alert($('#table').find('tbody tr').length); }
+
+    /*************** Send Data to Server *****/
+    var MASTER_ID;
+    function saveRecord() {
+        // Master Record***
+        //  VendorId = $('#VendorId').val()
+        var master = [{
+            "VendorId": $('#VendorId').val(),
+            "ItemQuantity": $('#table').find('tbody tr').length,
+            "Discount": 0,
+            "TotalAmount": $('#Gtotal').text(),
+            "Date": $('#date').val(),
+
+        }];
+
+        //Detail Records***
+        var details = [];
+
+        $('#table tbody tr').each(function (i, e) {
+            var $row = $(e);
+            // alert($row.find('.titem').text());
+            var d = {
+
+                "PurchaseType": $row.find('.rPurchaseType').text(),
+                "SaleTypeID": $row.find('.rSaleTypeID').text(),
+                "Quantity": $row.find('.rQuantity').text(),
+                "Unit_Amount": $row.find('.rUnit_Amount').text(),
+                "Sale_Amount": $row.find('.rSale_Amount').text(),
+                "Description": $row.find('.rDescription').text(),
+                "Total_Amount": $row.find('.rTotal').text(),
+
+            };
+            details.push(d);
+        });
+
+
+        //Master and details array****
+        master = JSON.stringify(master);
+        details = JSON.stringify(details);
+        //Send Data To Server Action***
+        $.post('@Url.Action("PurchaseSave")', { Details: details, Master: master })
+            .done(function (data) {
+                //MASTER_ID = data;
+                //$('.items').remove();
+                //sessionStorage.setItem('tmsg', 'Data Save Scussfully');
+                alert("Data Saved!")
+                location.reload();
+                printYes();
+
+
+            })
+            .fail(function (data) {
+                //  alert("Fail");
+                sessionStorage.setItem('tmsg', 'Save Failed');
+                alert("Data Saved failed!")
+
+                console.log(data);
+            })
+    }
+    /*******************************************************/
+
+
+
+
+
+
+
+
+
+
+
+    function printNo() {
+        $("#invostatus").val('No');
+    }
+    function printYes() {
+        $("#invostatus").val('Yes');
+    }
+
+    $("#submit").click(function () {
+        $('#printConfirmationModal').modal('show');
+    })
+</script>
+

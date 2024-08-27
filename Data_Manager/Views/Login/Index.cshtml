@@ -1,0 +1,295 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sign In Welcome to software</title>
+    @*<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />*@
+    <meta name="viewport" content="width=device-width" />
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link href="~/css/stylesheets.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/datepickerjquery.css" rel="stylesheet" />
+
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/bootstrap/bootstrap.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/validationengine/languages/jquery.validationEngine-en.js'></script>
+    <script type='text/javascript' src='~/js/plugins/validationengine/jquery.validationEngine.js'></script>
+    <script type='text/javascript' src='~/js/plugins.js'></script> @*Creating problem in data tables*@
+    @*<script type='text/javascript' src='~/js/actions.js'></script>
+    <script type='text/javascript' src='~/js/charts.js'></script>*@
+    @* <script type='text/javascript' src='~/js/settings.js'></script>*@ @*Creating problem in ajax success and erro callback*@
+   @* <script src="~/Scripts/waitingfor.js"></script>*@
+    @*Munam*@
+   
+    @*End*@
+    
+    <style>
+        body{
+            overflow-x:hidden;
+        }
+        input:focus, textarea:focus, select:focus, button:focus, a:focus {
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;
+            /*padding: 3px 0px 3px 3px;
+            margin: 5px 1px 3px 0px;*/
+            border: 1px solid #DDDDDD;
+        }
+
+        input:focus, textarea:focus, select:focus, button:focus, a:focus {
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            /*padding: 3px 0px 3px 3px;*/
+            /*margin: 5px 1px 3px 0px;*/
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .animated {
+            background-image: url(/css/images/logo.png);
+            background-repeat: no-repeat;
+            background-position: left top;
+            /*padding-top:95px;
+            margin-bottom:60px;*/
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        @@-webkit-keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateX(40px);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+            }
+        }
+
+        @@keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fadeInRight {
+            -webkit-animation-name: fadeInRight;
+            animation-name: fadeInRight;
+        }
+    </style>
+    <style>
+        div.aa {
+            opacity: 0;
+        }
+
+        label {
+            margin-bottom: 2%;
+            color: #7ed3ff;
+            font-size: 124%;
+        }
+
+        i {
+            color: #e0b727;
+            font-size: 124%;
+        }
+
+
+        tr i {
+            padding: 5%;
+        }
+
+            tr i:hover {
+                background: rgba(0,0,0,0.2);
+                border-radius: 7px;
+            }
+
+        .btn-base:hover {
+            background: rgba(0,0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body style="">
+    <script>
+        localStorage.setItem('status', 'stay');
+    var a=[1,2,3]
+    localStorage.setItem("loginID", a);
+    </script>
+    <div class="row well">
+        <div style="margin-top:7%;" class="aa col-md-6">
+            <div class="block">
+
+                <div class="content">
+                    <style>
+                        img {
+                            width: 100%;
+                        }
+                    </style>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        
+                        @*<img src="~/Images/startt.jpeg" />
+                         <hr/> <img src="~/Images/start.jpeg" />*@
+                        <div class="carousel-inner">
+
+                            <div class="item active">
+                                <div class="carousel-content">
+
+                                    <img src="~/img/1.jpg" />
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-content">
+                                    <img src="~/img/2.jpg" />
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-content">
+                                    <img src="~/img/3.jpg" />
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="carousel-content">
+
+                                    <img src="~/img/4.jpg" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr /> <img src="~/Img/5.jpg" />
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div style="border-left: 1px solid gray" class="col-md-6 ">
+            
+            <div class="aa login-block">
+                
+                <div class="block">
+                    <div class="header">
+                        <h2><i class="widget-icon widget-icon-dark icon-group"> </i> Login To Bit Soft</h2>
+                    </div>
+                    <div class="content">
+                        <center>
+                            <div class="">
+                                <div class="head">
+                                    <div class="user">
+                                        <div class="info user-change">
+                                            <img src="img/example/user/dmitry_b.jpg" class="img-circle img-thumbnail" />
+                                            <div class="user-change-button">
+                                                <span class="icon-off"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+
+                                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "validate", @class = "form" }))
+                                    {
+                                        <div class="form-row">
+                                            <h1>Bit Soft Login</h1>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="shine-me input-group-addon">
+                                                        <span class="icon-user"></span>
+                                                    </div>
+                                                    @Html.TextBox("Username", null, new { @class = "validate[required] form-control", @placeholder = "Username" })
+                                                    @*<input type="text" class="form-control" placeholder="Login ID" />*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="shine-me input-group-addon">
+                                                        <span class="icon-key"></span>
+                                                    </div>
+                                                    @Html.Password("Password", null, new { @class = "validate[required] form-control", @placeholder = "Password" })
+                                                    @*<input type="password" class="form-control" placeholder="Password" />*@
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="form-row">
+                                            @*<div class="col-md-6">
+                            <a href="#" class="btn btn-default btn-block btn-clean">Register</a>
+                        </div>*@
+                                            <div class="col-md-3"> </div>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-default btn-block btn-clean"><i class="icon-unlock"></i> &nbsp;Log In</button>
+                                            </div>
+                                            <div class="col-md-3"> </div>
+                                        </div>
+                                    }
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <a title="Click to review software video Demo" href="https://drive.google.com/file/d/1z7vivUW1Xqy90WY1ybcuWohO8WQtJBf1/view" target="_blank" class="btn btn-link btn-block"><i class="icon-desktop"> </i> Software Demo</a>
+                                        </div>
+                                    </div>
+                                    @*<div class="form-row">
+                    <div class="col-md-12 tac"><strong>OR USE</strong></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <a href="#" class="btn btn-info btn-block"><span class="icon-facebook"></span> &nbsp; Facebook</a>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <a href="#" class="btn btn-primary btn-block"><span class="icon-twitter"></span> &nbsp; Tweeter</a>
+                    </div>
+                </div>*@
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+
+
+                
+
+            </div>
+        </div>
+
+    </div>
+
+    <br /><br /><br />
+ 
+    <div id="footer-bar" class="row">
+        <div class="page-footer">
+            <div class="page-footer-wrap">
+                <div class=" side pull-left">
+                    Powered By :<i class="widget-icon widget-icon-dark icon-cogs"> </i> <a class="block-remove tip" title="" data-original-title="BitZenta IT Solutions Provider , Your Success Partner , www.bitzenta.com" style="color:#e0b727; font-weight:bold;" href="http://www.bitzenta.com/">BitZenta</a>  2017. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(window).load(function () {
+            $(".aa").delay(500).animate({ "opacity": "1" }, 500);
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+﻿@model Data_Manager.Models.tbl_Vendor_Payment
+
+@{
+    ViewBag.Title = "Vendor Payable";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "Vendor_Payment")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Vendor Payable</h1>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    <div class=" form-group form-group-sm">
+                        <div class="row ">
+
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Description, "Particular")
+                                @Html.TextBoxFor(model => model.Description, new { @class = "validate[required] " })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.tbl_Vendor.Name, "Vendor")
+                                @Html.DropDownList("VendorId", string.Empty)
+                                @Html.ValidationMessageFor(model => model.VendorId)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Payment_Type, "Payment Type")
+                               @Html.DropDownList("Payment_Type", new List<SelectListItem>
+                                {
+                                    new SelectListItem{ Text="Select Pay Type", },
+                                    new SelectListItem{ Text="Cash", Value = "Cash" },
+                                    new SelectListItem{ Text="Bank", Value = "Bank" },
+                                    new SelectListItem{ Text="Cheque", Value = "Cheque" },
+                                   
+                                 }) 
+                                
+                            </div>
+                            @*<div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.BankAccountId, "Bank")
+                                @Html.DropDownList("BankId", "Select Bank")                              
+                            </div>*@
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.BankAccountId, "AccountId")
+                                @Html.DropDownList("BankAccountId", string.Empty)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Amount, "Amount")
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "validate[required] " })
+                                @Html.ValidationMessageFor(model => model.Amount)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Recv_Date, "Date")
+                                @Html.TextBoxFor(model => model.Recv_Date, new { @class = "datepicker1 validate[required] " })
+                                @Html.ValidationMessageFor(model => model.Recv_Date)
+                            </div>
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-1">
+
+                            <input style="display:none" type="text" id="invostatus" name="invostatus" />
+                        </div>
+                        <div class="form-group col-lg-11">
+                            <p id="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="printConfirmationModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Print Invoice</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to print this invoice </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" onclick="printNo()">No</button>
+                    <button type="submit" class="btn btn-primary" onclick="printYes()">Yes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+}
+<script type='text/javascript' src='~/js/plugins.js'></script>
+
+
+
+<script>
+
+    function printNo() {
+        $("#invostatus").val('No');
+    }
+    function printYes() {
+        $("#invostatus").val('Yes');
+    }
+
+    $("#submit").click(function () {
+        $('#printConfirmationModal').modal('show');
+    })
+</script>
+    
+    
+
+

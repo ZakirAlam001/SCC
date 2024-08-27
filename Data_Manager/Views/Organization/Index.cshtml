@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_Orgcode>
+
+
+
+@{
+    ViewBag.Title = "Organization List";
+}
+<script>
+    //  alert('@TempData["sdata"]');
+</script>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Organization</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+    <br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i>Organization</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    <a title="Add New Record" href='@Url.Action("Create", "organization")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Cell </th>
+                                    <th>NIC</th>
+                                    <th>Address</th>
+                                    <th>Create Date</th>
+                                    <th>User_Log</th>
+                                    <th>Licence_to</th>
+                                    <th>CreatedBy</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td title="@item.Org_Id">
+                                            @item.Name
+                                        </td>
+                                        <td>
+                                            @item.Cell
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelitem => item.NIC)
+                                        </td>
+                                        <td>
+                                            @item.Adress
+                                        </td>
+                                        <td>
+                                            @item.CreatedDate
+                                        </td>
+                                        
+                                             <td>
+                                                @item.User_Log
+                                            </td>
+                                            <td>
+                                                @item.Licence_to
+                                            </td>
+                                            <td>
+                                                @item.CreatedBy 
+                                            </td>
+                                            
+                                        <td>
+                                            <a title="Edit" href="@Url.Action("Edit", "Customer", new { id = item.Org_Id }) "><i class="icon-pencil widget-icon-xlarge"></i></a>  |
+                                            <a title="Detail" href="@Url.Action("Details", "Customer", new { id = item.Org_Id }) "><i class="icon-list widget-icon-xlarge"></i></a> |
+                                            <a title="Delete" href="@Url.Action("Delete", "Customer", new { id = item.Org_Id }) "><i class="icon-trash widget-icon-xlarge"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Search Modal Start-->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.DropDownList("UserID", null, "Select User")*@
+                                    <input />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                        @*<input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->

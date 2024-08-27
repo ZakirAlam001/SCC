@@ -1,0 +1,454 @@
+﻿@{
+    ViewBag.Title = "Consolidate";
+}
+
+
+<div id="all">
+    <div class="row">
+        <div class="col-md-4">
+            
+            <div class="block block-fill-white">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Customer Sale</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                </div>
+                
+
+                <div class="content">
+                    <b><a class="btn btn-success btn-xs" href="">Add New</a> Sales</b>
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+
+                                    <th>
+                                        Amount
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int sum1 = 0;
+                                    foreach (var item in ViewBag.Sales)
+                                    {
+                                        sum1 += @Convert.ToInt32(@item["Total"]); ;
+                                        <tr>
+
+                                            <td style="font-family: auto;">
+                                                <i class="icon icon-star "></i> @item["Name"] <span>(@Convert.ToInt32(@item["bills"]))</span>
+                                            </td>
+
+
+                                            <td style="color:red;">
+                                                @String.Format("{0:n0}", @item["Total"])
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td style="background:white;border:none; float:right;">Total :</td>
+                                        <td style="color:red;">@String.Format("{0:n0}", @sum1)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                         @*   <tfoot><tr></tr></tfoot>*@
+                        </table>                        
+                    </div>
+                </div>
+                <div class="content">
+                    <div class=" table-responsive">
+                        <table  id="" cellpadding="0" cellspacing="0" width="100%" class="table1 table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+
+                                    <th>
+                                        Amount
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+    int sum2 = 0;
+                                    foreach (var item in ViewBag.Purchase)
+                                    {
+                                        sum2 += @Convert.ToInt32(@item["Total"]); ;
+                                        <tr>
+
+                                            <td style="font-family: auto;">
+                                                <i class="icon icon-star "></i> @item["Name"] <span>(@Convert.ToInt32(@item["bills"]))</span>
+                                            </td>
+
+
+                                            <td style="color:red;">
+
+                                                @String.Format("{0:n0}", @item["Total"])
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                                <tr>
+                                    <td style="background:white;border:none; float:right;">Total :</td>
+                                    <td style="color:red;">@String.Format("{0:n0}", @sum2)</td>
+                                </tr>
+                            </tbody>
+                           @* <tfoot><tr></tr></tfoot>*@
+                        </table>
+                    </div>
+                </div>
+                
+
+            
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="block block-fill-white">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Item Name</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                </div>
+                
+                <div class="content">
+                    @*<b><a class="btn btn-success btn-xs" href="">Add New</a> Sales</b>*@
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" class=" table table-hover table-bordered table-striped">
+
+                            <tbody>
+                                @*  @foreach (var item in ViewBag.sale)*@
+
+                                <tr>
+
+                                    <td style="font-family: auto;">
+                                        <i class="icon icon-star "></i> Deposit
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}", @TempData["Deposit"])
+                                    </td>
+                                    <td style="font-family: auto;">
+                                        <i class="icon icon-star "></i> Expense
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}", @TempData["Sum_Expense"])
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                            <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <b><a class="btn btn-success btn-xs" href="">Add New</a> Stock Remaining</b>
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                            @*<thead>
+                                <tr>
+                                    <th >Stock remaining</th>
+                                    <th>Amount</th>
+
+                                </tr>
+                            </thead>*@
+                            <tbody>
+                                @*  @foreach (var item in ViewBag.sale)*@
+
+                                <tr>
+
+                                    <td style="font-family: auto;">
+                                        <i class="icon icon-star "></i>Stock Remaining @*@item["Name"]*@
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}",  @TempData["Sum_StockRemaining"]) @*@item["Sale_Amount"]*@
+                                    </td>
+
+
+                                </tr>
+
+                            </tbody>
+                            <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="content">
+                    <b><a class="btn btn-success btn-xs" href="">Add New</a> Old Stock </b>
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                            
+                            <tbody>
+                                @*  @foreach (var item in ViewBag.sale)*@
+
+                                <tr>
+
+                                    <td style ="font-family: auto;">
+                                        <i class="icon icon-star "></i>Old Stock In @*@item["Name"]*@
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}",   @TempData["Sum_StockRemaining_in"])
+                                    </td>
+                                    <td style="font-family: auto;">
+                                        <i class="icon icon-star "></i>New Stock Out @*@item["Name"]*@
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}",  @TempData["Sum_StockRemaining_out"])
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                            <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <b><a class="btn btn-success btn-xs" href="">Add New</a> Credit Balance</b>
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>
+                                        Amount
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int abcbalance = 0;
+                                    foreach (var item in ViewBag.abcbalance)
+                                    {
+                                        abcbalance += @Convert.ToInt32(@item.BalanceAmount);
+                                        <tr>
+                                            <td style="font-family: auto;">
+                                                <i class="icon icon-star "></i>@item.Name
+                                            </td>
+                                            <td title="@item.Details" style="color:red;">
+                                                @item.BalanceAmount
+                                            </td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td style="background:white;border:none; float:right;">Total :</td>
+                                        <td align="right" style="color:red;">@String.Format("{0:n0}", @abcbalance)</td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                            <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="block block-fill-white">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Summary Report</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                </div>
+                <div class="content">
+                    <div class=" table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class=" table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>
+                                      Total  Amount
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*  @foreach (var item in ViewBag.sale)*@
+                               
+                                <tr>
+                                    <td style="font-family: auto;">
+                                        Total Sales
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}",  @sum1)
+                                    </td>
+                                 </tr>
+                                <tr>
+                                    <td style="font-family: auto;">
+                                        Cash collect
+                                    </td>
+                                    <td style="color:red;">
+                                        @String.Format("{0:n0}", @TempData["Cash_collect"])
+
+                                    </td>
+                                </tr>
+                            </tbody><tr>
+                                        <td style="font-family: auto;">
+                                            Cash left
+                                        </td>
+                                        <td style="color:red;">
+                                            @String.Format("{0:n0}", @TempData["Cash_left"])
+
+                                        </td>
+                                    </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    Expense
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @TempData["Sum_Expense"])
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    Balance Send
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @abcbalance)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    K.P
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @TempData["Sum_StockRemaining_in"])
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    Advance
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @TempData["advance"])
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    <i class="icon icon-star "></i>Gross Amount
+                                </td>
+                                <td align="right" style="color:red;">
+                                   @{
+                                       int TotalSum = @Convert.ToInt32(@TempData["advance"]) +
+                                       @Convert.ToInt32(@TempData["Sum_StockRemaining_in"]) +
+                                       @Convert.ToInt32(@abcbalance) +
+                                       @Convert.ToInt32(@TempData["Sum_Expense"]) +
+                                       @Convert.ToInt32(@TempData["Cash_left"]) +
+                                       @Convert.ToInt32(@TempData["Cash_collect"]) +
+                                       @Convert.ToInt32(@sum1);
+                                }
+                                    @String.Format("{0:n0}",@TotalSum)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    Deposit(-)
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @TempData["Deposit"])
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    K.P(-)
+                                </td>
+                                <td style="color:red;">
+                                  @String.Format("{0:n0}", @TempData["Sum_StockRemaining_in"])
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="font-family: auto;">
+                                    Balance Rcv(-)
+                                </td>
+                                <td style="color:red;">
+                                    @String.Format("{0:n0}", @abcbalance)
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    <i class="icon icon-star "></i>Net Amount
+                                </td>
+                                <td align="right" style="color:red;">
+                                    @{
+                                        int NetAmont = (@Convert.ToInt32(@TotalSum)) -
+                                       (@Convert.ToInt32(@TempData["Sum_StockRemaining_in"]) +
+                                       @Convert.ToInt32(@abcbalance) +
+                                       @Convert.ToInt32(@TempData["Deposit"]));
+
+                                    }
+                                    @String.Format("{0:n0}", @NetAmont) 
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                   Purchase
+                                </td>
+                                <td style="color:red;">
+
+                                    @String.Format("{0:n0}", @sum2)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: auto;">
+                                    <i class="icon icon-star "></i>Net Profit
+                                </td>
+                                <td align="right" style="color:red;">
+                                  @{
+                                      int NetProf = Convert.ToInt32(@NetAmont) - Convert.ToInt32(@sum2);
+                                  }     
+                                    
+                                    @String.Format("{0:n0}", @NetProf)
+
+                                  
+                                </td>
+                            </tr>
+
+                              <tfoot><tr></tr></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@*<button id="tableDestroy">Remove</button>
+<button onclick="$('table').DataTable();" id="tableDestroy1">apply</button>*@
+<script>
+    //  alert();
+    //var table = $('.table').DataTable();
+    //table.destroy();
+   
+  
+    //$('#tableDestroy').on('click', function () {
+    //    table.destroy();
+    //});
+    $(document).ready(function () {
+       // alert();
+        var table = $('table').DataTable();
+        table.destroy();
+    })
+    
+
+</script>

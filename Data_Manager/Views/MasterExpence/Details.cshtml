@@ -1,0 +1,85 @@
+﻿@model Data_Manager.Models.tbl_MstExpense
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>tbl_MstExpense</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExpMstID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpMstID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExpDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TotalAmount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TotalAmount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Comments)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comments)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

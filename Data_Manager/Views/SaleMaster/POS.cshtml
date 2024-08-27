@@ -1,0 +1,898 @@
+﻿
+@model Data_Manager.Models.POS_ItemIn
+@{
+    ViewBag.Title = "POS";
+    Layout = null;
+}
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Counter Sale</title>
+    <style>
+        /*h2 {
+  color: #007fed;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}*/
+.wrap {
+  position: absolute;
+  overflow: hidden;
+  top: 10%;
+  right: 10%;
+  bottom: 85px;
+  left: 10%;
+  padding: 20px 50px;
+  display: block;
+  border-radius: 4px;
+  transform: translateY(20px);
+  transition: all 0.5s;
+  visibility: hidden;
+  
+}
+.wrap .content {
+  opacity: 0;
+}
+.wrap:before {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: white;
+  content: "";
+  bottom: 10px;
+  left: 50%;
+  top: 95%;
+  color: #fff;
+  border-radius: 50%;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrap.active {
+  display: block;
+  visibility: visible;
+  box-shadow: 2px 3px 16px silver;
+  transition: all 600ms;
+  transform: translateY(0px);
+  transition: all 0.5s;
+}
+.wrap.active:before {
+  height: 2000px;
+  width: 2000px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-left: -1000px;
+  margin-top: -1000px;
+  display: block;
+  -webkit-transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.wrap.active .content {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: all 600ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+a.button {
+  padding: 11px 11px 13px 13px;
+  outline: none;
+  border-radius: 50%;
+  background: #007fed;
+  background: -webkit-linear-gradient(left, rgb(3, 70, 136) , #0f2d36);
+    background: -o-linear-gradient(right, rgb(3, 70, 136) , #0f2d36);
+    background: -moz-linear-gradient(right, rgb(3, 70, 136) , #0f2d36);
+    background: linear-gradient(to right, rgb(3, 70, 136) , #0f2d36);
+
+  color: #fff;
+  font-size: 24px;
+  display: block;
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  top: auto;
+  margin-left: -25px;
+  transition: transform 0.25s;
+}
+a.button:hover {
+  text-decoration: none;
+  background: #2198ff;
+}
+a.button.active {
+  transform: rotate(135deg);
+  transition: transform 0.5s;
+}
+    </style>
+    <style>
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+li img{
+    width: 44px;
+    float: left;
+}
+        .nav > li > a {
+            padding: 5px 0px 0px 0px !important;
+            color: black !important;
+            font-weight:bold;
+           border-bottom: 0.5px solid #ada8a8 !important;
+           background: #f7f7f7 !important;
+           height: 51px;
+        }
+        .nav > li > a:hover {
+           
+           background: #e0e0e1ad !important;
+        }
+        .itemimg{
+            width:78px
+        }
+        .b{
+            font-family: cursive !important;
+            color:#f7061d ;
+
+        }
+        .item{
+                margin-bottom: 9px !important;
+        }
+    </style>
+
+    <link href="~/css/stylesheets.css" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/bootstrap/bootstrap.min.js'></script>
+    <script>
+        $(document).ready(function () {
+
+            if ('@Session["employee"]' == null || '@Session["employee"]' == '') {
+                window.location.href = '@Url.Action("Index", "Login")';
+            }
+            else if ('@Session["employee"]' != null || '@Session["employee"]' != '') {
+            }
+
+        });
+    </script>
+
+</head>
+<body   onkeypress="return runScriptlist(event)" style="overflow-x:hidden; text-align:center; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+    <div class="row well">
+        <div class="col-md-9">
+            <div class="block block-fill-white">
+                <div class="header">
+                    <h2 style="color: #dfb626;"> <i title="Refresh" onclick="location.reload();" class=" widget-icon widget-icon-dark icon-refresh" > </i> Menu List</h2><i title="Selection Zero" onclick="$('.itemqty').text(0);" class="widget-icon widget-icon-dark icon-cut"> </i><i style="font-weight: bold;font-size: 15px;margin-left: 20px;" title="Add List" id="row" class=" widget-icon widget-icon-dark icon  icon-check" > </i> <span style="float:right;" id="Sitem">Selected item</span>
+                </div>
+                <div class="content controls">
+
+                    <div class="block nav-tabs-vertical">
+
+                        <div class="tabs" >
+                            <ul style="height: 450px;  overflow-y: auto;border-right: 3px solid #08b8ed38;"  class="nav nav-tabs">
+                                @{
+                                    foreach (var item in ViewBag.category)
+                                    {
+                                        <li class="">
+                                            <a href="#@item.CategoryID" data-toggle="tab">
+                                                <img src="~/Images/@item.CategoryID category.jpg" onerror="this.src = '/Images/Default.jpg'" /> <b title="@item.CategoryID category.jpg">@item.Name</b>
+                                            </a>
+                                        </li>
+                                      
+                                    }
+                                   
+                                }
+                                @*<li class="">
+                                    <a href="#tab19" data-toggle="tab">
+                                        <img src="~/Images/30.jpg" />  Example 1
+                                    </a>
+                                </li>
+                                <li class=""><a href="#tab20" data-toggle="tab"><img src="~/Images/38.jpg" /> Example 2</a></li>
+                                <li class="">
+                                    <a href="#tab21" data-toggle="tab">
+                                        <img src="~/Images/39.jpg" /> Example 3
+                                    </a>
+                                </li>*@
+                                
+                            </ul>
+                            
+                            <div style="height: 450px; overflow:auto;" class="content tab-content">
+                                @{
+                                    foreach (var itemM in ViewBag.category)
+                                    {
+
+                                        <div class="tab-pane" id="@itemM.CategoryID">
+
+                                            <div class="form-row">
+
+                                                <div class="col-md-12">
+                                                    @{ int i = 0; 
+                                                    foreach (var itemD in ViewBag.productitem)
+                                                    {  
+                                                        i++;
+                                                        if (@itemM.CategoryID == @itemD.CategoryID) 
+                                                        { 
+                                                        <button onclick="$(this).find('.itemqty').text(parseInt($(this).find('.itemqty').text()) + 1); $('#Sitem').text($(this).find('.itemid').text() + ',' + $(this).find('.itemname').text() + ',' + $(this).find('.itemrate').text() + ',' + $(this).find('.itemqty').text());" type="button" class="item btn btn-default">
+                                                            
+                                                            <img title="@itemD.ID_ItemIn item.jpg" class="itemimg" alt="image" src="~/Images/@itemD.ID_ItemIn item.jpg" onerror="this.src = '/Images/Default.jpg'" /><br />
+                                                            <span class="itemname">@itemD.Name</span>
+                                                            <span style="display:none;" class="itemid">@itemD.ID_ItemIn</span> <br />
+                                                            <b class="b">
+                                                                Rs.
+                                                                <b class="itemrate">@itemD.RetailPrice</b>
+                                                            </b> (<span class="itemqty">0</span>) @*<span class="delRowBtn" onclick="$(this).parent('button').find('.itemqty').text(0);">X</span>*@
+                                                        </button>
+                                                        }
+                                                       
+                                                    }
+                                        if (i == 0)
+                                        {
+                                            <span class="btn-danger">No Record Found</span>
+                                        }
+}
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+
+
+                                    
+                                }
+                                @*<div class="tab-pane" id="tab19">
+              TAb1
+            </div>
+            <div class="tab-pane" id="tab20">
+                Tab2
+            </div>
+            <div class="tab-pane " id="tab21">
+                Tab3
+            </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        
+
+        <div class="col-md-3">
+            <div class="block block-fill-white">
+                <div class="header">
+                    <h2 style="color: #dfb626;"><i class="widget-icon widget-icon-dark icon-print"> </i> Bill / Payment</h2>
+                </div>
+
+                <div class="content controls">
+
+                   
+
+                    <div style=" font-weight:bolder; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <span><b>Cash Rcv :</b><span id="Cash">00.0</span></span> <br>
+                        <span><b>Return :</b><span id="Return">00.0</span></span> |
+                        <span><b>Balance :</b><span id="Balance">00.0</span></span><br />
+                        <strong style="float:left;"> Cash Rcv:</strong><br />
+                        <input title="Bill Cash Amount" style="float:left; width: 228px; border: 3px double #ce1212;"  placeholder="Cash Rcv" id="scriptBox2" type="number" onkeypress="return runScript2(event)" /><button onclick="listsave();" style="font-size: 45px;color: #47494b; height: 56px;" class="btn btn-success icon icon-save" title="Bill Save"></button>
+                    </div>
+                    <table align="center" border="1" cellspacing="0" style="/* text-align:center; *//* border-color:gray; */color:black; MARGIN: 3PX;    width: 98%; margin-top:2%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="table">
+                        <thead>
+                            <tr style="background: #cecece;">
+                                <th>Itmes</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                                <th><i class="icon icon-trash"></i></th>
+                            </tr>
+                        </thead>
+
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td class="" align="right" style="background:#cecece;font-size: 17px; color:black;"><span>Tot-&gt; <span id="Gtotal"><b>00.0</b></span></span></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            @Html.DropDownList("list", null, "Last Bill Slip", new { @class = "validate[required]", @onkeypress = "return runScriptlist(event)" })
+        </div>
+
+    </div>
+ @*//   <button onclick="msg()">msg</button>*@
+
+    <div id="snackbar"></div>
+    <script>
+        function msg(msg) {
+            $('#snackbar').html(msg)
+            var x = document.getElementById("snackbar")
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+    <style>
+        input:focus ,select:focus {
+    background-color: rgba(239, 4, 4, 0.12);
+}
+        .delRowBtn {
+            border: none;
+            color: red;
+            font-weight: bold;
+            border-radius: 50%;
+            font-family: cursive;
+            cursor: pointer;
+        }
+
+        input, select, span > span {
+            font-size: 28px !important;
+            font-weight: bold;
+        }
+     .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    
+    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+    </style>
+  
+       
+   @*Start Qiuck form Add Product*@
+    <div style="color:black;text-align:left; border: 5px solid #112941a6;" class='wrap wrap1'>
+        <div class='content'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block block-fill-white">
+                        <div class="header">
+                            <h2 style="color: #dfb626;"><i class="widget-icon widget-icon-dark icon-list"> </i>Add Manu List</h2>
+                        </div>
+                        <div style="background: #e5e1e173;" class="content controls">
+                            <div class="form-row">
+                                <div class="col-md-3">Item Category:</div>
+                                <div class="col-md-9">
+                                    @Html.DropDownList("CategoryID", null, "Select Item")
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">Item Name:</div>
+                                <div class="col-md-9">
+                                    <input type="text" id="itemname" placeholder="Item Name" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">Price</div>
+                                <div class="col-md-9">
+                                    <input placeholder="Sale Price" id="price" type="number" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+                                    <button id="btnsave" class="btn"> <i class="widget-icon widget-icon-dark icon-plus"> </i> </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    @* @Html.DropDownList("list", null, "Last Slip", new { @class = "validate[required]", @onkeypress = "return runScriptlist(event)" })*@
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    @*End Quick form Add Product*@
+
+    @*Start Qiuck form Return Product*@
+    <div style="color:black;text-align:left; border: 5px solid #112941a6;" class='wrap wrap2'>
+        <div class='content'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block block-fill-white">
+                        <div class="header">
+                            <h2 style="color: #dfb626;"><i class="widget-icon widget-icon-dark icon-list"> </i>Item Return</h2>
+                        </div>
+                        <div style="background: #e5e1e173;" class="content controls">
+                            <div class="form-row">
+                                <div class="col-md-3">Item Name:</div>
+                                <div class="col-md-9">
+
+
+                                    @Html.DropDownList("list", null, "Select Item", new { @id = "Rlist" })
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">Price</div>
+                                <div class="col-md-9">
+                                    <input placeholder="Return Amount" id="returnamount" type="number" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+                                    <button id="btnrsave" class="btn"> <i class="widget-icon widget-icon-dark icon-plus"> </i> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    @*End Quick form Return Product*@
+    
+    <div class="tooltip">
+        Hover over me
+        <span class="tooltiptext">Tooltip text</span>
+    </div>
+    
+
+
+        <a id="list" style="left: 35%;" title="Reports" class='button icon-print ' href='@Url.Action("Summery", "SaleMaster")'></a>
+        <a id="list" style="left: 40%;" title="Manu List" class='button icon icon-list ' href='@Url.Action("Index", "POSItemIn")'></a>
+        <a id="a" title="Add New Item" class='button icon icon-plus ' href='#'></a>
+        <a style="left: 45%;" id="aa" title="Sale Return" class='button icon icon-refresh ' href='#'></a>
+       @*<a  style="left: 55%;background:#04fc04;" id="row" title="Sale Return" class='button icon icon-check ' href='#'></a>*@
+    @*Print Invoice Button*@
+    <button style="display:none;" id="print" onclick="printYes();">print</button>
+
+    <!-- 	<input id="scriptBox2" type="text"  onkeypress="return runScript2(event)" /> -->
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+
+    <script>
+
+
+
+
+
+        $(document).ready(function () {
+            $('#footer-bar').remove();
+            if (sessionStorage.getItem('cash') == null & sessionStorage.getItem('tot') == null) {
+                $('#Cash').text('00.0');
+                $('#Return').text('00.0');
+            }else{
+            $('#Cash').text(sessionStorage.getItem('cash'));
+            $('#Return').text(sessionStorage.getItem('tot'));
+            }
+
+            if (sessionStorage.getItem('tmsg') == 'nomsg') {
+               
+            } else {
+              //  alert();
+                msg(sessionStorage.getItem('tmsg'));
+                sessionStorage.setItem('tmsg', "nomsg")
+            }
+        });
+
+        //})
+        var gtot = 0;
+        $(function () {
+            var tbl = $("#table tbody");
+
+            //$("#addRowBtn").click(function () {
+            $("#row").click(function () {
+                var activelist = $('#Sitem').text();
+                alv = activelist.split(",");
+                //  alert(alv[1]);
+              //  alert( alv[3])
+                var Items = alv[0];
+                var Itemsname = alv[1]+" @@"+alv[2];
+                //var res = Itemsname.split("@@");
+                var Rate = parseInt(alv[2]);
+
+             //   alert(alv[0], alv[1], alv[2], alv[3])
+               
+                var Qty = parseInt(alv[3]);
+                if (Qty > 0) {
+                var Rate = Rate
+                var Total = Rate * Qty;
+              //  alert(Total);
+                gtot = gtot + Total;
+               
+               
+                $('#Gtotal').text(gtot);
+                $('#scriptBox2').val(gtot);
+                $("<tr class='items' style='border:1px solid gray; background: rgba(239, 4, 4, 0.12);'><td style='display:none;' class='titem'>" + Items + "</td> <td class='titemname'>" + Itemsname + "</td><td align='right' class='tqty'>" + Qty + "</td><td align='right' class=total>" + Total + "</td><td><button class='delRowBtn'>X</button></td></tr>").appendTo(tbl);
+                $('.itemqty').text(0);
+                $('#Sitem').text('');
+                } else {
+                    alert('Invalid Selection');
+                }
+                
+            });
+
+            $(document.body).delegate(".delRowBtn", "click", function () {
+
+
+                var r = confirm("Conferm Delete!");
+                if (r == true) {
+                    //  alert($(this).closest('tr').find('td').eq(2).text());
+                    var sub = $(this).closest('tr').find('td').eq(3).text()
+                    $(this).closest("tr").remove();
+                //    document.getElementById("scriptBox").focus();
+
+                    gtot = gtot - sub
+                    $('#Gtotal').text(gtot);
+                    $('#scriptBox2').val(gtot);
+
+                } else {
+
+                }
+
+                //alert($(this td:eq(3)).text());
+            });
+
+        });
+
+
+    </script>
+
+
+
+
+    <script type="text/javascript">
+        //function runScriptlist(e) {
+        //    if (e.keyCode == 66) {
+        //        document.getElementById("scriptBox2").focus();
+        //    }
+        //else if (e.keyCode == 13) {
+        //     document.getElementById("scriptBox").focus();
+        // }
+        //}
+      //  document.getElementById("scriptBox").focus();
+
+        function runScript(e) {
+            if (e.keyCode == 13) {
+
+                document.getElementById("scriptBox1").focus();
+                $("#scriptBox1").select();
+
+                var tb = document.getElementById("scriptBox");
+                eval(tb.value);
+                return false;
+            }
+            if (e.keyCode == 32) {
+
+                document.getElementById("scriptBox2").focus();
+
+                var tb = document.getElementById("scriptBox");
+                eval(tb.value);
+                return false;
+            }
+        }
+        function runScript1(e) {
+            if (e.keyCode == 13) {
+
+              //  var ldata= $('#scriptBox').val();
+              //  var qdata = $('#scriptBox1').val();
+               // alert(qdata);
+                if(ldata !="" && ldata !=null && qdata > 0){
+
+              //  $('#addRowBtn').click();
+              //  $('input').val('');
+              //  $('select').val('');
+             //   $('#scriptBox1').val(1);
+             //   document.getElementById("scriptBox").focus()
+             //   var tb = document.getElementById("scriptBox");
+              //  eval(tb.value);
+              //  return false;
+                } else {
+                  //  document.getElementById("scriptBox").focus();
+              //      alert("Invalid Selection..!");
+                }
+            }
+        }
+
+
+        function runScript2(e) {
+            if (e.keyCode == 13) {
+                //	$('#addRowBtn').click();
+                //alert("in");
+                var cash = $('#scriptBox2').val();
+                var tot = gtot;
+                if (cash >= tot & tot > 0) {
+                    tot = cash - tot;
+                    sessionStorage.setItem('cash', cash);
+                    sessionStorage.setItem('tot', tot)
+                    $('#Cash').text(sessionStorage.getItem('cash'));
+                    $('#Return').text(sessionStorage.getItem('tot'));
+                    $('#Balance').text(0);
+
+                    saveRecord();
+                    $('#Gtotal').text(0.00);
+                    document.getElementById("scriptBox").focus()
+                    $('input').val('');
+
+
+                } else {
+                    alert("Amount less than Bill or Invalid Selection")
+                }
+
+
+
+
+                var tb = document.getElementById("scriptBox");
+                eval(tb.value);
+                return false;
+            }
+        }
+
+        function listsave (){
+            
+                //	$('#addRowBtn').click();
+                //alert("in");
+                var cash = $('#scriptBox2').val();
+                var tot = gtot;
+                if (cash >= tot & tot > 0) {
+                    tot = cash - tot;
+                    sessionStorage.setItem('cash', cash);
+                    sessionStorage.setItem('tot', tot)
+                    $('#Cash').text(sessionStorage.getItem('cash'));
+                    $('#Return').text(sessionStorage.getItem('tot'));
+                    $('#Balance').text(0);
+
+                    saveRecord();
+                    $('#Gtotal').text(0.00);
+                    document.getElementById("scriptBox").focus()
+                    $('input').val('');
+
+
+                } else {
+                    alert("Amount less than Bill")
+                }
+
+
+
+
+                var tb = document.getElementById("scriptBox");
+                eval(tb.value);
+                return false;
+           
+        }
+
+
+
+
+        /*************** Send Data to Server *****/
+        var MASTER_ID;
+        function saveRecord() {
+            // Master Record***
+            var master = [{
+                "NetAmount": $('#Gtotal').text(),
+                "Cash": $('#Cash').text(),
+                "Balance": $('#Balance').text(),
+                "Return": $('#Return').text()
+
+            }];
+
+            //Detail Records***
+            var details = [];
+
+            $('#table tbody tr').each(function (i, e) {
+                var $row = $(e);
+                // alert($row.find('.titem').text());
+                var d = {
+                    "items": $row.find('.titem').text(),
+                    "itemname": $row.find('.titemname').text(),
+                    "Qtys": $row.find('.tqty').text(),
+                    "totals": $row.find('.total').text(),
+
+                };
+                details.push(d);
+            });
+
+            //Master and details array****
+            master = JSON.stringify(master);
+            details = JSON.stringify(details);
+            //Send Data To Server Action***
+            $.post('@Url.Action("SaleSave")', { Details: details, Master: master })
+                .done(function (data) {
+                    MASTER_ID = data;
+                    $('.items').remove();
+                    sessionStorage.setItem('tmsg', 'Data Save Scussfully');
+                    
+                    printYes();
+
+
+                })
+                .fail(function (data) {
+                    //  alert("Fail");
+                    sessionStorage.setItem('tmsg', 'Save Failed');
+                    
+                    console.log(data);
+                })
+        }
+        /*******************************************************/
+
+
+        /*************** Print Actions *****/
+
+        @*function NoPrint() {
+     location.reload();
+ }
+
+ function YesPrint() {
+     var redirectTo = '@Url.Action("Invoice", new { @masterId = "jsVariable" })';
+     redirectTo = redirectTo.replace("jsVariable", MASTER_ID);
+     location.reload();
+     var win = window.open(redirectTo, '_blank');
+     win.focus();
+ }*@
+
+        /*******************************************************/
+        $("#list").change(function () {
+            var selectedId = $("#list").val();
+            var redirectTo = '@Url.Action("posprint", new { @saleMstId = "jsVariable" })';
+            redirectTo = redirectTo.replace("jsVariable", selectedId);
+            //   window.location = redirectTo;
+            // window.open(redirectTo);
+            location.reload();
+
+            //  function popitup(url) {
+            newwindow = window.open(redirectTo, 'Print Invoice', 'height=800,width=400');
+            if (window.focus) { newwindow.focus() }
+            // return false;
+        });
+
+
+        function printYes() {
+
+            var redirectTo = '@Url.Action("posprint", new { @saleMstId = "jsVariable" })';
+            redirectTo = redirectTo.replace("jsVariable", MASTER_ID);
+            //   window.location = redirectTo;
+            // window.open(redirectTo);
+            location.reload();
+
+            //  function popitup(url) {
+            newwindow = window.open(redirectTo, 'Print Invoice', 'height=800,width=400');
+            if (window.focus) { newwindow.focus() }
+            // return false;
+            //  }
+        }
+
+        //start popup form
+        $('#a').on('click', function () {
+            $('.wrap1, #a').toggleClass('active');
+
+            //$('.wrap, #a').toggleClass(location.reload());
+            return false;
+        });
+
+        $('#aa').on('click', function () {
+            $('.wrap2, #aa').toggleClass('active');
+
+            //$('.wrap, #a').toggleClass(location.reload());
+            return false;
+        });
+        //End popup form
+        //Start Item Save Ajax
+
+        $("#btnsave").click(function () {
+            var category = $("#CategoryID").val();
+            var itemname = $("#itemname").val();
+            var price = $("#price").val();
+
+            if (itemname.length > 2 && price.length > 0) {
+                $.post('@Url.Action("ItemSave")', { Itemname: itemname, price: price, CategoryID: category })
+                       .done(function (data) {
+                           msg('Data Saved Successfully');
+                           document.getElementById("itemname").focus();
+                           $('input').val('');                       
+                       })
+                       .fail(function (data) {
+                           msg('Data failed')
+                          
+                           console.log(data);
+                       })
+            } else {
+                msg('Invalid Selection');
+             //   alert("Invalid Selection");
+            }
+        })
+
+
+        $("#btnrsave").click(function () {
+
+            var itemname = $("#Rlist").val();
+            var price = $("#returnamount").val();
+
+            $.post('@Url.Action("ItemReturn")', { ID: itemname, Amount: price })
+                   .done(function (data) {
+                       msg('Data Saved Successfully');
+                       document.getElementById("itemname").focus();
+                       $('input').val('');
+
+                   })
+                   .fail(function (data) {
+                       msg('Data failed ');
+                      
+                       console.log(data);
+                   })
+        })
+      
+        //function launchIntoFullscreen(element) {
+        //    if (element.requestFullscreen) {
+        //        element.requestFullscreen();
+        //    } else if (element.mozRequestFullScreen) {
+        //        element.mozRequestFullScreen();
+        //    } else if (element.webkitRequestFullscreen) {
+        //        element.webkitRequestFullscreen();
+        //    } else if (element.msRequestFullscreen) {
+        //        element.msRequestFullscreen();
+        //    }
+        //}
+        ////launchIntoFullscreen(document.documentElement);
+    </script>
+
+</body>
+
+
+
+</html>

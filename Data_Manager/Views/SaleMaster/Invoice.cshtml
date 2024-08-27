@@ -1,0 +1,267 @@
+﻿@model Data_Manager.Models.tbl_SaleMaster
+
+@{
+    Data_Manager.Models.Entities_Data db= new Data_Manager.Models.Entities_Data();
+  //  Data_Manager.Models.tbl_InvoiceInfo tb = new Data_Manager.Models.tbl_InvoiceInfo().;
+    Layout = null;
+    List<Data_Manager.Models.tbl_SaleDetail> items = Model.tbl_SaleDetail.ToList();
+    items=items.Where(a => a.Sale_Status == "S").ToList();
+    List<Data_Manager.Models.tbl_SaleDetail> items1 = Model.tbl_SaleDetail.ToList();
+    items1 = items1.Where(a => a.Sale_Status == "R").ToList();
+
+
+    var aaa =db.tbl_InvoiceInfo.Where(a => a.isactive=="Y" && a.ID==Model.invoiceid).FirstOrDefault();
+    
+    
+    //List<Data_Manager.Models.tbl_InvoiceInfo> invdata = Model.tbl_InvoiceInfo.First();
+    //invdata = invdata.Where(a => a.isactive == "y").ToList();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print Invoice</title>   
+</head>
+<body>
+   
+    
+    <div style="font-size:15px; color: black;
+            width: 600px;
+
+
+            border: 0.5px solid #c4c7c7;
+            padding: 10px 10px 20px 10px;
+            font-family:sans-serif;
+
+            z-index: 0;" id="print-area-2" class="print-area">
+        @*<div style="text-align:right;"><a href="" id="print" >Print</a></div>*@
+        @*<div id="page">*@
+        
+        <h2 style="text-align:center;letter-spacing: 2px;">@Html.DisplayFor(item => @aaa.CompanyName) </h2>
+        <p style=" text-align:center;margin-top: -17px; padding-left:100px; padding-right:100px">@Html.DisplayFor(item => @aaa.Addressline1) </p>
+        <hr />
+        <p class="">
+            <span style="float:right">
+            User ID : @Html.DisplayFor(item => @Model.CreateBy )<br />
+            Bill No : #@Html.DisplayFor(item =>   @Model.SaleMst_ID)<br />
+            Date : @String.Format("{0: dd-MMM-yy}", @Model.CreateDate)
+            </span>
+            <span style="max-width:40%;">
+                Customer: <strong>@Model.tbl_Employee.Name</strong><br />
+
+                <span class="white-space-pre">Description: @Model.Description</span><br />
+                <b>Sales Invoice</b>
+                
+            </span>
+        </p>
+        <style>
+
+            .white-space-pre
+            {
+                white-space: pre-wrap;
+            }
+        </style>
+
+
+
+        @*@String.Format("{0: dd-MMM-yy hh:mm tt}", @Model.CreateDate)
+      <br>
+        <b>Customer: @Model.tbl_Employee.Name</b>*@
+
+
+        <hr />
+
+        <style>
+            th,td{
+                border: 1px solid gray;
+            }
+        </style>
+        <br />
+        <table style="width: 590px"   cellspacing="0">
+            <thead style="">
+                <tr>
+
+                    <th align="center" style="width:54px">Qty</th>
+                    <th style="width:300px;" align="left">PARTICULER</th>
+                    
+                    @*<th>Make</th>*@
+                    <th align="center">RATE</th>
+                    
+                    @*<th align="left" class="dis">Dis</th>*@
+                    @*<th class="dis" id="thide">Disc(%)</th>*@
+                     
+                    <th style="width:150px;" align="center">AMOUNT</th>
+                </tr>
+            </thead>
+
+            <tbody style="font-size: 15px !important;">
+                @foreach (var item in items)
+                {
+                    <tr>
+                        <td align="center"> @String.Format("{0:n1}", Convert.ToInt32(item.Stock_Counts)) </td>
+                        <td>@item.tbl_SalesTypeSetupForm.Name</td>
+                        
+                        @*<td>@item.tbl_SalesTypeSetupForm.tbl_Brand.Name</td>*@
+                        <td align="center">@String.Format("{0:n1}", Convert.ToInt32(@item.Stock_Retial_Price)) </td>
+                        @*<td align="right" class="dis">@Convert.ToInt32(@item.Discount_Amount) </td>*@
+                        @*<td align="center" class="dis">@item.Discount_Amount (@item.Discount__%)</td>*@
+                        @*<td>@Convert.ToInt32(item.tbl_Product.HoleSaleUnitPrice)</td>*@
+                        <td align="right">@Convert.ToInt32( @Convert.ToInt32(@item.Net_Sale_Price))</td>
+                    </tr>
+                }
+
+               
+                <tr class="" style="font-weight:600;">
+                    
+                    <td colspan="3" align="right" style="padding:8px;">Net Amount</td>
+                    <td align="right"> @String.Format("{0:n1}", Convert.ToInt32(Model.Total_Amount)) </td>
+                </tr>
+                <tr class="" style="font-weight:bold;">
+                    
+
+                    <td  style="padding:10px;border:none;" colspan="5" align="right"></td>
+                </tr>
+                <tr class="2" style="">
+                    <td style="padding:8px;" id="colspan" align="right" colspan="3">Total Balance</td>
+
+                    <td colspan="1" align="right">Rs. @String.Format("{0:n1}", Convert.ToInt32(@ViewData["Balance"])) </td>
+                </tr>
+                <tr class="" style="font-weight:bold;">
+                    <td style="padding:8px;"  id="colspan" align="right" colspan="3">Cash Rcv</td>
+                   
+                    <td colspan="2" align="right"></td>
+                </tr>
+                @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Discount(@Convert.ToInt32(Model.Discount__)%)</td>
+                        <td>Rs.@Convert.ToInt32(Model.Discount_Amount)</td>
+                    </tr>*@
+                @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Net Pay</td>
+                        <td>Rs.@Convert.ToInt32(Model.Net_Amount)</td>
+                    </tr>*@
+                @*<tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Advance</td>
+                        <td>Rs.@Convert.ToInt32(Model.Advance)</td>
+                    </tr>
+                    <tr class="odd" style="font-weight:bold;">
+                        <td colspan="2"></td>
+                        <td>Balance</td>
+                        <td>Rs.@Convert.ToInt32(Model.Balance)</td>
+                    </tr>*@
+            </tbody>
+        </table><br /><br />
+       
+        @if (@items1.Count() > 0)
+        { <span>Sale Return Item(s)</span>
+            <table width="380" border="1" align="left" cellspacing="0">
+                <thead style="text-align: left;">
+                    <tr>
+
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Description</th>
+
+                        <th>Net Amount</th>
+                        @*<th style="WIDTH: 79PX;">Unit</th>*@
+
+                    </tr>
+                </thead>
+
+
+
+
+                <tbody style="font-size: 10px !important;">
+                    @foreach (var item1 in items1)
+                    {
+                        <tr>
+
+                            <td>@item1.tbl_SalesTypeSetupForm.Name</td>
+                            <td>@Convert.ToInt32(item1.Stock_Counts)</td>
+                            <td>@item1.Description</td>
+                            <td align="right"> @item1.Net_Sale_Price </td>
+                        </tr>
+                    }
+
+                    
+                    @*<tr class="odd" style="font-weight:bold;">
+                            <td colspan="2"></td>
+                            <td>Discount(@Convert.ToInt32(Model.Discount__)%)</td>
+                            <td>Rs.@Convert.ToInt32(Model.Discount_Amount)</td>
+                        </tr>*@
+                    @*<tr class="odd" style="font-weight:bold;">
+                            <td colspan="2"></td>
+                            <td>Net Pay</td>
+                            <td>Rs.@Convert.ToInt32(Model.Net_Amount)</td>
+                        </tr>*@
+                    @*<tr class="odd" style="font-weight:bold;">
+                            <td colspan="2"></td>
+                            <td>Advance</td>
+                            <td>Rs.@Convert.ToInt32(Model.Advance)</td>
+                        </tr>
+                        <tr class="odd" style="font-weight:bold;">
+                            <td colspan="2"></td>
+                            <td>Balance</td>
+                            <td>Rs.@Convert.ToInt32(Model.Balance)</td>
+                        </tr>*@
+                </tbody>
+            </table>
+
+            @*   </div>*@
+
+
+        } 
+        <hr />
+        <br />
+       <br />
+        <br />
+        <p style="width:600px;">
+            <span style="float: right">
+                <span>----------------------</span><br />
+                <sub>Receiver's Stamp & Signature</sub>
+            </span>
+            @*<span style="float:right">
+            <span>----------------------</span><br />
+            <sub>For <b>@aaa.CompanyName</b></sub>
+            </span>*@
+        </p>
+        <br />
+            <hr />
+            @*<h3>@aaa.fields1</h3>
+            @aaa.fields2<br />
+            @aaa.fields3<br />*@
+           
+            @*0213-1234567<br />*@
+        <sub> Developed By: @aaa.fields4</sub>
+
+</div>
+    <textarea id="printing-css" style="display:none;">html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}body{font:normal normal .8125em/1.4 Arial,Sans-Serif;background-color:white;color:#333}strong,b{font-weight:bold}cite,em,i{font-style:italic}a{text-decoration:none}a:hover{text-decoration:underline}a img{border:none}abbr,acronym{border-bottom:1px dotted;cursor:help}sup,sub{vertical-align:baseline;position:relative;top:-.4em;font-size:86%}sub{top:.4em}small{font-size:86%}kbd{font-size:80%;border:1px solid #999;padding:2px 5px;border-bottom-width:2px;border-radius:3px}mark{background-color:#ffce00;color:black}p,blockquote,pre,table,figure,hr,form,ol,ul,dl{margin:1.5em 0}hr{height:1px;border:none;background-color:#666}h1,h2,h3,h4,h5,h6{font-weight:bold;line-height:normal;margin:1.5em 0 0}h1{font-size:200%}h2{font-size:180%}h3{font-size:160%}h4{font-size:140%}h5{font-size:120%}h6{font-size:100%}ol,ul,dl{margin-left:3em}ol{list-style:decimal outside}ul{list-style:disc outside}li{margin:.5em 0}dt{font-weight:bold}dd{margin:0 0 .5em 2em}input,button,select,textarea{font:inherit;font-size:100%;line-height:normal;vertical-align:baseline}textarea{display:block;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}pre,code{font-family:"Courier New",Courier,Monospace;color:inherit}pre{white-space:pre;word-wrap:normal;overflow:auto}blockquote{margin-left:2em;margin-right:2em;border-left:4px solid #ccc;padding-left:1em;font-style:italic}table[border="1"] th,table[border="1"] td,table[border="1"] caption{border:1px solid;padding:.5em 1em;text-align:left;vertical-align:top}th{font-weight:bold}table[border="1"] caption{border:none;font-style:italic}.no-print{display:none}</textarea>
+    <iframe id="printing-frame" name="print_frame" src="about:blank" style="display:none;"></iframe>
+    <script>
+        window.addEventListener("load", function () {
+
+            window.print();
+            window.close();
+
+        });
+      
+    </script>
+   
+    <script src="~/js/plugins/jquery/jquery.min.js"></script>
+    <script>
+        //alert();
+        $('#thide').click(function () {
+      
+            $('.dis').remove();
+
+            $('#colspan').attr("colspan", "3");
+
+        })
+    </script>
+  
+</body>
+</html>

@@ -1,0 +1,392 @@
+﻿@model IEnumerable<Data_Manager.Models.tbl_Vendors_Mst_Transaction>
+
+
+@{
+    ViewBag.Title = "Vendor(s) Transaction";
+    ViewBag.printtext = "Vendor GL (Payments) Report";
+}
+<script>
+    localStorage.setItem("Key","Saved From 24-jan-2018");
+</script>
+<div class="container">
+    <br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class=" header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i>GL Vendor Record</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    <a title="Add New Payment" href='@Url.Action("Create", "Vendor_Payment")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-upload"></i></a>
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+
+                    <div class="block">
+                        <div class="head bg-default bg-light-ltr np">
+                            <ul class="nav nav-tabs pull-left">
+                                <li title="CR : @Model.Sum(a =>a.CR_Amount) / DR : @Model.Sum(a =>a.DR_Amount)" class="active"><a href="#tab13" data-toggle="tab"><i class=" icon-refresh"></i> GL Transaction</a></li>
+                                <li title="Payed to Vendor : @Model.Sum(a =>a.CR_Amount)"><a href="#tab14" data-toggle="tab"><i class="icon-upload"></i>Accounts Payable</a></li>
+                                <li title="Received From Vendor :@Model.Sum(a =>a.DR_Amount)"><a href="#tab15" data-toggle="tab"><i class="icon-download"></i>Accounts Receivable</a></li>
+                            </ul>
+                        </div>
+                        <div class="content tab-content bg-dot50">
+                            <div class="tab-pane active" id="tab13">
+                                @{
+                                    decimal cr = Convert.ToDecimal(Model.Sum(a => a.CR_Amount));
+
+                                    decimal dr = Convert.ToDecimal(Model.Sum(a => a.DR_Amount));
+
+                                    decimal bal = cr - dr;
+                                    var per = "";
+                                    if (cr > 0)
+                                    {
+                                        per = (( cr/dr) * 100).ToString("F");
+                                    }
+                                    else
+                                    {
+                                        per = "0";
+                                    }
+
+                                    <center>
+                                        <span class="icon-refresh"></span> <i>Total Balance :</i> <strong>Rs.@String.Format("{0:n2}", @bal)</strong>
+                                        <div title="Payed @per%" style="width: 20%; min-width: 185px;" class="hp-info hp-simple  hp-inline">
+                                            <span class="hp-main"><span class=""></span>@per%</span>
+                                            <div class="hp-sm">
+                                                <div class="progress progress-small  shine-me">
+                                                    <div id="pro" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="@per" aria-valuemin="0" aria-valuemax="100" style=""></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </center>
+                                }
+                                <script>
+                                    $(window).load(function () {
+                                        $(".progress-bar-danger").css('width', '@per%');
+                                        //  width:
+                                        //    alert("Handler for .focus() called.");
+
+                                    });
+                                </script>
+                                <div class="table-responsive">
+                                    <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                                        <thead>
+                                            <tr>
+                                                <th title="Transaction ID">
+                                                    #
+                                                </th>
+                                                <th>
+                                                    CreateDate<i class="icon-calendar"></i>
+                                                </th>
+                                                <th>
+                                                    Name<i class="icon-star-half-empty"></i>
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+
+                                                <th>
+                                                    DR Amount<i class="icon-download"></i>
+                                                </th>
+
+                                                <th>
+                                                    CR Amount<i class="icon-upload"></i>
+                                                </th>
+                                                <th>
+                                                    CreateBy<i class="icon-user"></i>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+
+                                                <tr>
+                                                    <td title="GL ID : @item.Vendor_Acc_Trans_ID ">
+                                                        @if (item.Ven_Payment_ID.ToString() == "")
+                                                        {
+                                                            <span title="Stock in Amount"> S-@item.StockMstId</span>
+                                                        }
+                                                        else if (item.StockMstId.ToString() == "")
+                                                        {
+                                                          <span title="Payment Rcv">  P-@item.Ven_Payment_ID </span>
+                                                        }
+
+                                                    </td>
+
+                                                    <td>
+                                                        @String.Format("{0:dd/MMM/yy}", @item.CreateDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(model => item.tbl_Vendor.Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(model => item.Particular) <span> *@Html.DisplayFor(model => item.tbl_Vendor_Payment.Payment_Type)</span>
+                                                    </td>
+                                                    <td align="right" title="Vendor Purchase Amount">
+                                                        <i>@String.Format("{0:n2}", @item.DR_Amount)</i>
+                                                    </td>
+                                                    <td align="right" title="Vendor Payed Amount">
+                                                        <i>@String.Format("{0:n2}", @item.CR_Amount)</i>
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(model => item.CreateBy)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="background:black;font-size: 20px;">Total Amount</td>
+                                                <td align="right" style="background:black;font-size: 20px;">@String.Format("{0:n2}", @dr)</td>
+                                                <td align="right" style="background:black ;font-size: 20px;">@String.Format("{0:n2}", @cr)</td>
+
+                                                <td class="shine-me" style="background:Red;font-size: 20px;">Bal <span style="text-align:right;"> @String.Format("{0:n2}", @bal)</span></td>
+                                            </tr>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab14">
+                                <div class="table-responsive">
+                                    <center>
+                                        <span class="icon-refresh"></span> <i>Total Payable : Rs.@String.Format("{0:n2}", @Model.Sum(a => a.CR_Amount))</i>
+                                        @*<div style="width: 20%; min-width: 185px;" class="hp-info hp-simple  hp-inline">
+                                                <span class="hp-main"><span class=""></span>@per%</span>
+                                                <div class="hp-sm">
+                                                    <div class="progress progress-small">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="@per" aria-valuemin="0" aria-valuemax="100" style="width: @per%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                    </center>
+
+                                    <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #No
+                                                </th>
+                                                <th>
+                                                    CreateDate<i class="icon-calendar"></i>
+                                                </th>
+                                                <th>
+                                                    Name<i class="icon-star-half-empty"> </i>
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+
+                                                <th>
+                                                    CR Amount<i class="icon-upload"> </i>
+                                                </th>
+
+
+                                                <th>
+                                                    CreateBy<i class="icon-user"> </i>
+                                                </th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.CR_Amount > 0)
+                                                {
+                                                    <tr>
+                                                        <td title="GL ID : @item.Vendor_Acc_Trans_ID ">
+                                                            @if (item.StockMstId.ToString() == "")
+                                                            {
+                                                                <span title="Payment Rcv">  P-@item.Ven_Payment_ID </span>
+                                                            }
+
+                                                        </td>
+                                                        <td>
+                                                            @String.Format("{0:dd/MMM/yy}", @item.CreateDate)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.tbl_Vendor.Name)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.Particular)
+                                                        </td>
+
+
+                                                        <td align="right">
+                                                            <i>@String.Format("{0:n2}", @item.CR_Amount)</i>
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.CreateBy)
+                                                        </td>
+                                                    </tr>}
+
+
+                                            }
+                                        </tbody>
+                                        <tfoot><tr></tr></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab15">
+                                <center>
+                                    <span class="icon-refresh"></span> <i>Total Receivable : Rs.@String.Format("{0:n2}", @Model.Sum(a => a.DR_Amount))</i>
+                                    <div title="Payed @per%" style="width: 20%; min-width: 185px;" class="hp-info hp-simple  hp-inline">
+                                        <span class="hp-main"><span class=""></span>@per%</span>
+                                        <div class="hp-sm">
+                                            <div class="progress progress-small shine-me">
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="@per" aria-valuemin="0" aria-valuemax="100" style="width: @per%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </center>
+                                <div class="table-responsive">
+                                    <table id="myTable1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    #No
+                                                </th>
+                                                <th>
+                                                    CreateDate<i class="icon-calendar"></i>
+                                                </th>
+                                                <th>
+                                                    Name<i class="icon-star-half-empty"></i>
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+                                                <th>
+                                                    DR Amount<i class="icon-download"> </i>
+                                                </th>
+                                                <th>
+                                                    CreateBy<i class="icon-user"></i>
+                                                </th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.DR_Amount > 0)
+                                                {
+                                                    <tr>
+                                                        <td title="GL ID : @item.Vendor_Acc_Trans_ID ">
+                                                            @if (item.Ven_Payment_ID.ToString() == "")
+                                                            {
+                                                                <span title="Stock in Amount"> S-@item.StockMstId</span>
+                                                            }
+                                                           
+
+                                                        </td>
+                                                        <td>
+                                                            @String.Format("{0:dd/MMM/yy}", @item.CreateDate)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.tbl_Vendor.Name)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.Particular)
+                                                        </td>
+
+
+
+                                                        <td align="right">
+                                                            <i>@String.Format("{0:n2}", @item.DR_Amount)</i>
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(model => item.CreateBy)
+                                                        </td>
+                                                    </tr>}
+                                            }
+                                        </tbody>
+                                        <tfoot><tr></tr></tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Search Modal Start-->
+@using (Html.BeginForm("Index", "Vendor_Transactions", FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Search Record </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @Html.DropDownList("VendorId", null, "Select Vendor")
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        @*<input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />*@
+                                        @*<input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    @*  <input name="todate" id="todate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />*@
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->

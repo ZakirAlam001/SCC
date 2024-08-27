@@ -1,0 +1,91 @@
+﻿@model Data_Manager.Models.tbl_MstExpense
+
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "MasterExpence")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Create Expense</h1>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    <div class=" form-group form-group-sm">
+                        <div class="row ">
+
+                            <div class="form-group col-lg-4">
+                                @Html.LabelFor(model => model.Comments, "Reasaon/Others")
+                                @Html.TextBoxFor(model => model.Comments, new { @class = "validate[required] form-control" , @placeholder="Daily exp,Bill,Guest,Rant" })
+                                @Html.ValidationMessageFor(model => model.Comments)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.Comments, "Expense Type")
+                                @Html.DropDownListFor(model => model.Expensetype, new List<SelectListItem>
+                                {
+                                    new SelectListItem() {Text = "", Value=""},
+                                    new SelectListItem() {Text = "D-Salary", Value="D-Salary"},
+                                    new SelectListItem() {Text = "M-Salary", Value="M-Salary"},
+                                    new SelectListItem() {Text = "OfficeExp", Value="OfficeExp"},
+                                    new SelectListItem() {Text = "UtilityExp", Value="UtilityExp"},
+                                    new SelectListItem() {Text = "Others", Value="Others"}
+                                }, new { @class = "validate[required]" })
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.TotalAmount, "Amount")
+                                @Html.TextBoxFor(model => model.TotalAmount, new { @class = "validate[required] form-control", @type="number"})
+                                @Html.ValidationMessageFor(model => model.TotalAmount)
+                            </div>
+                            <div class="form-group col-lg-2">
+                                @Html.LabelFor(model => model.ExpDate, "Date")
+                                @Html.TextBoxFor(model => model.ExpDate, new { @class = "datepicker1 validate[required] " })
+                                @Html.ValidationMessageFor(model => model.ExpDate)
+                            </div>
+
+
+
+
+                           
+                        </div>
+                
+
+
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+
+                        <div class="form-group col-lg-1">
+
+
+                        </div>
+                        <div class="form-group col-lg-11">
+                            <button type="submit" class="btn btn-base">
+                                <i class=" icon-plus"> </i>
+                                Save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+
+
+
+
+

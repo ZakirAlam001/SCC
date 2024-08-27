@@ -1,0 +1,84 @@
+﻿@model Data_Manager.Models.tbl_Stock
+
+
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="row">
+    <div class="col-md-6">
+        <a title="Back" href='@Url.Action("Index", "Stock")' style="" class="widget-icon widget-icon-dark"><i class="icon-arrow-left"></i></a>
+    </div>
+</div><br />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "validate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.Stock_ID)
+        @Html.HiddenFor(model => model.CreateDate)
+        @Html.HiddenFor(model => model.CreateBy)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="widget-icon widget-icon-dark icon-plus"> </i> Edit Record</h1>
+            </div>
+            <div class="well">
+                <div class=" form-group form-group-sm">
+                    <div class="row ">
+
+                        <div class="form-group col-lg-2">
+                            @Html.LabelFor(model => model.SaleTypeID, "Item")
+                            @Html.DropDownList("SaleTypeID", null, "Select Item", new { @class = "validate[required]" })
+                            @Html.ValidationMessageFor(model => model.SaleTypeID)
+                        </div>
+                        @*<div class="form-group col-lg-2">
+                            @Html.LabelFor(model => model.Invoice_No, "Invoice No")
+                            @Html.TextBoxFor(model => model.Invoice_No, new { @class = "validate[required]" })
+                            @Html.ValidationMessageFor(model => model.Invoice_No)
+                        </div>*@
+                        <div class="form-group col-lg-2">
+                            @Html.LabelFor(model => model.Quantity, "Quantity")
+                            @Html.TextBoxFor(model => model.Quantity, new { @type = "number", @class = "validate[required]" })
+                            @Html.ValidationMessageFor(model => model.Quantity)
+                        </div>
+                        <div class="form-group col-lg-2">
+                            @Html.LabelFor(model => model.Unit_Amount, "Unit Price")
+                            @Html.TextBoxFor(model => model.Unit_Amount, new { @type = "number", @class = "validate[required]" })
+                            @Html.ValidationMessageFor(model => model.Unit_Amount)
+                        </div>
+                        <div class="form-group col-lg-2">
+                            @Html.LabelFor(model => model.Sale_Amount, "Sale Price")
+                            @Html.TextBoxFor(model => model.Sale_Amount, new { @type = "number", @class = "validate[required]" })
+                            @Html.ValidationMessageFor(model => model.Sale_Amount)
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-1">
+                </div>
+                <div class="form-group col-lg-11">
+                    <button type="submit" class="btn btn-base">
+                        <i class="icon-pencil"> </i>
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    </fieldset>
+}
+
+<script type='text/javascript' src='~/js/plugins.js'></script>
+
+
+

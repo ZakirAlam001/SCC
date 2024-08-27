@@ -1,0 +1,405 @@
+﻿@model IEnumerable<Data_Manager.Models.MedicalClaim>
+@{
+    ViewBag.Title = "Claim";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pages</a></li>
+                <li class="active">Tickets</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="block">
+                <div class="header">
+                    <h2>Sortable table</h2>
+                    <a data-toggle="modal" data-backdrop="static" data-target="#ClaimModal" onclick="clearFields()" style="float:right;" class="widget-icon widget-icon-circle"><i class="icon-plus"></i></a>
+                    <a data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" onclick="clearFields()" style="float:right;" class="widget-icon widget-icon-circle"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="myTable" cellpadding="0" cellspacing="0" width="100%" class="table table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ClaimType)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ClaimAmount)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Hospital)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ClaimDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Details)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Status)
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="replacethis">
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.ClaimId">
+                                        <td>
+                                            @item.ClaimType
+                                        </td>
+                                        <td>
+                                            @item.ClaimAmount
+                                        </td>
+                                        <td>
+                                            @item.Hospital
+                                        </td>
+                                        <td>
+                                            @String.Format("{0:dd/MM/yyyy}", item.ClaimDate)
+                                        </td>
+                                        <td>
+                                            @item.Details
+                                        </td>
+                                        <td>
+                                            @item.Status
+                                        </td>
+                                        <td>
+                                            <span class="icon-pencil" data-toggle="modal" data-backdrop="static" data-target="#ClaimModal" onclick="editRecord(@item.ClaimId)"></span>
+                                            <span class="icon-trash" data-toggle="modal" data-backdrop="static" data-target="#DeleteConfirmationModal" onclick="deleteRecord(@item.ClaimId)"></span>
+                                            <span class="icon-list" data-toggle="modal" data-backdrop="static" data-target="#DetailsModal" onclick="showDetails(@item.ClaimId)"></span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Claim Modal Start -->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        //InsertionMode = InsertionMode.Replace,
+        //UpdateTargetId = "replacethis",
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    //Insert Form
+    <div class="modal  fade" id="ClaimModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().ClaimType)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().ClaimType, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().ClaimType)
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().ClaimAmount)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().ClaimAmount, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().ClaimAmount)
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().Hospital)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().Hospital, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().Hospital)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().Details)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextAreaFor(model => model.First().Details, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().Details)
+                                </div>
+                            </div>
+                            @*<div class="col-lg-4">
+
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @Html.Hidden("ClaimId", "")
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Claim Modal End -->
+<!-- Details Modal Start -->
+<div class="modal  fade" id="DetailsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">   Claim Details </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="editor-label">
+                            <b> Claim Type</b>
+                        </div>
+                        <div class="editor-field">
+                            <span id="d_claimtype"> </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="editor-label">
+                            <b> Claim Amount</b>
+                        </div>
+                        <div class="editor-field">
+                            <span id="d_claimamount"> </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="editor-label">
+                            <b> Hospital </b>
+                        </div>
+                        <div class="editor-field">
+                            <span id="d_hospital"> </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="editor-label">
+                            <b> Details</b>
+                        </div>
+                        <div class="editor-field">
+                            <span id="d_details"> </span>
+                        </div>
+                    </div>
+                    @*<div class="col-lg-4">
+
+                        </div>*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                @Html.Hidden("claimid", "")
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Details Modal End-->
+<!-- Search Modal Start-->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().ClaimType)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().ClaimType, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().ClaimType)
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().ClaimAmount)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().ClaimAmount, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().ClaimAmount)
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().Hospital)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextBoxFor(model => model.First().Hospital, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().Hospital)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="editor-label">
+                                    @Html.LabelFor(model => model.First().Details)
+                                </div>
+                                <div class="editor-field">
+                                    @Html.TextAreaFor(model => model.First().Details, new { @class = "form-control empty" })
+                                    @Html.ValidationMessageFor(model => model.First().Details)
+                                </div>
+                            </div>
+                            @*<div class="col-lg-4">
+
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @Html.Hidden("ClaimId", "")
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- Search Modal End-->
+
+<script>
+    var otable;
+    $(document).ready(function () {
+        drawTable();  // refresh Table
+    });
+    function drawTable() {
+        otable = $('#myTable').dataTable({
+            "aaSorting": [],
+            "pagingType": "full_numbers"
+        });
+    }
+    var clearFields = function () {  // Modal field clear
+        $('.empty').val('');
+        $('#claimForm').attr('action', '@Url.Action("Claim", "Home")');
+    }
+    var editRecord = function (id) {  // Edit Text box fill
+        var $row = $('tr#' + id);
+        var claimtype = $row.find("td:nth-child(1)").text(); //surgery
+        var claimamount = $row.find("td:nth-child(2)").text(); // 20000
+        var hospital = $row.find("td:nth-child(3)").text(); // agha khan
+        var details = $row.find("td:nth-child(5)").text(); // details
+
+        $('input[id="ClaimType"]').val(claimtype.trim());
+        $('input[id="ClaimAmount"]').val(claimamount.trim());
+        $('input[id="Hospital"]').val(hospital.trim());
+        $('input[id="ClaimId"]').val(id);
+        $('textarea[id="Details"]').val(details.trim());
+
+        $('#claimForm').attr('action', '@Url.Action("UpdateClaim", "Home")')
+    }
+    var showDetails = function (id) {  // get detail record
+        var $row = $('tr#' + id);
+        var claimtype = $row.find("td:nth-child(1)").text(); //surgery
+        var claimamount = $row.find("td:nth-child(2)").text(); // 20000
+        var hospital = $row.find("td:nth-child(3)").text(); // agha khan
+        var details = $row.find("td:nth-child(5)").text(); // details
+
+        $('#d_claimtype').text(claimtype.trim())
+        $('#d_claimamount').text(claimamount.trim())
+        $('#d_hospital').text(hospital.trim())
+        $('#d_details').text(details.trim())
+    }
+    var ajaxBegin = function () {  // Ajax Submit
+        $('#ClaimModal').modal('hide');
+        $('#DeleteConfirmationModal').modal('hide');
+        otable.fnDestroy();
+    }
+    var ajaxSuccess = function (data) {  //Insert and Edit Callback - Return List
+
+        $('#myTable > tbody').empty();
+        $.each(data, function (i, item) {
+            var $tr = $('<tr id=' + item.claimId + '>').append(
+                $('<td>').text(item.ClaimType),
+                $('<td>').text(item.ClaimAmount),
+                $('<td>').text(item.Hospital),
+                $('<td>').text(moment(item.ClaimDate).format("DD/MM/YYYY")),
+                $('<td>').text(item.Details),
+                $('<td>').text(item.Status),
+                $('<td>').html("<span class='icon-pencil' data-toggle='modal' data-backdrop='static' data-target='#ClaimModal' onclick='editRecord(" + item.claimId + ")'></span> " +
+                "<span class='icon-trash' data-toggle='modal' data-backdrop='static' data-target='#DeleteConfirmationModal' onclick='deleteRecord(" + item.claimId + ")'></span> " +
+                "<span class='icon-list' data-toggle='modal' data-backdrop='static' data-target='#DetailsModal' onclick='showDetails(" + item.claimId + ")'></span>")
+            )
+            .appendTo('#myTable > tbody');
+        });
+        drawTable();
+    }
+    var ajaxFailure = function () {  // Ajax Failure
+
+    }
+    function deleteRecord(id) {
+        DELETE_RECORD(id, '@Url.Action("DeleteClaim", "Home")', 'deleteBegin', 'deleteSuccess');
+    }
+    var deleteBegin = function () {
+        $('#ClaimModal').modal('hide');
+        $('#DeleteConfirmationModal').modal('hide');
+    }
+    var deleteFailure = function () {
+
+    }
+    var deleteSuccess = function (data) {
+        if (otable != null) {
+            otable.fnDeleteRow($("tr#" + data.id));
+        } else {
+            console.log("table is null");
+        }
+    }
+
+</script>

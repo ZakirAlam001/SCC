@@ -1,0 +1,117 @@
+﻿@model Data_Manager.Models.tbl_Account
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>tbl_Account</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BankAccountId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BankAccountId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tbl_Bank.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tbl_Bank.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccountTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AccountNo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountNo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpeningDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpeningDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpeningBalance)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpeningBalance)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChequeBookStart)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChequeBookStart)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChequeBookEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChequeBookEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateBy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdateDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdateDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.isDelete)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.isDelete)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Remarks)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remarks)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

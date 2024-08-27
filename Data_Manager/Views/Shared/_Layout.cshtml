@@ -1,0 +1,599 @@
+﻿@using System.Web.UI.WebControls;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="theme-color" content="#ff6600" />
+    <title>@ViewBag.Title - | BitSoft www.bitzenta.com</title>
+    @*<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />*@
+    <meta name="viewport" content="width=device-width" />
+    @*@Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    
+   
+    <link rel="icon" type="image/ico" href="~/img/Logo.ico" />
+    <link href="~/css/stylesheets.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/datepickerjquery.css" rel="stylesheet" />
+
+    
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/jquery/jquery-migrate.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/jquery/globalize.js'></script>
+    <script type='text/javascript' src='~/js/plugins/bootstrap/bootstrap.min.js'></script>
+
+    <script type='text/javascript' src='~/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js'></script>
+    
+    <script type='text/javascript' src='~/js/plugins/uniform/jquery.uniform.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/select2/select2.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/tagsinput/jquery.tagsinput.min.js'></script>
+   @* <script type='text/javascript' src='js/plugins/jquery/jquery-ui-timepicker-addon.js'></script>*@
+    <script type='text/javascript' src='~/js/plugins/ibutton/jquery.ibutton.js'></script>
+
+    <script type='text/javascript' src='~/js/plugins/validationengine/languages/jquery.validationEngine-en.js'></script>
+    <script type='text/javascript' src='~/js/plugins/validationengine/jquery.validationEngine.js'></script>
+
+    <script type='text/javascript' src='~/js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/stepy/jquery.stepy.min.js'></script>    
+
+    <script type='text/javascript' src='~/js/plugins/knob/jquery.knob.js'></script>
+    <script type='text/javascript' src='~/js/plugins/sparkline/jquery.sparkline.min.js'></script>
+    <script type='text/javascript' src='~/js/plugins/flot/jquery.flot.js'></script>
+    <script type='text/javascript' src='~/js/plugins/flot/jquery.flot.pie.js'></script>   
+    <script type='text/javascript' src='~/js/plugins/flot/jquery.flot.resize.js'></script>
+
+    <script type='text/javascript' src='~/js/plugins.js'></script> @*Creating problem in data tables*@
+    <script type='text/javascript' src='~/js/actions.js'></script>
+    <script type='text/javascript' src='~/js/charts.js'></script>
+   @* <script type='text/javascript' src='~/js/settings.js'></script>*@ @*Creating problem in ajax success and erro callback*@
+    <script src="~/Scripts/waitingfor.js"></script>
+    @*Munam*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/moment-2.17.0.min.js"></script>
+    <script src="~/js/plugins/datatables/jquery.dataTables.min.js"></script>
+
+    @*End*@
+    <style>
+        .display-label{
+            margin-bottom: 0.5%;
+    color: #7ed3ff;
+    font-size: 124%;
+    font-weight: bold;
+    }
+        .display-field{
+        
+         border-bottom: 1px solid #8080804a;
+          
+            }
+        p > input{
+            background :red !important;
+        }
+        input:focus, textarea:focus, select:focus, button:focus, a:focus {
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;
+            /*padding: 3px 0px 3px 3px;
+            margin: 5px 1px 3px 0px;*/
+            border: 1px solid #DDDDDD;
+        }
+
+            input:focus, textarea:focus, select:focus, button:focus, a:focus {
+                box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                /*padding: 3px 0px 3px 3px;*/
+                /*margin: 5px 1px 3px 0px;*/
+                border: 1px solid rgba(81, 203, 238, 1);
+            }
+
+        .animated {
+            background-image: none;          
+            background-repeat: no-repeat;
+            background-position: left top;
+            /*padding-top:95px;
+            margin-bottom:60px;*/
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+         table th,td {
+                      white-space: nowrap;
+                      overflow: hidden;
+ 
+                    }
+
+         @@-webkit-keyframes fadeInRight {
+            0% {
+               opacity: 0;
+               -webkit-transform: translateX(40px);
+            }
+            100% {
+               opacity: 1;
+               -webkit-transform: translateX(0);
+            }
+         }
+
+         @@keyframes fadeInRight {
+            0% {
+               opacity: 0;
+               transform: translateX(40px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateX(0);
+            }
+         }
+
+         .fadeInRight {
+            -webkit-animation-name: fadeInRight;
+            animation-name: fadeInRight;
+         }
+    </style>
+    <style>
+
+        div.aa {
+            opacity: 0;
+        }
+        label{
+            margin-bottom:2%;
+            color: #7ed3ff;
+            font-size: 124%;
+        }
+        i{
+             color: #e0b727;
+             font-size: 124%;
+        }
+         th{
+            font-size: 124%;      
+            background-color: #49338c;
+            background: -webkit-linear-gradient(rgb(25, 49, 70), rgba(12, 36, 63));
+            background: -o-linear-gradient(rgb(25, 49, 70), rgba(12, 36, 63));
+            background: -moz-linear-gradient(rgb(25, 49, 70), rgba(12, 36, 63));
+            background: linear-gradient(rgb(25, 49, 70), rgb(12, 36, 63));
+            color: #7ed3ff;
+        }
+         tr i{
+             
+             padding:5%;
+         }
+         
+         tr i:hover{
+             background:rgba(0,0,0,0.2);
+             border-radius:7px;            
+         }
+         .btn-base:hover{
+             background:rgba(0 ,0, 0, 0.5)
+         }
+    </style>
+    <meta name="theme-color" content="#1c4160" />
+    
+    <link rel="icon" sizes="192x192" href="~/img/Logo.ico">
+</head>
+<body style="overflow:auto;" class="bg-img-num1 ">
+
+
+    <script>
+        @*var timeout = '@Session.Count';
+        alert(timeout);*@
+        var abc = localStorage.getItem("loginID");
+       // alert(abc);
+        if (abc == 'null') {
+       // alert("Logout");
+             //window.location.href = '@Url.Action("Index", "Login")';
+            localStorage.setItem("loginID", 'logout');
+
+        } else if (abc == 'logout') {
+
+            if (localStorage.getItem("status") == 'stay') {
+
+            } else {
+                //window.location.href = '@Url.Action("Index", "Login")';
+            }
+
+
+        } else {
+           // alert();
+        }
+        // alert(localStorage.getItem("loginID"));
+
+
+    </script>
+
+    @*<p>Date: <input type="text" class="datepicker1"></p>
+        <p>Date: <input type="text" class="datepicker1"></p>*@
+
+    <style>
+        .modal11 {
+            position: fixed;
+            left: 0;
+            z-index: 1000;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: #0f0f0fad;
+            filter: alpha(opacity=60);
+            opacity: 1;
+            -moz-opacity: 1;
+            display: none;
+        }
+
+        .center {
+            z-index: 15000;
+            /*  margin: 35% auto;
+                    margin-left: 50%; */
+            /*padding: 10px;*/
+            /* width: 130px; */
+            background-color: transparent;
+            border-radius: 10px;
+            filter: alpha(opacity=100);
+            opacity: 1;
+            -moz-opacity: 1;
+        }
+
+            .center img {
+                /*                     height: 120px; */
+                max-height: 100%;
+                max-width: 100%;
+                width: 92px;
+                height: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                background: transparent;
+                border-radius: 10px;
+                z-index: 15000;
+            }
+    </style>
+
+    <div id="loa" class="modal11">
+        <div class="center">
+            @* https://us.v-cdn.net/5019960/uploads/editor/7r/aozh89cuo8e8.gif*@
+            <img src="https://us.v-cdn.net/5019960/uploads/editor/7r/aozh89cuo8e8.gif">
+            @* <img src="~/img/2.jpg" />*@
+        </div>
+    </div>
+
+
+
+
+    <div class="container">
+        <!--nav bar start-->
+        <div id="nav-bar" class="row">
+            <div class="col-md-12">
+
+                <nav class="navbar brb" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-reorder"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Index", "Reports_Chart")"><img style=" height: 43px; border-radius: 10px; border: 3px solid #cacac9;" src="~/Images/logobill.jpg" alt="Logo" /></a>
+                        @*<a title="Dashboard Graph Report" href="@Url.Action("Index", "Reports_Chart")" style="margin-top:5px;" class="navbar-brand" href=""><i class="icon-dashboard"> </i> </a>*@
+                    </div>
+                    @*<script>
+                            alert('@Session["Org_Code"]');
+                        </script>*@
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a title="DropDown List Data " href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th"></i> Config Module</a>
+                                <ul class="dropdown-menu">
+
+                                    @{
+
+                                        if (Convert.ToInt64(@Session["Org_Code"]) == 1)
+                                        {
+                                            <li title="Create New Login User"><a href="@Url.Action("Index", "User")"> <i class="icon-user"> </i>Add User</a></li>
+                                            <li title="Create New Org User"><a href="@Url.Action("Index", "Organization")"> <i class="icon-user"> </i>Add ORG</a></li>
+                                        }
+                                    }
+
+                                    <li title="Create New Sale Officer"><a href="@Url.Action("Index", "Employee_SO")"><i class="icon-group"></i>Add Customer</a></li>
+                                    @* <li title="Create New Customer/Saler"><a href="@Url.Action("Index", "Customer")"><i class="icon-certificate"></i> Add Suplaier</a></li>*@
+                                    <li title="Create New Vendor/Purchaser"><a href="@Url.Action("Index", "Vendor")"><i class="icon-certificate"></i>Add Vendor</a></li>
+                                    @*<li title="Create New Employee Designation"><a href="@Url.Action("Index", "Designation")"><i class="icon-umbrella"> </i> Add Designation</a></li>*@
+                                    <li>
+                                        @* <a href="@Url.Action("Index", "Category")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Add Category Name</a>*@
+                                        <a href="#">Add Product Name<i class="icon-angle-right pull-right"></i></a>
+                                        <ul class="dropdown-submenu">
+                                            <li title="Create a quick Product"><a href="@Url.Action("Create", "SalesType")"> <i style="float:right;" class="icon-sort-by-alphabet"> </i> Add Quick Product</a></li>
+                                            <li title="Create Category Step-1"><a href="@Url.Action("Index", "Category")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Add Category Name</a></li>
+                                            <li title="Create Brand Step-2"><a href="@Url.Action("Index", "Brand")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Add Brand Name</a></li>
+                                            <li title="Create Product Step-3"><a href="@Url.Action("Index", "SalesType")"><i style="float:right;" class="icon-sort-by-alphabet"></i> Add Product</a></li>
+
+                                        </ul>
+                                    </li>
+
+                                    <li title="Create New Loan Member"><a href="@Url.Action("Index", "LoanPerson")"><i class="icon-sort-by-alphabet"></i>Add Loan Member</a></li>
+                                    <li title="Create New Bank Name"><a href="@Url.Action("Index", "Bank")"><i class="icon-certificate"></i>Add Bank</a></li>
+                                    <li title="Create New Bank Account No"><a href="@Url.Action("Index", "BankAccount")"><i class="icon-umbrella"></i>Add Bank Account</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a title="Purchase Items" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i> Purchases</a>
+                                <ul class="dropdown-menu">
+                                    <li title="Add new Item"><a href="@Url.Action("Create", "Stock")"><i class="icon-sort-by-attributes"></i>Add New Purchase</a></li>
+                                    <li title="Purchased Invoice"><a href="@Url.Action("Index", "StockMaster")"><i class="icon-sort-by-attributes"></i>  Purchased Item</a></li>
+                                    <li title="Purchase Details "><a href="@Url.Action("Index", "Stock")"><i class="icon-sort-by-attributes"></i> Purchase Details</a></li>
+
+                                    <li title="Check Available Product Stock Balances"><a href="@Url.Action("StockReport", "Stock")"><i class="icon-tint"></i> Stock Report</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a title="Manage Sales Data" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-bar-chart"></i> Sales</a>
+                                <ul class="dropdown-menu">
+                                    @*<li title="Create New POS Item Quick Sales"><a href="@Url.Action("POS", "SaleMaster")"> <i class="icon-bar-chart"> </i> Counter Sale</a></li>
+                                        <li title="Create New POS Product Item"><a href="@Url.Action("Index", "POSItemIn")"> <i class="icon-bar-chart"> </i>Menu List</a></li>
+                                        <li> <a href="@Url.Action("Index", "Category")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Item Category Name</a></li>
+                                        <li> <a href="@Url.Action("Summery", "SaleMaster")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Counter Sale Report</a></li>
+                                        <li> <a href="@Url.Action("Index", "POSMasterSale")"> <i style="float:right;" class="icon-sort-by-alphabet"></i>Counter Sale</a></li>
+                                        <hr />*@
+                                    <li title="Create New Sales Record"><a href="@Url.Action("Index", "SaleMaster")"> <i class="icon-bar-chart"> </i>Add New Sale</a></li>
+                                    <li title="Last Sales History"><a href="@Url.Action("Index", "SaleDetails")"><i class="icon-tint"></i> Sale Details</a></li>
+                                    <li title="Sale History List"><a href="@Url.Action("Create", "SaleDetails")"><i class="icon-tint"></i> Sale Return</a></li>
+                                    @*<li><a href="@Url.Action("Index", "Payments")"><i class="icon-money"></i> Payment Receivable</a></li>*@
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a title="Manage  Expenses " href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i> Expenses </a>
+                                <ul class="dropdown-menu">
+                                    <li title="Manage Company Expenses/History"><a href="@Url.Action("Index", "MasterExpence")"><i class="icon-sort-by-attributes"></i>Expenses</a></li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a title="Manage Payments Customers,Vendors & others" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-money"></i> Payments</a>
+                                <ul class="dropdown-menu">
+                                    <li title="Payment Payed to Vendor"><a href="@Url.Action("Index", "Vendor_Payment")"><i class="icon-money"></i> Vendor Payable</a></li>
+                                    <li title="Get Payment from Customer"><a href="@Url.Action("Index", "Payments")"> <i class="icon-money"> </i> Customer Receivable </a> </li>
+                                    <li title="Payment Process For Loan Member"><a href="@Url.Action("Index", "Loan_Transaction")"><i class="icon-tint"></i> Loan Transaction GL</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                @*<a href="@Url.Action("Index", "GL_Transaction")" class="dropdown-toggle" ><i class="icon-money"></i> Check & Balance</a>*@
+                                <a title="Check Payment and Balances" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-money"></i> Check & Balance</a>
+                                <ul class="dropdown-menu">
+                                    <li title="Customer Accounts GL (Payment & Balances )"><a href="@Url.Action("Index", "GL_Transaction")"><i class="icon-certificate"></i>Customer GL</a></li>
+                                    <li title="Vendor Accounts GL (Payment & Balances )"><a href="@Url.Action("Index", "Vendor_Transactions")" )"><i class="icon-certificate"></i>Vendor GL</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                @*<a href="@Url.Action("Index", "GL_Transaction")" class="dropdown-toggle" ><i class="icon-money"></i> Check & Balance</a>*@
+                                <a title="Your Valuable Feedback ,Suggestion ,Complain,Ideas" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-money"></i> Apps Feedback</a>
+                                <ul class="dropdown-menu">
+                                    <li title="Your Valuable Feedback ,Suggestion ,Complain,Ideas"><a href="@Url.Action("Index", "AppsFeedback")"><i class="icon-certificate"></i>Soft Feedback</a></li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a title="Daily Activity" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-money"></i> Daily Note</a>
+                                <ul class="dropdown-menu">
+                                    <li title="Your Valuable Feedback ,Suggestion ,Complain,Ideas"><a href="@Url.Action("Index", "DailySheet")"><i class="icon-certificate"></i>Daily Sheet</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group" style="margin-left:10px; margin-right:10px;">
+                                <i title="Active User Name" class="widget-icon widget-icon-dark icon-user"> </i> <b title="Hi @Session["name"]">@Session["name"] &nbsp; |</b> &nbsp;&nbsp;
+                                <a title="Logout from Software" href="@Url.Action("Logout", "Login")"><i class=" icon-off"> </i> Logout </a>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!--nav bar end-->
+        <div id="animated-example" class="animated fadeInRight ">
+            <div class="aaa" id="body">
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix">
+                    @RenderBody()
+                </section>
+            </div>
+            <script>
+
+                if ('@Session["employee"]' == null || '@Session["employee"]' == '') {
+                    window.location.href = '@Url.Action("Index", "Login")';
+                }
+                else if ('@Session["employee"]' != null || '@Session["employee"]' != '') {
+
+                }
+
+
+            </script>
+
+            <!--footer Start-->
+            <div id="footer-bar" class="row well">
+                <div class="page-footer">
+                    <div class="page-footer-wrap">
+                        <div class=" side pull-left">
+                            Powered By :<i class="widget-icon widget-icon-dark icon-cogs"> </i> <a class="block-remove tip" title="" data-original-title="BitZenta IT Solutions Provider , Your Success Partner , www.bitzenta.com" style="color:#e0b727; font-weight:bold;" href="http://www.bitzenta.com/"> BitZenta </a>  @DateTime.Now.Year All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--footer end-->
+    </div>
+
+    <script>
+        function DELETE_RECORD(id, actionUrl, beginFn, successFn, failureFn) {
+            $('#deleteconfirmationform').find('#deleteId').val(id);
+            $('#deleteconfirmationform').attr('action', actionUrl);
+            $('#deleteconfirmationform').attr('data-ajax-begin', beginFn);
+            $('#deleteconfirmationform').attr('data-ajax-success', successFn);
+            $('#deleteconfirmationform').attr('data-ajax-failure', failureFn);
+        }
+    </script>
+
+    @*<script>
+        //session end
+        var sessionTimeoutWarning = @Session.Timeout -1;
+            //alert(sessionTimeoutWarning);
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionEnd()', sTimeout);
+
+        function SessionEnd() {
+            window.location = "/Login/Logout";
+        }
+        </script>*@
+    <script>
+
+    $(document).ready(function () {
+
+        if ('@Session["employee"]' == null || '@Session["employee"]' == '') {
+            window.location.href = '@Url.Action("Index", "Login")';
+        }
+        else if ('@Session["employee"]' != null || '@Session["employee"]' != '') {
+        }
+        $(function () {
+            $(".datepicker1").datepicker({
+                dateFormat: 'dd-M-yy',
+                yearRange: '@(System.DateTime.Now.Year - 150).ToString():@System.DateTime.Now.Year.ToString()',
+                changeMonth: true,
+                changeYear: true,
+                maxDate: 'd'
+            });
+        });
+        $(".datepicker1").datepicker("setDate", new Date());
+        $(".aa").delay(500).animate({ "opacity": "1" }, 500);
+    });
+
+
+    //$(document).ajaxSuccess(function () {
+    //    waitingDialog.showSuccessMsg();
+    //});
+    //$(document).ajaxSend(function () {
+    //    waitingDialog.showBeginMsg();
+    //});
+    //$(document).ajaxError(function () {
+    //    waitingDialog.showFailureMsg();
+    //});
+    </script>
+    @*  @Scripts.Render("~/bundles/jquery")*@
+    @*  @RenderSection("scripts", required: false)*@
+
+
+    <link href="~/js/Datatable_Print/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="~/js/Datatable_Print/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="~/js/Datatable_Print/copy_csv_xls_pdf.swf"></script>
+    <script src="~/js/Datatable_Print/dataTables.buttons.min.js"></script>
+    <script src="~/js/Datatable_Print/buttons.flash.min.js"></script>
+    <script src="~/js/Datatable_Print/jszip.min.js"></script>
+    <script src="~/js/Datatable_Print/pdfmake.min.js"></script>
+    <script src="~/js/Datatable_Print/vfs_fonts.js"></script>
+    <script src="~/js/Datatable_Print/buttons.html5.min.js"></script>
+    <script src="~/js/Datatable_Print/buttons.print.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker1').attr('autocomplete', 'off');
+           // autocomplete = "off"
+    });
+        $.fn.dataTable.ext.errMode = 'none';
+
+    $('table').DataTable({
+
+        ordering: false,
+        dom: 'Blfrtip',
+        buttons: [
+   {
+       extend: 'excel', footer: true, title: '@ViewBag.printtext'
+       }, {
+           extend: 'pdf', footer: true, title: '@ViewBag.printtext'
+       },
+
+       //     { extend: 'copyHtml5', footer: true  },
+       //     { extend: 'excelHtml5', footer: true },
+       //     { extend: 'csvHtml5', footer: true   },
+       //     { extend: 'pdfHtml5', footer: true   },
+
+       {
+           extend: 'print', footer: true, title: '@ViewBag.printtext'
+       }
+            ]  ,
+
+            lengthMenu: [10, 25, 50, 75, 100]
+
+        });
+        //Datatable Error Popup Hide
+    $.fn.dataTable.ext.errMode = 'none';
+        //footer: true,
+        //Multiple DropDwen List
+        //$('select').addClass("select2");
+
+    </script>
+    <style>
+        /*.select2{
+            width:100%;
+        }*/
+    </style>
+    @*<script>
+            $('table').dataTable({
+                ordering: false
+            });
+
+        </script>*@
+    <script>
+        //Loader Start
+
+        function closeIt() {
+            $("#loa").show();
+        }
+        window.onbeforeunload = closeIt;
+
+        $(document).ajaxStart(function () {
+            $("#loa").show();
+        });
+        $(document).ajaxStop(function () {
+            $("#loa").hide();
+        });
+
+        $(window).load(function () {
+            $("#loa").fadeOut("slow", function () {
+                $("#loa").hide();
+                //   $("#loa").show();
+            });
+        });
+             //Loader End
+    </script>
+
+
+
+
+    <form action="" data-ajax="true" id="deleteconfirmationform" method="post">
+        <div class="modal fade " id="DeleteConfirmationModal">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">   Confirm Delete </h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="bodyText">Are you sure you want to delete <span id="delval"></span>  ?</span>
+                    </div>
+                    <div class="modal-footer">
+                        @Html.Hidden("deleteId", "")
+                        <button type="submit" class="btn btn-danger btn-clean" id="btnConfirm">Yes</button>
+                        <button type="button" data-dismiss="modal" class="btn">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Modal -->
+
+
+
+
+</body>
+</html>

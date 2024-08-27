@@ -1,0 +1,235 @@
+﻿@{
+    ViewBag.Title = "Stock Report";
+}
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Modules</a></li>
+                <li><a href="#">Stock Report</a></li>
+
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div><br />
+    @*Table List Item*@
+    <div class="">
+        <div class="col-md-8">
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Stock Counts</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    @*<a title="Add New Record" href='@Url.Action("Create", "Stock")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>*@
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="table1" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #ID
+                                    </th>
+                                    <th>
+                                        Item Name
+                                    </th>
+                                    <th>
+                                        Stock Count
+                                    </th>
+                                    <th>
+                                        Sale Count
+                                    </th>
+                                    <th>
+                                        Sale REturn
+                                    </th>
+                                    <th>
+                                        Available Count
+                                    </th>
+                                    <th>Graph</th>
+                                    @*<th>
+                                        Stock Amount
+                                    </th>
+                                    <th>
+                                        Sale Amount
+                                    </th>
+                                    <th>Remaining Amount</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.data)
+                                {
+                                    int a = Convert.ToInt32(@item["Stock_Count"]);
+                                    if (a > 0)
+                                    {
+                                        
+                                        decimal sc = Convert.ToDecimal(@item["Stock_Count"]);
+                                        decimal sac = Convert.ToDecimal(@item["Sale_Count"]);
+                                        decimal sr = Convert.ToDecimal(@item["Sale_Return"]);
+                                        decimal asale = @sac-@sr;
+                                        
+                                        decimal nv = ((sac - sr) / sc) * 100;
+                                        nv = 100 - nv;
+
+
+                                        <tr>
+                                            <td>@item["SaleTypeID"]</td>
+                                            <td>@item["Name"]</td>
+                                            <td>@item["Stock_Count"]</td>
+                                            <td>@asale.ToString("n0") </td>
+                                            <td>@item["Sale_Return"]</td>
+                                            <td style="font-size: 20px;font-weight: bold;">@item["Net_Count"]</td>
+                                            <td title="Line Graph" width="150">
+                                               
+                                               
+                                                <div  title="@nv.ToString("n2")% remaining in stock" @*style="margin:-9px"*@ class="hp-sm">
+                                                    <div style="border: 1px solid #beb9b924;height: 13px" class="progress progress-small  shine-me">
+                                                        <div id="pro" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width: @nv%;"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            @*<td>@item["Stock_Amount"]</td>
+                                            <td>@item["Sale_Amount"]</td>
+                                            <td>@item["Net_Diff_Amount"]</td>*@
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <!-- <div class="">
+        <div class="col-md-6">
+
+            <div class="block">
+                <div class="header">
+                    <h2><i class="widget-icon widget-icon-dark icon-list"> </i> Stock Amount</h2>
+                    @*<a title="Add New Record" class="btn btn-primary" href='@Url.Action("Create", "City")'><i class="fa  fa-plus"></i>  Create</a>*@
+                    @*<a title="Add New Record" href='@Url.Action("Create", "Stock")' style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>*@
+                    <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-search"></i></a>
+                </div>
+                <div class="content">
+                    <div class="table-responsive">
+                        <table id="" cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped sortable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #ID
+                                    </th>
+                                    <th>
+                                        Item Name
+                                    </th>
+                                    @*<th>
+                                        Stock Count
+                                    </th>
+                                    <th>
+                                        Sale Count
+                                    </th>
+                                    <th>
+                                        Available Count
+                                    </th>*@
+                                    <th>
+                                        Stock Amount
+                                    </th>
+                                    <th>
+                                        Sale Amount
+                                    </th>
+                                    <th>Remaining Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>-->
+
+</div>
+<!-- Search Modal Start-->
+@using (Ajax.BeginForm("Claim", "Home", new AjaxOptions()
+    {
+        OnBegin = "ajaxBegin",
+        OnSuccess = "ajaxSuccess",
+        OnFailure = "ajaxFailure"
+    }, new { @id = "claimForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="modalTitle"> Apply Your Claim </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <form role="form"> -->
+                    <div class="well">
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    Users
+                                </div>
+                                <div class="editor-field">
+                                    @*@Html.DropDownList("UserID", null, "Select User")*@
+                                    <input />
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    From Date
+                                </div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                        @*<input name="fromdate" id="fromdate" />*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="editor-label">
+                                    To Date
+                                </div>
+                                @* <div class="editor-field">*@
+                                <div class="input-group">
+                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" value="mm/dd/yyyy" />
+                                </div>
+                                @*  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        @* @Html.Hidden("ClaimId", "")*@
+                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
+                    </div>
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
