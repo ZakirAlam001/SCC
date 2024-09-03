@@ -222,7 +222,7 @@ function SaleOrder() {
         "Stock_ID": $('.OItemType :selected').val(),
         "Stock_Counts": $('.OWeight').val(),
         "Item_Price": $('.ORate').val(),
-        "Net_Price": $('.ORate').val(),
+        "Net_Price": $('.OTotalAmount').val(),
         "Discount": 0,
         "Discount_Amount": 0
     }
@@ -329,7 +329,7 @@ function ExpenseAdd() {
     var ExpDate = $('.Exdate').val();
     //alert(Total_Amount);
     // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
-    $.post('/MasterExpence/Create)', { Expensetype: Expensetype, Comments: Comments, TotalAmount: TotalAmount, ExpDate: ExpDate, invostatus: "No" })
+    $.post('/MasterExpence/Create', { Expensetype: Expensetype, Comments: Comments, TotalAmount: TotalAmount, ExpDate: ExpDate, invostatus: "No" })
         .done(function (data) {
             //alert();
             //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
