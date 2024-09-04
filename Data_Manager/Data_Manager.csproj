@@ -1232,6 +1232,7 @@
     <Content Include="HighCharts\code\themes\sunset.js.map" />
     <Content Include="css\fonts\TitilliumWeb-Regular.ttf" />
     <Content Include="img\aozh89cuo8e8.webp" />
+    <Content Include="DB_Bak_File\SCCDB_Bak_File" />
     <None Include="Properties\PublishProfiles\Bitsoft.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
