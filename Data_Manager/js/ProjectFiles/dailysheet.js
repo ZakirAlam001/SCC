@@ -1,4 +1,6 @@
-﻿const d = new Date();
+﻿const { checked } = require("modernizr");
+
+const d = new Date();
 s = d.getDate() + '-' + d.toString().substr(4, 3) + '-' + d.getFullYear();
 $('#activedate').val(s);
 
@@ -216,6 +218,7 @@ function SaleOrder() {
     //    grossAmount += parseInt($(elem).find('.txtPayableAmount').val());
     //});
     // List of Item Json
+    //Git checked
     var products = [];
     //   $('.singleProduct').each(function (i, elem) {
     var item = {
