@@ -1,5 +1,4 @@
-﻿const { checked } = require("modernizr");
-
+﻿
 const d = new Date();
 s = d.getDate() + '-' + d.toString().substr(4, 3) + '-' + d.getFullYear();
 $('#activedate').val(s);
