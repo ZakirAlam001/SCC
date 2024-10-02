@@ -181,17 +181,23 @@ function VendorSave() {
 
 
 
-
+//function ctotal() {
+//    //alert();
+//    var a = parseFloat($('.crate').val()) || 0;
+//    var b = parseFloat($('.cweight').val()) || 0;
+//    total1 = a * b;
+//    $('.ctotal').val((total1).toFixed(2))
+//}
 
 function Total(id) {
     debugger
     var TotalAmount = 0;
     if (id == 1) {
-        TotalAmount = parseFloat(parseFloat($('.ORate').val()) * parseFloat($('.OWeight').val())).toFixed(2);
+        TotalAmount = parseFloat(parseFloat($('.ORate').val() || 0) * parseFloat($('.OWeight').val() || 0)).toFixed(2);
         $('.OTotalAmount').val(TotalAmount);
     }
     if (id == 2) {
-        TotalAmount = parseFloat(parseFloat($('.OVRate').val()) * parseFloat($('.OVWeight').val())).toFixed(2);
+        TotalAmount = parseFloat(parseFloat($('.OVRate').val() || 0) * parseFloat($('.OVWeight').val() || 0)).toFixed(2);
         $('.OVTotalAmount').val(TotalAmount);
     }
 }

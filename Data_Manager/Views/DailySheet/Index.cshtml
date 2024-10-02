@@ -29,8 +29,10 @@
     .icon-list,.pointer {
         cursor: pointer;
     }
-    .content{
-        overflow:auto;
+    .dataTables_wrapper {
+        overflow: auto;
+        max-height:122pt;
+        height:122pt;
     }
 </style>
 
@@ -60,7 +62,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.dailydeposit');" href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(1);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Deposit  </h2>
             </div>
             <div class="content">
@@ -101,7 +103,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a onclick="showhide('#customerpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.customerorder');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(2);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Customer Order</h2>
             </div>
             <div class="content">
@@ -146,7 +148,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.vendorrorder');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(3);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Vendor Order</h2>
             </div>
             <div class="content">
@@ -189,7 +191,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.loanAmount');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(7)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Loan Amount</h2>
             </div>
             <div class="content">
@@ -237,7 +239,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.expense');"   href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(4)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Expense</h2>
             </div>
             <div class="content">
@@ -278,7 +280,7 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
-                <a href="" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a onclick="showhide('.customerpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
                 <h2 onclick="GetData(5)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Recieved</h2>
             </div>
             <div class="content">
@@ -319,6 +321,8 @@
     <div class="col-md-3">
         <div class="block">
             <div class="header">
+                <a onclick="showhide('.vendorpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                
                 <h2 onclick="GetData(6)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Send</h2>
             </div>
             <div class="content">
@@ -439,7 +443,7 @@
                     <!-- <form role="form"> -->
                     <div class="well">
 
-                        <div class=" hidee row">
+                        <div class=" hide addform row">
                             <div class="col-lg-4">
                                 <div class="editor-label">
                                     Users
@@ -476,7 +480,7 @@
                                 @*  </div>*@
                             </div>
                         </div>
-                        <div id="customerpayment" class="row hidee customerpayment">
+                        <div id="customerpayment" class="row hide addform customerpayment">
                             <div class=" block">
                                 <div class="header">
 
@@ -538,7 +542,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="button" onclick="CustomerPayment();" value="Save" />
+                                            <button type="button" class="btn btn-base" onclick="CustomerPayment();">Save</button>
 
 
                                         </div>
@@ -546,7 +550,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hidee row vendorpayment">
+                        <div class="hide addform row vendorpayment">
                             <div class=" block">
                                 <div class="header">
 
@@ -613,13 +617,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="button" onclick="VendorPayment();" value="Save" />
+                                        <button type="button" class="btn btn-base" onclick="VendorPayment();">Save</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="hidee row expense">
+                        <div class="hide addform row expense">
                             <div class=" block">
                                 <div class="header">
 
@@ -674,14 +678,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="button" onclick="ExpenseAdd();" value="Save" />
+
+                                            <button type="button" class="btn btn-base" onclick="ExpenseAdd();">Save</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row customerorder hidee">
+                        <div class="row customerorder hide addform">
                             <div class=" block">
                                 <div class="header">
 
@@ -759,15 +764,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <input type="button" onclick="SaleOrder();" value="Save" />
+                                            <button type="button" class="btn btn-base" onclick="SaleOrder();">Save</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row vendorrorder hidee">
+                        <div class=" row vendorrorder hide addform">
                             <div class=" block">
                                 <div class="header">
 
@@ -845,8 +849,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <input type="button" onclick="VendorSave();" value="Save" />
+                                            <button type="button" class="btn btn-base" onclick="VendorSave();">Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -854,7 +857,7 @@
                         </div>
 
 
-                        <div class=" row loanAmount hidee">
+                        <div class=" row loanAmount hide addform">
                             <div class=" block">
                                 <div class="header">
 
@@ -916,14 +919,15 @@
                                             </div>
 
                                         </div>
-                                        <input type="button" onclick="LoanPayment();" value="Save" />
+
+                                        <button type="button" class="btn btn-base" onclick="LoanPayment();">Save</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class=" row dailydeposit hidee">
+                        <div class=" row dailydeposit hide addform">
                             <div class=" block">
                                 <div class="header">
 
@@ -981,17 +985,16 @@
                                             </div>
 
                                         </div>
-                                        <input type="button" onclick="DailyDeposit();" value="Save" />
+                                        <button type="button" class="btn btn-base" onclick="DailyDeposit();">Save</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal-footer">
-                        @* @Html.Hidden("ClaimId", "")*@
+                    @*<div class="modal-footer">
                         <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
-                    </div>
+                    </div>*@
                     <!--</form>-->
                 </div>
             </div>
@@ -1001,11 +1004,22 @@
 
 <script>
 
-  //  $('.hide').hide();
+  //  $('.hide addform').hide addform();
     function showhide(id) {
-        alert(id)
-        $('#customerpayment').removeClass('hide');
+        $('.addform').addClass('hide');
+       // alert(id);
+        $(id).removeClass('hide');
     }
+
+    $('.close').click(function(){
+      //  alert();
+        $('.content').find('input,select').val('');
+    })
+
+
+  
+
+
         ////
 </script>
 
