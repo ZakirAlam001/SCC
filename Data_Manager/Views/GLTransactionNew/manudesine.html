@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial,sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        .container {
+            padding: 18px;
+            padding-bottom: 90px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: #fff;
+            height: 110px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+            cursor: pointer;
+            transition: .3s;
+        }
+
+            .card:hover {
+                transform: translateY(-4px);
+            }
+
+            .card i {
+                font-size: 35px;
+                color: #ff6200;
+                margin-bottom: 10px;
+            }
+
+            .card span {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .tile {
+            border-radius: 18px;
+            padding: 18px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blue {
+            background: linear-gradient(135deg,#3a7bfd,#62b0ff);
+        }
+
+        .green {
+            background: linear-gradient(135deg,#16a34a,#38d67a);
+        }
+
+        .tile small {
+            opacity: .9;
+        }
+
+        .tile h3 {
+            margin-top: 5px;
+            font-size: 22px;
+        }
+
+        .tile i {
+            font-size: 28px;
+        }
+
+        h4 {
+            margin: 30px 0 15px;
+            color: #777;
+            letter-spacing: 3px;
+        }
+
+        .payments {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .payment {
+            height: 180px;
+            border-radius: 25px;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .purple {
+            background: linear-gradient(135deg,#6d4cff,#8f70ff);
+        }
+
+        .orange {
+            background: linear-gradient(135deg,#ff5b6d,#ff8d4b);
+        }
+
+        .payment i {
+            font-size: 45px;
+        }
+
+        .payment h3 {
+            margin: 18px 0 10px;
+            font-size: 30px;
+        }
+
+        .payment p {
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -3px 15px rgba(0,0,0,.1);
+        }
+
+            .bottom a {
+                text-decoration: none;
+                color: #666;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                font-size: 14px;
+            }
+
+            .bottom i {
+                font-size: 22px;
+            }
+
+            .bottom a:hover {
+                color: #ff6200;
+            }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Dashboard</title>
+
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <!-- Top Menu -->
+            <div class="menu">
+
+                <div class="card">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Party</span>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Cash</span>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-box"></i>
+                    <span>Stock</span>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span>Bills</span>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Staff</span>
+                </div>
+
+                <div class="card">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span>Expense</span>
+                </div>
+
+            </div>
+
+
+            <!-- Party -->
+            <div class="info">
+
+                <div class="tile blue">
+
+                    <div>
+                        <small>Party Name</small>
+                        <h3>ABC Traders</h3>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+                <div class="tile green">
+
+                    <div>
+                        <small>Total Balance</small>
+                        <h3>Rs. 58,420</h3>
+                    </div>
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <h4>PAYMENTS</h4>
+
+            <div class="payments">
+
+                <div class="payment purple">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    <h3>POS</h3>
+
+                    <p>
+                        Receive payments
+                        through Card
+                    </p>
+
+                </div>
+
+                <div class="payment orange">
+
+                    <i class="fa-solid fa-qrcode"></i>
+
+                    <h3>QR</h3>
+
+                    <p>
+                        Share QR &
+                        Receive Payment
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Bottom Menu -->
+
+        <div class="bottom">
+
+            <a href="#">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Sale
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-calculator"></i>
+                POS
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                Money
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-bars"></i>
+                More
+            </a>
+
+        </div>
+
+    </body>
+</html>
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html>
+
+
+s

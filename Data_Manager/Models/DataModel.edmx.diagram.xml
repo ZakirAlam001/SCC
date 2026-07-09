@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aee31be45b274fe1ad140bb40e390b29" Name="Diagram1" ZoomLevel="68">
+        <EntityTypeShape EntityType="db.FranchiseModel.POS_ItemIn" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="db.FranchiseModel.POS_ItemOut" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="db.FranchiseModel.POS_MasterSale" Width="1.5" PointX="7.75" PointY="28" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Account" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Bank" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Brand" Width="1.5" PointX="3" PointY="33.625" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Category" Width="1.5" PointX="3" PointY="38.125" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Commission" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Customer" Width="1.5" PointX="5.25" PointY="17.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Designation" Width="1.5" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_ExpenseDetail" Width="1.5" PointX="7.5" PointY="33.5" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Loan_Transaction_Backup" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_LoanPerson" Width="1.5" PointX="9.75" PointY="6.375" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_MstExpense" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Orgcode" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Payment_Rcv" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_SalesTypeSetupForm" Width="1.5" PointX="5.25" PointY="35.25" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_StockMst" Width="1.5" PointX="3" PointY="28.125" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_User" Width="1.5" PointX="14.75" PointY="6.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Vendor" Width="1.5" PointX="0.75" PointY="28" />
+        <AssociationConnector Association="db.FranchiseModel.FK_POS_ItemOut_POS_ItemIn" />
+        <AssociationConnector Association="db.FranchiseModel.FK_POS_ItemOut_POS_ItemOut" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Account_tbl_Bank" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Payment_Rcv_tbl_Account" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Brand_tbl_Brand" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SalesTypeSetupForm_tbl_Brand" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SalesTypeSetupForm_tbl_Category" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_ExpenceDetail_tbl_MstExpense" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_StockMst_tbl_Vendor" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Complain_apps" Width="1.5" PointX="0.75" PointY="15.75" />
+        <AssociationConnector Association="db.FranchiseModel.FK_POS_ItemIn_tbl_Category" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_InvoiceInfo" Width="1.5" PointX="15.375" PointY="11.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_SaleDetail" Width="1.5" PointX="12.75" PointY="17.375" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SaleDetail_tbl_SalesTypeSetupForm" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_SaleMaster" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SaleDetail_tbl_SaleMaster" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Stock" Width="1.5" PointX="10.5" PointY="31.125" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SaleDetail_tbl_Stock" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Stock_tbl_SalesTypeSetupForm" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Stock_tbl_StockMst" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Stock_tbl_Vendor" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_oldstockinout" Width="1.5" PointX="17.375" PointY="4.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_StockDaily" Width="1.5" PointX="17.375" PointY="8.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.POS_tables" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_RateList" Width="1.5" PointX="7.875" PointY="38.125" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_RateList_tbl_SalesTypeSetupForm" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_daily_balance" Width="1.5" PointX="17.375" PointY="12.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Account_Mst_Transaction_Backup" Width="1.5" PointX="15.375" PointY="17.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Vendors_Mst_Transaction" Width="1.5" PointX="10.5" PointY="21.875" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Vendors_Mst_Transaction_Backup" Width="1.5" PointX="17.375" PointY="16.75" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Vendors_Mst_Transaction_tbl_StockMst" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Vendors_Mst_Transaction_tbl_Vendor" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Employee" Width="1.5" PointX="3" PointY="9.125" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Customer_tbl_Employee" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Employee_tbl_Designation" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Payment_Rcv_tbl_Employee" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_SaleMaster_tbl_Employee" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Account_Mst_Transaction" Width="1.5" PointX="7.5" PointY="7" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Account_Mst_Transaction_tbl_Employee" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Account_Mst_Transaction_tbl_Payment_Rcv" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Account_Mst_Transaction_tbl_SaleMaster" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Vendor_Payment" Width="1.5" PointX="8.25" PointY="15.875" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Vendor_Payment_tbl_Account" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Vendor_Payment_tbl_Vendor" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Vendors_Mst_Transaction_tbl_Vendor_Payment" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_deposit_Amount" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="db.FranchiseModel.tbl_Loan_Transactions" Width="1.5" PointX="12" PointY="37.75" />
+        <AssociationConnector Association="db.FranchiseModel.FK_tbl_Loan_Transactions_tbl_LoanPerson" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

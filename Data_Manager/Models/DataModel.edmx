@@ -3432,7 +3432,7 @@ FROM [dbo].[tbl_Vendors_Mst_Transaction_Backup] AS [tbl_Vendors_Mst_Transaction_
     </Connection>
     <Options>
       <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />

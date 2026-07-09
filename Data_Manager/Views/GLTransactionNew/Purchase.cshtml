@@ -1,0 +1,610 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Party Ledger</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/css/cssnew/css/style.css" rel="stylesheet" />
+   
+</head>
+
+<body>
+
+    <div class="container-fluid py-4">
+
+        <div class="row g-4">
+
+            <!-- ========================= -->
+            <!-- LEFT PANEL -->
+            <!-- ========================= -->
+
+            <div class="col-lg-5 col-xl-4">
+
+                <div class="left-panel">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h3 class="page-title">
+                            Purchase Detail
+                        </h3>
+
+                        <!-- <button class="btn btn-add"> -->
+                        <!-- <i class="fa fa-plus"></i> -->
+                        <!-- Add Party -->
+                        <!-- </button> -->
+
+                    </div>
+
+
+                    <!-- Search -->
+
+                    <div class="search-box mb-4">
+
+                        <i class="fa fa-search"></i>
+
+                        <input type="text"
+                               id="searchParty"
+                               placeholder="Search Party">
+
+                    </div>
+
+
+                    <!-- Party List -->
+
+                    <div class="party-list" id="partyList">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================= -->
+            <!-- RIGHT PANEL -->
+            <!-- ========================= -->
+
+            <div class="col-lg-7 col-xl-8">
+
+                <div class="right-panel">
+                    <div style="float: right;">
+                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Party </button>
+                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Payment </button>
+                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Sale </button>
+                    </div>
+
+                    <div class="ledger-header">
+
+                        <div>
+
+                           <h4 class="text-success" id="activename">ABC Traders</h4>
+
+                            <small id="activecell">03001234567</small>
+
+                        </div>
+
+                        <!-- <div class="text-end"> -->
+                        <!-- <small> -->
+                        <!-- Current Balance -->
+                        <!-- </small> -->
+                        <!-- <h3 class="text-success"> -->
+                        <!-- Rs.25,000 -->
+                        <!-- </h3> -->
+                        <!-- </div> -->
+
+                    </div>
+
+
+                    <!-- Summary -->
+
+                    <div class="row mt-4 g-3 gray-bg">
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card border-green">
+
+                                <h6>Total Purchase</h6>
+                                <h3 id="TotalPurchase">
+
+                                    Rs.45,000
+
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card border-green">
+
+                                <h6>Total Payment</h6>
+
+                                <h3 id="TotalPayment">
+
+                                    Rs.20,000
+
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card">
+
+                                <h6>Balance</h6>
+
+                                <h3 id="TotalBalance" class="text-success">
+
+                                    Rs.25,000
+
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Ledger -->
+
+                    <div class="ledger-table mt-4 tblheight">
+                        @*<div class="row mb-3">
+                                <div class="col-md-3">
+                                    <input type="date" id="FromDate" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" id="ToDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" id="Search" class="form-control" placeholder="Search...">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary w-100" onclick="LoadLedger(selectedEmpId)">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>*@
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <input type="date" id="FromDate" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" id="ToDate" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary w-100" onclick="LoadLedger(selectedEmpId)">
+                                    <i class="fa fa-filter"></i> Filter
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-secondary w-100" onclick="ClearFilter()">
+                                    <i class="fa fa-refresh"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <table class="table table-hover align-middle table-sm">
+
+                            <thead class="tblfont">
+                                <tr>
+                                    <th>T ID</th>
+                                    <th>Date</th>
+                                    <th>Descripion</th>
+                                    <th>Trans-Type</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Balance</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody class='tblfont' id="ledgerBody">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="globalLoader">
+        <div class="loader-card">
+            <div class="loader-spinner"></div>
+            <h5>Please Wait</h5>
+            <small>Loading data...</small>
+        </div>
+    </div>
+    @*//Load CSS*@
+    <style>
+        #globalLoader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255,255,255,.35);
+            backdrop-filter: blur(6px);
+            z-index: 999999;
+            animation: fadeIn .25s ease;
+        }
+
+        /* Loader Card */
+
+        .loader-card {
+            background: #fff;
+            padding: 35px 45px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.18);
+            text-align: center;
+            animation: popup .30s ease;
+        }
+
+        /* Spinner */
+
+        .loader-spinner {
+            width: 70px;
+            height: 70px;
+            border: 6px solid #e5e5e5;
+            border-top: 6px solid #0d6efd;
+            border-radius: 50%;
+            margin: auto;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-card h5 {
+            margin-top: 18px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .loader-card small {
+            color: #777;
+        }
+
+        /* Animations */
+
+        @@keyframes spin {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes popup {
+
+            from {
+                transform: scale(.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @@keyframes fadeIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/css/cssnew/js/script.js"></script>
+    <script src="~/js/plugins/jquery/jquery.min.js"></script>
+    <script>
+
+        // Show Loader
+        function ShowLoader() {
+
+            $("#globalLoader")
+                .css("display", "flex")
+                .hide()
+                .fadeIn(200);
+
+        }
+
+        // Hide Loader
+        function HideLoader() {
+
+            $("#globalLoader").fadeOut(200);
+
+        }
+
+        // Page Load
+        $(window).on("beforeunload", function () {
+
+            ShowLoader();
+
+        });
+
+        // Page Fully Loaded
+        $(window).on("load", function () {
+
+            HideLoader();
+
+        });
+
+        // All AJAX Requests
+        $(document).ajaxStart(function () {
+
+            ShowLoader();
+
+        });
+
+        $(document).ajaxStop(function () {
+
+            HideLoader();
+                
+        });
+
+        $("a").click(function () {
+
+            ShowLoader();
+
+        });
+        $("form").submit(function () {
+
+            ShowLoader();
+
+        });
+
+        function LoadPartyList(empId) {
+
+            $.ajax({
+
+                url: '/GLTransactionNew/GetPurcahseHeader',
+                type: 'GET',
+
+                data: { vendorid: empId },
+
+                success: function (res) {
+
+                    $("#partyList").empty();
+                    console.log(res);
+                    $.each(res, function (i, item) {
+
+                        var balanceClass = item.Balance >= 0 ? "text-success" : "text-danger";
+
+                        var html = `
+                        <div class="party-card" data-id="${item.VendorId}">
+
+                            <div class="party-left">
+
+                                <div class="party-icon">
+
+                                    <i class="fa-solid fa-store"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <h5 data-name="${item.Name}">${item.Name}</h5>
+
+                                    <small data-cell="${item.Cell}">${item.Cell}</small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="party-right">
+
+                                <small>Total Balance</small>
+
+                                <h6 class="${balanceClass}">
+
+                                    Rs. ${item.Balance.toLocaleString()}
+
+                                </h6>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                        $("#partyList").append(html);
+
+                    });
+
+                }
+
+            });
+
+        }
+
+
+
+
+
+        $(document).ready(function () {
+            LoadPartyList(1);
+        });
+        
+        var selectedEmpId = 0;
+        function LoadLedger(empId) {
+            selectedEmpId = empId;
+            $.ajax({
+                url: "/GLTransactionNew/GetPurchaseLedger",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    vendorid: empId,
+                    fromDate: $("#FromDate").val(),
+                    toDate: $("#ToDate").val(),
+                    search: null
+                },
+                success: function (res) {
+                    $("#ledgerBody").empty();
+
+                    if (!res || res.length === 0) {
+                        $("#ledgerBody").append(`
+                            <tr>
+                                <td colspan="7" class="text-center text-danger fw-bold py-4">
+                                    <i class="fa fa-exclamation-circle me-2"></i>
+                                    No Data Found
+                                </td>
+                            </tr>
+                        `);
+                        return;
+                    }
+                    $.each(res, function (i, item) {
+                        var transType = "";
+                        if (item.StockMstId > 0)
+                            transType = "Purchase";
+                        else if (item.Ven_Payment_ID > 0)
+                            transType = "Payment";
+                        else
+                            transType = "Opening";
+                        var html =
+                            '<tr>' +
+
+                            '<td>' + item.Vendor_Acc_Trans_ID + '</td>' +
+
+                            '<td>' + formatDate(item.CreateDate) + '</td>' +
+
+                            '<td>' + (item.Particular || "") + '</td>' +
+
+                            '<td>' + transType + '</td>' +
+
+                            '<td class="text-end"><a style="color:red" href="">' +
+                            Number(item.DR_Amount || 0).toLocaleString() +
+                            '</a></td>' +
+
+                            '<td class="text-end" ><a style="color:green" href="">' +
+                            Number(item.CR_Amount || 0).toLocaleString() +
+                            '</a></td>' +
+
+                            '<td class="text-end fw-bold" >' +
+                            Number(item.Balance || 0).toLocaleString() +
+                            '</td>' +
+
+                            '</tr>';
+
+                        $("#ledgerBody").append(html);
+
+                    });
+
+                },
+
+                error: function (xhr) {
+
+                    console.log(xhr.responseText);
+
+                }
+
+            });
+
+        }
+
+
+        function LoadPartySummary(empId) {
+
+    $.ajax({
+        url: "/GLTransactionNew/GetVendorSummary",
+        type: "GET",
+        data: {
+            vendorid: empId
+        },
+        dataType: "json",
+        success: function (res) {
+            if (res != null) {
+
+                var totalpayment = Number(res.TotalSale || 0);
+                var totalReceive = Number(res.TotalReceive || 0);
+
+                var totalBalance = totalReceive - totalpayment;
+
+                $("#TotalPurchase").text("Rs." + totalReceive.toLocaleString() );
+
+                $("#TotalPayment").text("Rs." + totalpayment.toLocaleString());
+
+                $("#TotalBalance").text("Rs." + totalBalance.toLocaleString());
+
+            }
+        },
+        error: function (xhr) {
+            console.log(xhr.responseText);
+        }
+
+    });
+
+}
+
+
+
+
+        function formatDate(jsonDate) {
+
+            if (!jsonDate)
+                return "";
+            var timestamp = parseInt(jsonDate.substr(6));
+            var d = new Date(timestamp);
+            var months = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
+            var day = ("0" + d.getDate()).slice(-2);
+            var month = months[d.getMonth()];
+            var year = d.getFullYear();
+
+            return day + "-" + month + "-" + year;
+        }
+
+        $(document).on("click", ".party-card", function () {
+            $(".party-card").removeClass("active");
+            $(this).addClass("active");
+            var empId = $(this).data("id");
+            $('#activename').text($(this).find("h5").data("name")); 
+            $('#activecell').text($(this).find("small").data("cell"));
+            LoadLedger(empId); // Ledger load function
+            LoadPartySummary(empId);
+
+        });
+
+        function ClearFilter() {
+
+            $("#FromDate").val("");
+            $("#ToDate").val("");
+            LoadLedger(selectedEmpId);
+        }
+    </script>
+</body>
+
+</html>

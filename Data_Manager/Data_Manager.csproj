@@ -376,6 +376,7 @@
     </Compile>
     <Compile Include="Models\ViewModel\Resultset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\GLTransactionNewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\ajax_modal_content.html" />
@@ -517,6 +518,8 @@
     <Content Include="css\codemirror\theme\vibrant-ink.css" />
     <Content Include="css\codemirror\theme\xq-dark.css" />
     <Content Include="css\codemirror\theme\xq-light.css" />
+    <Content Include="css\cssnew\css\style.css" />
+    <Content Include="css\cssnew\js\script.js" />
     <Content Include="css\datepickerjquery.css" />
     <Content Include="css\elfinder\elfinder.min.css" />
     <Content Include="css\fancybox\jquery.fancybox.css" />
@@ -1918,6 +1921,9 @@
     <Content Include="Views\DailyStockRemaining\Delete.cshtml" />
     <Content Include="Views\Stock\Invoice - Copy.cshtml" />
     <Content Include="Views\DailySheet\Index.cshtml" />
+    <Content Include="Views\GLTransactionNew\Sale.cshtml" />
+    <Content Include="Views\GLTransactionNew\manudesine.html" />
+    <Content Include="Views\GLTransactionNew\Purchase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

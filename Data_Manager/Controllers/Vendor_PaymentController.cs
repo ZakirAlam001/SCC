@@ -141,7 +141,8 @@ namespace Data_Manager.Controllers
             }
 
             ViewBag.VendorId = new SelectList(db.tbl_Vendor, "VendorId", "Name", tbl_vendor_payment.VendorId);
-            return View(tbl_vendor_payment);
+            //  return View(tbl_vendor_payment);
+            return RedirectToAction("Index");
         }
 
         public ActionResult PrintInvoice(int saleMstId)
@@ -149,7 +150,6 @@ namespace Data_Manager.Controllers
             //tbl_Payment_Rcv model = db.tbl_Payment_Rcv.Include(m => m.tbl_Employee).Where(m => m.Payment_ID == tbl_payment_rcv.Payment_ID).FirstOrDefault();
             tbl_Vendor_Payment model = db.tbl_Vendor_Payment.Find(saleMstId);
             return View("Invoice", model);
-
 
         }
         //
