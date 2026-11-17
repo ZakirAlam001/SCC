@@ -80,9 +80,9 @@
 
                 <div class="right-panel">
                     <div style="float: right;">
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Party </button>
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Payment </button>
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Sale </button>
+                        <a href="/Vendo/Create" class="btn btn-add"><i class="fa fa-plus"> </i> Add Party </a>
+                        <a href="/Vendor_Payment/Create" class="btn btn-add"><i class="fa fa-plus"> </i> Payment </a>
+                        <a href="/Stock/Create" class="btn btn-add"><i class="fa fa-plus"> </i> Purchase </a>
                     </div>
 
                     <div class="ledger-header">
@@ -386,6 +386,10 @@
 
         });
 
+        window.addEventListener("pageshow", function (event) {
+            HideLoader();
+        });
+
         function LoadPartyList(empId) {
 
             $.ajax({
@@ -503,13 +507,21 @@
 
                             '<td>' + transType + '</td>' +
 
-                            '<td class="text-end"><a style="color:red" href="">' +
-                            Number(item.DR_Amount || 0).toLocaleString() +
-                            '</a></td>' +
+                            '<td class="text-end">' +
+                            (Number(item.DR_Amount || 0) > 0
+                                ? '<a style="color:red" href="/Stock/PrintInvoice?MstId=' + item.StockMstId + '">' +
+                                Number(item.DR_Amount).toLocaleString() +
+                                '</a>'
+                                : '-') +
+                            '</td>' +
 
-                            '<td class="text-end" ><a style="color:green" href="">' +
-                            Number(item.CR_Amount || 0).toLocaleString() +
-                            '</a></td>' +
+                            '<td class="text-end">' +
+                            (Number(item.CR_Amount || 0) > 0
+                                ? '<a style="color:green" href="/Vendor_Payment/PrintInvoice?saleMstId=' + item.Ven_Payment_ID + '">' +
+                                Number(item.CR_Amount).toLocaleString() +
+                                '</a>'
+                                : '-') +
+                            '</td>'+
 
                             '<td class="text-end fw-bold" >' +
                             Number(item.Balance || 0).toLocaleString() +

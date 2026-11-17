@@ -81,9 +81,9 @@
 
                 <div class="right-panel">
                     <div style="float: right;">
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Party </button>
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Payment </button>
-                        <button class="btn btn-add"><i class="fa fa-plus"> </i> Add Sale </button>
+                        <a href="/Employee_SO/Create" class="btn btn-add"><i class="fa fa-plus"> </i> Add Party </a>
+                        <a href="/Payments/Create" class="btn btn-add">  <i class="fa fa-plus"> </i> Payment </a>
+                        <a href="/SaleMaster/Create" class="btn btn-add"><i class="fa fa-plus"> </i>Add Sale </a>
                     </div>
 
                     <div class="ledger-header">
@@ -377,6 +377,9 @@
             ShowLoader();
 
         });
+        window.addEventListener("pageshow", function (event) {
+            HideLoader();
+        });
 
         function LoadPartyList(empId) {
 
@@ -498,11 +501,11 @@
 
                             '<td>' + transType + '</td>' +
 
-                            '<td class="text-end"><a style="color:green" href="">' +
+                            '<td class="text-end"><a style="color:green" href="/SaleMaster/PrintInvoice?saleMstId=9062">' +
                             Number(item.DR_Amount || 0).toLocaleString() +
                             '</a></td>' +
 
-                            '<td class="text-end" ><a style="color:red" href="">' +
+                            '<td class="text-end" ><a style="color:red" href="/SaleMaster/PrintInvoice?saleMstId='+item.SaleMst_ID+'">' +
                             Number(item.CR_Amount || 0).toLocaleString() +
                             '</a></td>' +
 

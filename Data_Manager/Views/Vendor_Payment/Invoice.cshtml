@@ -21,89 +21,93 @@
     <div style="font-size:12px; color: black; font-family: monospace;
             width: 250px;
 
-   
+
             border: 1px solid #c4c7c7;
             padding: 10px 10px 20px 10px;
-          
+
             z-index: 0;" id="print-area-2" class="print-area">
         @*<div style="text-align:right;"><a href="" id="print" >Print</a></div>*@
         @*<div id="page">*@
-            <h2>Pay-Invoice @Model.Ven_Payment_ID </h2><span></span><hr />
-            <p class="">
-                <strong>ATTA ENGINEERING WORKS</strong><span style="float:right">User: @Session["name"] </span><br>
-                @*ABC Address,<br />  ABC Zone<br>
-                Karachi,Pakistan<br>*@
-            </p>
+        <h2>Pay-Invoice @Model.Ven_Payment_ID </h2><span></span><hr />
+        <p class="">
+            <strong>ATTA ENGINEERING WORKS</strong><span style="float:right">User: @Session["name"] </span><br>
+            @*ABC Address,<br />  ABC Zone<br>
+            Karachi,Pakistan<br>*@
+        </p>
 
 
-            @DateTime.Now.ToString("dd/MMM/yy hh:mm tt")<br>
+
+        @if (Model.CreateDate.HasValue)
+        {
+            @Model.CreateDate.Value.ToString("dd/MMM/yy hh:mm tt");
+        }<br>
         @*Vendor : @Html.DisplayFor(modelitem => Model.tbl_Vendor.Name)*@
-            Vendor : <b>@Html.DisplayFor(modelitem => @Model.tbl_Vendor.Name)</b>
-            <hr />
+        Vendor : <b>@Html.DisplayFor(modelitem => @Model.tbl_Vendor.Name)</b>
+        <hr />
 
 
-            <table width="250" border="1" align="left" cellspacing="0">
-                <thead style="text-align: left;">
-                    <tr>
+        <table width="250" border="1" align="left" cellspacing="0">
+            <thead style="text-align: left;">
+                <tr>
 
-                        <th>Description</th>
-                        <th>Pay Type</th>
-                        @*<th style="WIDTH: 79PX;">Unit</th>*@
-                        <th>Total</th>
-                    </tr>
-                </thead>
+                    <th>Description</th>
+                    <th>Pay Type</th>
+                    @*<th style="WIDTH: 79PX;">Unit</th>*@
+                    <th>Total</th>
+                </tr>
+            </thead>
 
-                <tbody style="font-size: 10px !important;">
-                   @* @foreach (var item in Model)*@
-                    
-                        <tr>
+            <tbody style="font-size: 10px !important;">
+                @* @foreach (var item in Model)*@
 
-                            <td>@Html.DisplayFor(modelitem => Model.Description)   </td>
-                            <td>@Model.Payment_Type</td>
-                            @*<td>@Convert.ToInt32(item.tbl_Product.HoleSaleUnitPrice)</td>*@
-                            <td> @Model.Amount </td>
-                        </tr>
-                   
+                <tr>
 
-                    <tr class="odd" style="font-weight:bold;">
-                        <td colspan="1"></td>
-                        <td>------</td>
-                        <td>------</td>
-                    </tr>
-                    <tr class="odd" style="font-weight:bold;">
-                        <td colspan="1"></td>
-                        <td>Net Amount</td>
-                        <td>Rs.@Convert.ToInt32(@Model.Amount)</td>
-                    </tr>
-                    @*<tr class="odd" style="font-weight:bold;">
-                        <td colspan="2"></td>
-                        <td>Discount(@Convert.ToInt32(Model.Discount__)%)</td>
-                        <td>Rs.@Convert.ToInt32(Model.Discount_Amount)</td>
-                    </tr>*@
-                    @*<tr class="odd" style="font-weight:bold;">
-                        <td colspan="2"></td>
-                        <td>Net Pay</td>
-                        <td>Rs.@Convert.ToInt32(Model.Net_Amount)</td>
-                    </tr>*@
-                    @*<tr class="odd" style="font-weight:bold;">
-                        <td colspan="2"></td>
-                        <td>Advance</td>
-                        <td>Rs.@Convert.ToInt32(Model.Advance)</td>
-                    </tr>
-                    <tr class="odd" style="font-weight:bold;">
-                        <td colspan="2"></td>
-                        <td>Balance</td>
-                        <td>Rs.@Convert.ToInt32(Model.Balance)</td>
-                    </tr>*@
-                </tbody>
-            </table>  
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
-<h3>Thank You</h3>
-            @*For our latest offer<br />
-            Visit our website<br />
-            www.abc.com<br />
-            0213-1234567<br />*@
-            Powered By: www.bitzenta.com<br /> (0334-3787191)
+                    <td>@Html.DisplayFor(modelitem => Model.Description)   </td>
+                    <td>@Model.Payment_Type</td>
+                    @*<td>@Convert.ToInt32(item.tbl_Product.HoleSaleUnitPrice)</td>*@
+                    <td> @Model.Amount </td>
+                </tr>
+
+
+                <tr class="odd" style="font-weight:bold;">
+                    <td colspan="1"></td>
+                    <td>------</td>
+                    <td>------</td>
+                </tr>
+                <tr class="odd" style="font-weight:bold;">
+                    <td colspan="1"></td>
+                    <td>Net Amount</td>
+                    <td>Rs.@Convert.ToInt32(@Model.Amount)</td>
+                </tr>
+                @*<tr class="odd" style="font-weight:bold;">
+                    <td colspan="2"></td>
+                    <td>Discount(@Convert.ToInt32(Model.Discount__)%)</td>
+                    <td>Rs.@Convert.ToInt32(Model.Discount_Amount)</td>
+                </tr>*@
+                @*<tr class="odd" style="font-weight:bold;">
+                    <td colspan="2"></td>
+                    <td>Net Pay</td>
+                    <td>Rs.@Convert.ToInt32(Model.Net_Amount)</td>
+                </tr>*@
+                @*<tr class="odd" style="font-weight:bold;">
+                    <td colspan="2"></td>
+                    <td>Advance</td>
+                    <td>Rs.@Convert.ToInt32(Model.Advance)</td>
+                </tr>
+                <tr class="odd" style="font-weight:bold;">
+                    <td colspan="2"></td>
+                    <td>Balance</td>
+                    <td>Rs.@Convert.ToInt32(Model.Balance)</td>
+                </tr>*@
+            </tbody>
+        </table>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><hr />
+        <h3>Thank You</h3>
+        @*For our latest offer<br />
+        Visit our website<br />
+        www.abc.com<br />
+        0213-1234567<br />*@
+        Powered By: www.bitzenta.com<br /> (0334-3787191)
     </div>
 
 
