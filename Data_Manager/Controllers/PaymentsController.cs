@@ -116,24 +116,21 @@ namespace Data_Manager.Controllers
                         //acc.UserID=null;
                         db.tbl_Account_Mst_Transaction.Add(acc);
                         db.SaveChanges();
-
-                        if (invostatus == "Yes")
-                        {
-                            //PrintInvoice(tbl_stock.Stock_ID);
-                            tbl_Payment_Rcv model = db.tbl_Payment_Rcv.Include(m => m.tbl_Employee).Where(m => m.Payment_ID == tbl_payment_rcv.Payment_ID).FirstOrDefault();
-                            ////tbl_SaleMst mstRecrod = db.tbl_SaleMst.Find(saleMstId);
-                            return View("Invoice", model);
-                        }
                         tranScope.Complete();
+                        
                     }
                     catch (Exception ex) {
                         tranScope.Dispose();
                     }
                 }
 
-              
-
-
+                if (invostatus == "Yes")
+                {
+                    //PrintInvoice(tbl_stock.Stock_ID);
+                    tbl_Payment_Rcv model = db.tbl_Payment_Rcv.Include(m => m.tbl_Employee).Where(m => m.Payment_ID == tbl_payment_rcv.Payment_ID).FirstOrDefault();
+                    ////tbl_SaleMst mstRecrod = db.tbl_SaleMst.Find(saleMstId);
+                    return View("Invoice", model);
+                }
                 return RedirectToAction("Index");
             }
 

@@ -122,14 +122,6 @@ namespace Data_Manager.Controllers
                         db.tbl_Vendors_Mst_Transaction.Add(acc);
                         db.SaveChanges();
                         tranScope.Complete();
-                        if (invostatus == "Yes")
-                        {
-                            //PrintInvoice(tbl_stock.Stock_ID);
-                            tbl_Vendor_Payment model = db.tbl_Vendor_Payment.Include(m => m.tbl_Vendor).Where(m => m.Ven_Payment_ID == tbl_vendor_payment.Ven_Payment_ID).FirstOrDefault();
-                            ////tbl_SaleMst mstRecrod = db.tbl_SaleMst.Find(saleMstId);
-                            return View("Invoice", model);
-                        }
-                        return RedirectToAction("Index");
                         
                     }
                     catch (Exception ex)
@@ -139,7 +131,13 @@ namespace Data_Manager.Controllers
                 }
                     
             }
-
+            if (invostatus == "Yes")
+            {
+                //PrintInvoice(tbl_stock.Stock_ID);
+                tbl_Vendor_Payment model = db.tbl_Vendor_Payment.Include(m => m.tbl_Vendor).Where(m => m.Ven_Payment_ID == tbl_vendor_payment.Ven_Payment_ID).FirstOrDefault();
+                ////tbl_SaleMst mstRecrod = db.tbl_SaleMst.Find(saleMstId);
+                return View("Invoice", model);
+            }
             ViewBag.VendorId = new SelectList(db.tbl_Vendor, "VendorId", "Name", tbl_vendor_payment.VendorId);
             //  return View(tbl_vendor_payment);
             return RedirectToAction("Index");
