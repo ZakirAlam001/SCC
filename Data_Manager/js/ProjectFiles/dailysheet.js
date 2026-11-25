@@ -62,119 +62,167 @@ function GetData(Case) {
 //// For Date Save
 
 function DailyDeposit() {
-    debugger;
-    var DepositType = $('#DepositType :selected').val();
-
+    var DepositType = $('#DepositType :selected').val() || $('#DepositType').val();
     var description = $('.dddescription').val();
     var Amount = parseFloat($('.ddAmount').val());
     var Date = $('.dddate').val();
-    //alert(Total_Amount);
-    // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
+
+    if (!DepositType || DepositType === "Select Deposit Type" || DepositType === "") {
+        alert("Please select Deposit Type!");
+        $('#DepositType').focus();
+        return false;
+    }
+    if (isNaN(Amount) || Amount <= 0) {
+        alert("Please enter a valid Amount!");
+        $('.ddAmount').focus();
+        return false;
+    }
+    if (!Date) {
+        alert("Please select Date!");
+        $('.dddate').focus();
+        return false;
+    }
+    if (!description || description.trim() === "") {
+        alert("Please enter Description!");
+        $('.dddescription').focus();
+        return false;
+    }
+
     $.post('/DailyDeposit/Create', { DepositType: DepositType, description: description, Amount: Amount, Date: Date })
         .done(function (data) {
-            debugger
             GetData(1);
-
+            $('#Searchmodel').modal('hide');
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving deposit");
+        });
 }
 
 
 
 
-function LoanPayment() {
-    debugger;
-    var LoanPersonID = parseInt($('.LPLoanPersonID :selected').val());
+function LoanPaymentCrud() {
+    var LoanPersonID = parseInt($('.LPLoanPersonID :selected').val() || $('.LPLoanPersonID').val());
     var Payment_Type = $('.LPPayment_Type').val();
     var Description = $('.LPdescription').val();
     var Amount = parseFloat($('.LPAmount').val());
     var ApplyDate = $('.LPdate').val();
-    //alert(Total_Amount);
-    // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
+
+    if (isNaN(LoanPersonID) || LoanPersonID <= 0) {
+        alert("Please select Person!");
+        $('.LPLoanPersonID').focus();
+        return false;
+    }
+    if (!Payment_Type) {
+        alert("Please select Payment Type!");
+        $('.LPPayment_Type').focus();
+        return false;
+    }
+    if (isNaN(Amount) || Amount <= 0) {
+        alert("Please enter a valid Amount!");
+        $('.LPAmount').focus();
+        return false;
+    }
+    if (!ApplyDate) {
+        alert("Please select Date!");
+        $('.LPdate').focus();
+        return false;
+    }
+    if (!Description || Description.trim() === "") {
+        alert("Please enter Description!");
+        $('.LPdescription').focus();
+        return false;
+    }
+
     $.post('/Loan_Transaction/Create', { LoanPersonID: LoanPersonID, Payment_Type: Payment_Type, Description: Description, Amount: Amount, ApplyDate: ApplyDate })
         .done(function (data) {
-            //alert();
-            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
-            //waitingDialog.hide();
-            //setTimeout(function () {
             MASTER_RECORD_ID = data;
-
+            $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
             $('html, body').animate({ scrollTop: 0 }, 500);
-            //}, 2000)
-
+            GetData(7);
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving loan transaction");
+        });
 }
 
 
 
 var MASTER_ID;
 function VendorSave() {
-    debugger
-    // Master Record***
-    //  VendorId = $('#VendorId').val()
+    var vendorId = $('.OVendorID').val();
+    var itemType = $('.OVItemType').val();
+    var rate = parseFloat($('.OVRate').val());
+    var weight = parseFloat($('.OVWeight').val());
+    var totalAmount = parseFloat($('.OVTotalAmount').val());
+    var date = $('.OVdate').val();
+    var description = $('.OVDescription').val();
+
+    if (!vendorId) {
+        alert("Please select Vendor!");
+        $('.OVendorID').focus();
+        return false;
+    }
+    if (!itemType) {
+        alert("Please select Order Type / Item!");
+        $('.OVItemType').focus();
+        return false;
+    }
+    if (isNaN(rate) || rate <= 0) {
+        alert("Please enter a valid Rate!");
+        $('.OVRate').focus();
+        return false;
+    }
+    if (isNaN(weight) || weight <= 0) {
+        alert("Please enter a valid Weight!");
+        $('.OVWeight').focus();
+        return false;
+    }
+    if (!date) {
+        alert("Please select Date!");
+        $('.OVdate').focus();
+        return false;
+    }
+    if (!description || description.trim() === "") {
+        alert("Please enter Description!");
+        $('.OVDescription').focus();
+        return false;
+    }
+
     var master = [{
-        "VendorId": $('.OVendorID').val(),
-        "ItemQuantity": $('.OVWeight').val(),
+        "VendorId": vendorId,
+        "ItemQuantity": weight,
         "Discount": 0,
-        "Date": $('OVdate').val(),
-        "TotalAmount": $('.OVTotalAmount').val(),
+        "Date": date,
+        "TotalAmount": totalAmount
     }];
 
-    //Detail Records***
-    var details = [];
-
-    // $('#table tbody tr').each(function (i, e) {
-    //     var $row = $(e);
-    // alert($row.find('.titem').text());
-    var d = {
-
+    var details = [{
         "PurchaseType": 1,
-        "SaleTypeID": $('.OVItemType').val(),
-        "Quantity": $('.OVWeight').val(),
+        "SaleTypeID": itemType,
+        "Quantity": weight,
         "Unit_Amount": 0,
         "Sale_Amount": 0,
-        "Description": $('.OVDescription').val(),
-        "Total_Amount": $('.OVTotalAmount').val(),
+        "Description": description,
+        "Total_Amount": totalAmount
+    }];
 
-    };
-    details.push(d);
-    //   });
-
-
-    //Master and details array****
     master = JSON.stringify(master);
     details = JSON.stringify(details);
-    //Send Data To Server Action***
+
     $.post('/Stock/PurchaseSave', { Details: details, Master: master })
         .done(function (data) {
-            //MASTER_ID = data;
-            //$('.items').remove();
-            //sessionStorage.setItem('tmsg', 'Data Save Scussfully');
-            alert("Data Saved!")
+            alert("Data Saved Successfully!");
+            $('#Searchmodel').modal('hide');
             location.reload();
             printYes();
-
-
         })
         .fail(function (data) {
-            //  alert("Fail");
             sessionStorage.setItem('tmsg', 'Save Failed');
-            alert("Data Saved failed!")
-
+            alert("Data Save failed!");
             console.log(data);
         })
 }
@@ -205,8 +253,10 @@ function Total(id) {
 
 var MASTER_RECORD_ID;
 function SaleOrder() {
-    debugger
-    var EmpID = $('.OEmpID :selected').val();
+    var EmpID = $('.OEmpID :selected').val() || $('.OEmpID').val();
+    var stockId = $('.OItemType :selected').val() || $('.OItemType').val();
+    var rate = parseFloat($('.ORate').val());
+    var weight = parseFloat($('.OWeight').val());
     var Total_Amount = $('.OTotalAmount').val();
     var Description = $('.ODescription').val();
     var ApplyDate = $('.Odate').val();
@@ -214,149 +264,199 @@ function SaleOrder() {
     var Discount_Amount = 0;
     var invoiceid = 0;
 
-    //alert(EmpID );
-    //alert(Total_Amount);
-    //alert(Description);
-    //alert(ApplyDate);
-    //Get Details Record Json List
-    //$('.singleProduct').each(function (i, elem) {
-    //    grossAmount += parseInt($(elem).find('.txtPayableAmount').val());
-    //});
-    // List of Item Json
-    //Git checked
-    var products = [];
-    //   $('.singleProduct').each(function (i, elem) {
-    var item = {
-        "Stock_ID": $('.OItemType :selected').val(),
-        "Stock_Counts": $('.OWeight').val(),
-        "Item_Price": $('.ORate').val(),
-        "Net_Price": $('.OTotalAmount').val(),
+    if (!EmpID) {
+        alert("Please select Customer!");
+        $('.OEmpID').focus();
+        return false;
+    }
+    if (!stockId) {
+        alert("Please select Order Type / Item!");
+        $('.OItemType').focus();
+        return false;
+    }
+    if (isNaN(rate) || rate <= 0) {
+        alert("Please enter a valid Rate!");
+        $('.ORate').focus();
+        return false;
+    }
+    if (isNaN(weight) || weight <= 0) {
+        alert("Please enter a valid Weight!");
+        $('.OWeight').focus();
+        return false;
+    }
+    if (!ApplyDate) {
+        alert("Please select Date!");
+        $('.Odate').focus();
+        return false;
+    }
+    if (!Description || Description.trim() === "") {
+        alert("Please enter Description!");
+        $('.ODescription').focus();
+        return false;
+    }
+
+    var products = [{
+        "Stock_ID": stockId,
+        "Stock_Counts": weight,
+        "Item_Price": rate,
+        "Net_Price": Total_Amount,
         "Discount": 0,
         "Discount_Amount": 0
-    }
-    products.push(item);
-    //  });
+    }];
     products = JSON.stringify(products);
-    // console.log(products);
-    // Form Submit  Ajax  Start   Createe                               List[]
+
     $.post('/SaleMaster/Createe', { Products: products, EmpID: EmpID, Total_Amount: Total_Amount, Description: Description, ApplyDate: ApplyDate, Discount: Discount, Discount_Amount: Discount_Amount, invoiceid: invoiceid })
         .done(function (data) {
-            //alert();
-            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
-            //waitingDialog.hide();
-            //setTimeout(function () {
             MASTER_RECORD_ID = data;
-
+            $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
             $('html, body').animate({ scrollTop: 0 }, 500);
-            //}, 2000)
-
+            GetData(2);
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving sale order");
+        });
 }
 // Form Submit  Ajax  End
 
 
 
 function CustomerPayment() {
-    alert();
-    var EmpID = parseInt($('#EmpID :selected').val());
+    var EmpID = parseInt($('#EmpID :selected').val() || $('#EmpID').val());
     var PayType = $('#Payment_Type').val();
     var Description = $('#Customerdescription').val();
     var Amount = parseFloat($('#Amount').val());
     var Date = $('#Recv_Date').val();
-    //alert(Total_Amount);
-    // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
+
+    if (isNaN(EmpID) || EmpID <= 0) {
+        alert("Please select Customer!");
+        $('#EmpID').focus();
+        return false;
+    }
+    if (!PayType || PayType === "Select") {
+        alert("Please select Payment Type!");
+        $('#Payment_Type').focus();
+        return false;
+    }
+    if (isNaN(Amount) || Amount <= 0) {
+        alert("Please enter a valid Amount!");
+        $('#Amount').focus();
+        return false;
+    }
+    if (!Date) {
+        alert("Please select Date!");
+        $('#Recv_Date').focus();
+        return false;
+    }
+    if (!Description || Description.trim() === "") {
+        alert("Please enter Description!");
+        $('#Customerdescription').focus();
+        return false;
+    }
+
     $.post('/Payments/Create', { EmpID: EmpID, Payment_Type: PayType, Description: Description, Amount: Amount, Recv_Date: Date, invostatus: "No" })
         .done(function (data) {
-            //alert();
-            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
-            //waitingDialog.hide();
-            //setTimeout(function () {
             MASTER_RECORD_ID = data;
-
+            $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
             $('html, body').animate({ scrollTop: 0 }, 500);
-            //}, 2000)
-
+            GetData(5);
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving customer payment");
+        });
 }
 
 
 function VendorPayment() {
-    alert();
-    var VendorId = parseInt($('.VPVendorID :selected').val());
+    var VendorId = parseInt($('.VPVendorID :selected').val() || $('.VPVendorID').val());
     var PayType = $('.VPPType').val();
     var Description = $('.VPdescription').val();
     var Amount = parseFloat($('.VPamount').val());
     var Date = $('.VPdate').val();
-    //alert(Total_Amount);
-    // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
+
+    if (isNaN(VendorId) || VendorId <= 0) {
+        alert("Please select Vendor!");
+        $('.VPVendorID').focus();
+        return false;
+    }
+    if (!PayType || PayType === "Select") {
+        alert("Please select Payment Type!");
+        $('.VPPType').focus();
+        return false;
+    }
+    if (isNaN(Amount) || Amount <= 0) {
+        alert("Please enter a valid Amount!");
+        $('.VPamount').focus();
+        return false;
+    }
+    if (!Date) {
+        alert("Please select Date!");
+        $('.VPdate').focus();
+        return false;
+    }
+    if (!Description || Description.trim() === "") {
+        alert("Please enter Description!");
+        $('.VPdescription').focus();
+        return false;
+    }
+
     $.post('/Vendor_Payment/Create', { VendorId: VendorId, Payment_Type: PayType, Description: Description, Amount: Amount, Recv_Date: Date, invostatus: "No" })
         .done(function (data) {
-            //alert();
-            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
-            //waitingDialog.hide();
-            //setTimeout(function () {
             MASTER_RECORD_ID = data;
-
+            $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
             $('html, body').animate({ scrollTop: 0 }, 500);
-            //}, 2000)
-
+            GetData(6);
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving vendor payment");
+        });
 }
 
 
 function ExpenseAdd() {
-    alert();
-    // var VendorId = parseInt($('.VPVendorID :selected').val());
     var Expensetype = $('.Exexpensetype').val();
     var Comments = $('.Exdescription').val();
     var TotalAmount = parseFloat($('.ExAmount').val());
     var ExpDate = $('.Exdate').val();
-    //alert(Total_Amount);
-    // Form Submit  Ajax  Start   Createe       Recv_Date: Date,
+
+    if (!Expensetype) {
+        alert("Please select Expense Type!");
+        $('.Exexpensetype').focus();
+        return false;
+    }
+    if (isNaN(TotalAmount) || TotalAmount <= 0) {
+        alert("Please enter a valid Amount!");
+        $('.ExAmount').focus();
+        return false;
+    }
+    if (!ExpDate) {
+        alert("Please select Date!");
+        $('.Exdate').focus();
+        return false;
+    }
+    if (!Comments || Comments.trim() === "") {
+        alert("Please enter Description / Comments!");
+        $('.Exdescription').focus();
+        return false;
+    }
+
     $.post('/MasterExpence/Create', { Expensetype: Expensetype, Comments: Comments, TotalAmount: TotalAmount, ExpDate: ExpDate, invostatus: "No" })
         .done(function (data) {
-            //alert();
-            //waitingDialog.show('Data Saved', { dialogSize: 'sm', progressType: 'success' }) ;
-            //waitingDialog.hide();
-            //setTimeout(function () {
             MASTER_RECORD_ID = data;
-
+            $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
             $('html, body').animate({ scrollTop: 0 }, 500);
-            //}, 2000)
-
+            GetData(4);
         })
         .fail(function (data) {
-            $('.btn-base').css('background', 'red')
-            alert("Invalid Salections");
-            //$('#txtAdvance').get(0).focus();
-            //   $("#txtAdvance").focus(true);
-        })
-    //.always(function () { console.log("always") });
+            $('.btn-base').css('background', 'red');
+            alert("Invalid Selection or Error saving expense");
+        });
 }
 
 // Form Submit  Ajax  End

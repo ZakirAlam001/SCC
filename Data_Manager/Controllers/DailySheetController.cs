@@ -21,7 +21,7 @@ namespace Data_Manager.Controllers
             ViewBag.Stock_ID = new SelectList(db.tbl_SalesTypeSetupForm.Where(a => a.Org_Id == id), "SaleTypeID", "Name");
             ViewBag.EmpID = new SelectList(db.tbl_Employee.Where(a => a.Org_Id == id), "EmpID", "Name");
             ViewBag.VendorId = new SelectList(db.tbl_Vendor.Where(a => a.IsDelete == "N" && a.Org_Id == id), "VendorId", "Name");
-            ViewBag.LoanPersonID = new SelectList(db.tbl_LoanPerson.Where(a => a.IsDelete == "N" && a.Org_Id == id), "LoanPersonID", "Name");
+            ViewBag.LoanPersonID = new SelectList(db.tbl_LoanPerson, "LoanPersonID", "Name");
             return View();
         }
 

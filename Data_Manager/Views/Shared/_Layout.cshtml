@@ -359,6 +359,8 @@
                                 @*<a href="@Url.Action("Index", "GL_Transaction")" class="dropdown-toggle" ><i class="icon-money"></i> Check & Balance</a>*@
                                 <a title="Check Payment and Balances" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-money"></i> Check & Balance</a>
                                 <ul class="dropdown-menu">
+                                    <li title="Customer Accounts GL (Payment & Balances )"><a href="@Url.Action("Sale", "GLTransactionNew")"><i class="icon-certificate"></i>Customer GL New</a></li>
+                                    <li title="Vendor Accounts GL (Payment & Balances )"><a href="@Url.Action("Purchase", "GLTransactionNew")" )"><i class="icon-certificate"></i>Vendor GL New</a></li>
                                     <li title="Customer Accounts GL (Payment & Balances )"><a href="@Url.Action("Index", "GL_Transaction")"><i class="icon-certificate"></i>Customer GL</a></li>
                                     <li title="Vendor Accounts GL (Payment & Balances )"><a href="@Url.Action("Index", "Vendor_Transactions")" )"><i class="icon-certificate"></i>Vendor GL</a></li>
                                 </ul>
