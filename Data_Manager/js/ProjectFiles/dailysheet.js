@@ -90,6 +90,7 @@ function DailyDeposit() {
 
     $.post('/DailyDeposit/Create', { DepositType: DepositType, description: description, Amount: Amount, Date: Date })
         .done(function (data) {
+            alert("Daily Deposit Saved Successfully!");
             GetData(1);
             $('#Searchmodel').modal('hide');
         })
@@ -137,6 +138,7 @@ function LoanPaymentCrud() {
 
     $.post('/Loan_Transaction/Create', { LoanPersonID: LoanPersonID, Payment_Type: Payment_Type, Description: Description, Amount: Amount, ApplyDate: ApplyDate })
         .done(function (data) {
+            alert("Loan Payment Saved Successfully!");
             MASTER_RECORD_ID = data;
             $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
@@ -215,7 +217,7 @@ function VendorSave() {
 
     $.post('/Stock/PurchaseSave', { Details: details, Master: master })
         .done(function (data) {
-            alert("Data Saved Successfully!");
+            alert("Daily Vendor Order Saved Successfully!");
             $('#Searchmodel').modal('hide');
             location.reload();
             printYes();
@@ -307,6 +309,7 @@ function SaleOrder() {
 
     $.post('/SaleMaster/Createe', { Products: products, EmpID: EmpID, Total_Amount: Total_Amount, Description: Description, ApplyDate: ApplyDate, Discount: Discount, Discount_Amount: Discount_Amount, invoiceid: invoiceid })
         .done(function (data) {
+            alert("Daily Customer Order Saved Successfully!");
             MASTER_RECORD_ID = data;
             $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
@@ -357,6 +360,7 @@ function CustomerPayment() {
 
     $.post('/Payments/Create', { EmpID: EmpID, Payment_Type: PayType, Description: Description, Amount: Amount, Recv_Date: Date, invostatus: "No" })
         .done(function (data) {
+            alert("Customer Payment Saved Successfully!");
             MASTER_RECORD_ID = data;
             $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
@@ -405,6 +409,7 @@ function VendorPayment() {
 
     $.post('/Vendor_Payment/Create', { VendorId: VendorId, Payment_Type: PayType, Description: Description, Amount: Amount, Recv_Date: Date, invostatus: "No" })
         .done(function (data) {
+            alert("Vendor Payment Saved Successfully!");
             MASTER_RECORD_ID = data;
             $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');
@@ -447,6 +452,7 @@ function ExpenseAdd() {
 
     $.post('/MasterExpence/Create', { Expensetype: Expensetype, Comments: Comments, TotalAmount: TotalAmount, ExpDate: ExpDate, invostatus: "No" })
         .done(function (data) {
+            alert("Daily Expense Saved Successfully!");
             MASTER_RECORD_ID = data;
             $('#Searchmodel').modal('hide');
             $('#printConfirmationModal').modal('show');

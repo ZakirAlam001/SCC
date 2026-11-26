@@ -35,117 +35,27 @@
         height:122pt;
     }
 
-    /* ===== Popup Big Size + Professional Design ===== */
+        /* Modal Centering & Big Size (overrides Bootstrap 3.0.0 left: 50% bug) */
     #Searchmodel .modal-dialog {
-        width: 900px !important;
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        width: 90% !important;
+        max-width: 950px !important;
         margin: 30px auto !important;
     }
-    #Searchmodel .modal-content {
-        background: linear-gradient(rgb(25, 49, 70), rgb(12, 36, 63)) !important;
-        border: 1px solid #3d4a5d !important;
-        border-radius: 8px !important;
-        border-bottom: 3px solid #ffc806 !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8) !important;
-        color: #fff !important;
+    /* Hide inner duplicate block header inside modal so only modal-header is visible */
+    #Searchmodel .block .header {
+        display: none !important;
     }
-    #Searchmodel .modal-header {
-        background: rgba(0,0,0,0.3) !important;
-        border-bottom: 2px solid #ffc806 !important;
-        padding: 12px 20px !important;
-    }
-    #Searchmodel .modal-title {
-        color: #ffc806 !important;
-        font-weight: bold !important;
-        font-size: 16px !important;
-    }
-    #Searchmodel .modal-body {
-        padding: 20px !important;
-    }
-    #Searchmodel .well {
+    #Searchmodel .block {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    #Searchmodel .block {
-        background: rgba(255,255,255,0.05) !important;
-        border: 1px solid #3e4c60 !important;
-        border-radius: 6px !important;
         margin-bottom: 0 !important;
     }
-    #Searchmodel .block .header {
-        background: rgba(0,0,0,0.25) !important;
-        border-bottom: 1px solid #3e4c60 !important;
-        padding: 10px 15px !important;
-    }
-    #Searchmodel .block .header h2 {
-        color: #ffc806 !important;
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        margin: 0 !important;
-    }
     #Searchmodel .block .content {
-        padding: 18px !important;
-    }
-    #Searchmodel .editor-label {
-        color: #b8d4e8 !important;
-        font-weight: 600 !important;
-        font-size: 12px !important;
-        margin-bottom: 5px !important;
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-    }
-    #Searchmodel .form-control,
-    #Searchmodel .editor-field input,
-    #Searchmodel .editor-field select {
-        background-color: #0d1b2a !important;
-        border: 1px solid #4a5a73 !important;
-        color: #fff !important;
-        height: 36px !important;
-        border-radius: 4px !important;
-        font-size: 13px !important;
-        padding: 5px 10px !important;
-    }
-    #Searchmodel .form-control:focus,
-    #Searchmodel .editor-field input:focus,
-    #Searchmodel .editor-field select:focus {
-        border-color: #ffc806 !important;
-        box-shadow: 0 0 5px rgba(255,200,6,0.4) !important;
-        outline: none !important;
-    }
-    #Searchmodel select option {
-        background: #1a2a3a !important;
-        color: #fff !important;
-    }
-    #Searchmodel .input-group-addon {
-        background-color: #132233 !important;
-        border: 1px solid #4a5a73 !important;
-        color: #ffc806 !important;
-    }
-    #Searchmodel .btn-base {
-        background: #00a65a !important;
-        border: 1px solid #008d4c !important;
-        color: #fff !important;
-        font-weight: bold !important;
-        font-size: 13px !important;
-        padding: 7px 25px !important;
-        border-radius: 4px !important;
-        margin-top: 10px !important;
-    }
-    #Searchmodel .btn-base:hover {
-        background: #008d4c !important;
-        box-shadow: 0 0 8px rgba(0,166,90,0.5) !important;
-    }
-    #Searchmodel .close {
-        color: #fff !important;
-        opacity: 0.8 !important;
-        font-size: 24px !important;
-        text-shadow: none !important;
-    }
-    #Searchmodel .close:hover {
-        color: #ffc806 !important;
-        opacity: 1 !important;
+        padding: 5px 0 !important;
     }
     .ui-datepicker, #ui-datepicker-div {
         z-index: 99999 !important;
@@ -175,10 +85,11 @@
     </div><br />
 <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.dailydeposit');" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/DailyDeposit/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(1);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Deposit  </h2>
             </div>
             <div class="content">
@@ -216,10 +127,11 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.customerorder');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/SaleMaster/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(2);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Customer Order</h2>
             </div>
             <div class="content">
@@ -261,10 +173,11 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.vendorrorder');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/stock/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(3);"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Vendor Order</h2>
             </div>
             <div class="content">
@@ -304,10 +217,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    
+
+
+</div>
+<div class="row">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.loanAmount');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/Loan_Transaction/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(7)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Loan Amount</h2>
             </div>
             <div class="content">
@@ -339,7 +258,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -348,14 +267,11 @@
             </div>
         </div>
     </div>
-
-
-</div>
-<div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.expense');" href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/MasterExpence/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(4)"><i class="widget-icon widget-icon-dark icon-list"> </i> Daily Expense</h2>
             </div>
             <div class="content">
@@ -383,7 +299,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -393,10 +309,11 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.customerpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
+                <a href="/Payments/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(5)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Recieved</h2>
             </div>
             <div class="content">
@@ -434,11 +351,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="block">
             <div class="header">
                 <a onclick="showhide('.vendorpayment');" data-toggle="modal" data-backdrop="static" data-target="#Searchmodel" style="float:right;" class="widget-icon widget-icon-dark"><i class="icon-plus"></i></a>
-                
+                <a href="/Vendor_Payment/Index" target="_blank" style="float:right;" title="Go to Detail" class="widget-icon widget-icon-dark"><i class="icon-location-arrow"></i></a>
                 <h2 onclick="GetData(6)"><i class="widget-icon widget-icon-dark icon-list"> </i> Payment Send</h2>
             </div>
             <div class="content">
@@ -468,7 +385,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -548,7 +465,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="modal  fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="Searchmodel" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -559,244 +476,201 @@
                     <!-- <form role="form"> -->
                     <div class="well">
 
-                        <div class=" hide addform row">
-                            <div class="col-lg-4">
-                                <div class="editor-label">
-                                    Users
-                                </div>
+                        <div class="hide addform row searchform">
+                            <div class="col-md-4">
+                                <div class="editor-label">Users / Sales Item / Vendor</div>
                                 <div class="editor-field">
-                                    @*@*   @Html.DropDownList("EmpID", null, "Select SO")*@
-
-                                    @Html.DropDownList("Stock_ID", null, "Select Sales Item", new { @class = "validate[required] form-control" })
-                                    @*   @Html.DropDownList("EmpID", null, "Customer Name", new { @class = "validate[required] form-control" })*@
+                                    @Html.DropDownList("Stock_ID", null, "Select Sales Item", new { @class = "validate[required] form-control", style = "margin-bottom: 6px;" })
                                     @Html.DropDownList("VendorId", null, "Vendor Name", new { @class = "validate[required] form-control" })
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="editor-label">
-                                    From Date
-                                </div>
+                            <div class="col-md-4">
+                                <div class="editor-label">From Date</div>
                                 <div class="editor-field">
                                     <div class="input-group">
                                         <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
                                         <input name="fromdate" id="fromdate" type="text" class="datepicker1 form-control" />
-                                        @* <input name="fromdate" id="fromdate" />*@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="editor-label">
-                                    To Date
+                            <div class="col-md-4">
+                                <div class="editor-label">To Date</div>
+                                <div class="editor-field">
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
+                                        <input name="todate" id="todate" type="text" class="datepicker1 form-control" />
+                                    </div>
                                 </div>
-                                @* <div class="editor-field">*@
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="icon-calendar-empty"></span></div>
-                                    <input name="todate" id="todate" type="text" class="datepicker1 form-control" />
-                                </div>
-                                @*  </div>*@
                             </div>
                         </div>
+
                         <div id="customerpayment" class="row hide addform customerpayment">
-                            <div class=" block">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i  class="widget-icon widget-icon-dark icon-plus"> </i> Add Customer Payment  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Customer Payment</h2>
                                 </div>
                                 <div class="content">
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Name
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required] form-control" })
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Name</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required] form-control" })
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Payment Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <select class="" id="Payment_Type" name="Payment_Type">
-                                                            <option>Select</option>
-                                                            <option value="Cash">Cash</option>
-                                                            <option value="Bank">Bank</option>
-                                                            <option value="Cheque">Cheque</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Payment Type</div>
+                                            <div class="editor-field">
+                                                <select class="form-control" id="Payment_Type" name="Payment_Type">
+                                                    <option value="">Select</option>
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Bank">Bank</option>
+                                                    <option value="Cheque">Cheque</option>
+                                                </select>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number" required>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Amount</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] form-control" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number" required>
                                             </div>
-                                            <div class="col-lg-2">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                            <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
-                                                        <input class="datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="form-control" id="Customerdescription" type="text" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-base" onclick="CustomerPayment();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
-
-
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hide addform row vendorpayment">
-                            <div class=" block">
-                                <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Vendor Payment  </h2>
-                                </div>
-                                <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Name
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("VendorId", null, "Select", new { @class = "VPVendorID validate[required] form-control" })
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Payment Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <select class=" VPPType">
-                                                            <option>Select</option>
-                                                            <option value="Cash">Cash</option>
-                                                            <option value="Bank">Bank</option>
-                                                            <option value="Cheque">Cheque</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] VPamount " data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="VPdate datepicker1 validate[required]  hasDatepicker" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="col-lg-8">
-                                            <div class="editor-label">
-                                                Description
-                                            </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
                                             <div class="editor-field">
                                                 <div class="input-group">
-                                                    <input class="form-control VPdescription" type="text" required>
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="datepicker1 validate[required] form-control hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off" required>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-base" onclick="VendorPayment();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        <div class="col-md-8">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="form-control" id="Customerdescription" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="CustomerPayment();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hide addform row vendorpayment">
+                            <div class="block">
+                                <div class="header">
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Vendor Payment</h2>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Name</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("VendorId", null, "Select", new { @class = "VPVendorID validate[required] form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Payment Type</div>
+                                            <div class="editor-field">
+                                                <select class="VPPType form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="Bank">Bank</option>
+                                                    <option value="Cheque">Cheque</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Amount</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] VPamount form-control" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="VPdate datepicker1 validate[required] form-control hasDatepicker" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="form-control VPdescription" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="VendorPayment();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="hide addform row expense">
-                            <div class=" block">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Daily Expense  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Daily Expense</h2>
                                 </div>
                                 <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="form-control Exdescription" type="text" required>
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Expense Type</div>
+                                            <div class="editor-field">
+                                                <select class="validate[required] Exexpensetype form-control" id="Expensetype" name="Expensetype">
+                                                    <option value=""></option>
+                                                    <option value="D-Salary">D-Salary</option>
+                                                    <option value="M-Salary">M-Salary</option>
+                                                    <option value="OfficeExp">OfficeExp</option>
+                                                    <option value="UtilityExp">UtilityExp</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Amount</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] ExAmount form-control" required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="datepicker1 validate[required] form-control hasDatepicker Exdate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Payment Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <select class="validate[required] Exexpensetype" id="Expensetype" name="Expensetype">
-                                                            <option value=""></option>
-                                                            <option value="D-Salary">D-Salary</option>
-                                                            <option value="M-Salary">M-Salary</option>
-                                                            <option value="OfficeExp">OfficeExp</option>
-                                                            <option value="UtilityExp">UtilityExp</option>
-                                                            <option value="Others">Others</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-12">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="form-control Exdescription" type="text" required>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] ExAmount" required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="datepicker1 validate[required]  hasDatepicker Exdate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button type="button" class="btn btn-base" onclick="ExpenseAdd();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="ExpenseAdd();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
@@ -804,315 +678,253 @@
                         </div>
 
                         <div class="row customerorder hide addform">
-                            <div class=" block">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Customer Order  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Customer Order</h2>
                                 </div>
                                 <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Name
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required]  OEmpID" })
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Name</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("EmpID", null, "Select", new { @class = "validate[required] form-control OEmpID" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Order Type</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required] form-control OItemType" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="datepicker1 validate[required] form-control hasDatepicker Odate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Order Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required]  OItemType" })
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Rate</div>
+                                            <div class="editor-field">
+                                                <input onchange="Total(1);" class="validate[required] form-control ORate" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="form-control validate[required] ODescription" placeholder="Description" data-val="true" data-val-date="The field Recv_Date must be a date." type="text">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Weight(kg)</div>
+                                            <div class="editor-field">
+                                                <input onchange="Total(1);" class="validate[required] form-control OWeight" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Rate
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        <input onchange="Total(1);" class="validate[required] ORate" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Total Amount</div>
+                                            <div class="editor-field">
+                                                <input readonly="readonly" value="0" class="validate[required] form-control OTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Weight(kg)
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        <input onchange="Total(1);" class="validate[required] OWeight" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-12">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="form-control validate[required] ODescription" placeholder="Description" data-val="true" type="text">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input readonly="readonly" value="0" class="validate[required] OTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="datepicker1 validate[required]  hasDatepicker Odate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-base" onclick="SaleOrder();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="SaleOrder();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class=" row vendorrorder hide addform">
-                            <div class=" block">
+                        <div class="row vendorrorder hide addform">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Vendor Order  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Vendor Order</h2>
                                 </div>
                                 <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Name
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("VendorID", null, "Select", new { @class = "validate[required]  OVendorID" })
-                                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Name</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("VendorID", null, "Select", new { @class = "validate[required] form-control OVendorID" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Order Type</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required] form-control OVItemType" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="datepicker1 validate[required] form-control hasDatepicker OVdate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Order Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        @Html.DropDownList("Stock_ID", null, "Select", new { @class = "validate[required]  OVItemType" })
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Rate</div>
+                                            <div class="editor-field">
+                                                <input onchange="Total(2)" class="validate[required] form-control OVRate" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
                                             </div>
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="form-control validate[required] OVDescription" placeholder="Description" type="text">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Weight(kg)</div>
+                                            <div class="editor-field">
+                                                <input onchange="Total(2)" class="validate[required] form-control OVWeight" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Rate
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        <input onchange="Total(2)" class="validate[required] OVRate" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Total Amount</div>
+                                            <div class="editor-field">
+                                                <input readonly="readonly" value="0" class="validate[required] form-control OVTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Weight(kg)
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="editor-field">
-                                                        <input onchange="Total(2)" class="validate[required] OVWeight" required data-val="true" data-val-number="The field Amount must be a number." value="0" type="number">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-12">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="form-control validate[required] OVDescription" placeholder="Description" type="text">
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input readonly="readonly" value="0" class="validate[required] OVTotalAmount" data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="datepicker1 validate[required]  hasDatepicker OVdate" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-base" onclick="VendorSave();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="VendorSave();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class=" row loanAmount hide addform">
-                            <div class=" block">
+                        <div class="row loanAmount hide addform">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Loan Payment  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Loan Payment</h2>
                                 </div>
                                 <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Name
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("LoanPersonID", null, "Select", new { @class = "LPLoanPersonID validate[required]" })
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Name</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("LoanPersonID", null, "Select", new { @class = "LPLoanPersonID validate[required] form-control" })
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] LPdescription " required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="text">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Payment Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <select class="validate[required] LPPayment_Type" id="Payment_Type" name="Payment_Type">
-                                                        <option value=""></option>
-                                                        <option value="CR">Amount Payed</option>
-                                                        <option value="DR">Amount Recieved</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] LPAmount " required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="LPdate datepicker1 validate[required]  hasDatepicker" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </div>
-
-                                        <button type="button" class="btn btn-base" onclick="LoanPaymentCrud();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Payment Type</div>
+                                            <div class="editor-field">
+                                                <select class="validate[required] LPPayment_Type form-control" id="Payment_Type" name="Payment_Type">
+                                                    <option value=""></option>
+                                                    <option value="CR">Amount Payed</option>
+                                                    <option value="DR">Amount Recieved</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Amount</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] LPAmount form-control" required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="number">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="LPdate datepicker1 validate[required] form-control hasDatepicker" required data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] LPdescription form-control" required data-val="true" data-val-number="The field Amount must be a number." id="Amount" name="Amount" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="LoanPaymentCrud();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class=" row dailydeposit hide addform">
-                            <div class=" block">
+                        <div class="row dailydeposit hide addform">
+                            <div class="block">
                                 <div class="header">
-
-                                    <h2><i class="widget-icon widget-icon-dark icon-plus"> </i> Add Deposit  </h2>
+                                    <h2><i class="widget-icon widget-icon-dark icon-plus"></i> Add Deposit</h2>
                                 </div>
                                 <div class="content">
-
-                                    <div class="row ">
-                                        <div class="col-lg-12">
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Deposit Type
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        @Html.DropDownList("DepositType", new List<SelectListItem>
-                                                        {
-                                                                new SelectListItem{ Text="Select Deposit Type", },
-                                                                new SelectListItem{ Text="Cash", Value = "Cash" },
-                                                                new SelectListItem{ Text="Goods", Value = "Goods" },
-
-                                                         })
-                                                    </div>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Deposit Type</div>
+                                            <div class="editor-field">
+                                                @Html.DropDownList("DepositType", new List<SelectListItem>
+                                                {
+                                                    new SelectListItem{ Text="Select Deposit Type", Value="" },
+                                                    new SelectListItem{ Text="Cash", Value = "Cash" },
+                                                    new SelectListItem{ Text="Goods", Value = "Goods" },
+                                                }, new { @class = "validate[required] form-control", @required = "required" })
                                             </div>
-
-
-
-
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Amount
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] ddAmount " data-val="true" data-val-number="The field Amount must be a number." type="number" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="editor-label">
-                                                    Date
-                                                </div>
-                                                <div class="editor-field">
-                                                    <div class="input-group">
-                                                        <input class="dddate datepicker1 validate[required]  hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="editor-label">
-                                                    Description
-                                                </div>
-                                                <div class="editor-field">
-                                                    <input class="validate[required] dddescription " data-val="true" data-val-number="The field Amount must be a number." type="text" required>
-                                                </div>
-                                            </div>
-
                                         </div>
-                                        <button type="button" class="btn btn-base" onclick="DailyDeposit();"><i class="icon-save"></i> Save</button> <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-top: 10px; padding: 7px 20px; font-weight: bold;">Cancel</button>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Amount</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] ddAmount form-control" data-val="true" data-val-number="The field Amount must be a number." type="number" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="editor-label">Date</div>
+                                            <div class="editor-field">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar-empty"></i></span>
+                                                    <input class="dddate datepicker1 validate[required] form-control hasDatepicker" data-val="true" data-val-date="The field Recv_Date must be a date." id="Recv_Date" name="Recv_Date" type="text" value="" autocomplete="off" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-md-12">
+                                            <div class="editor-label">Description</div>
+                                            <div class="editor-field">
+                                                <input class="validate[required] dddescription form-control" data-val="true" type="text" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12"><hr style="margin: 15px 0 10px 0;" /></div>
+                                        <div class="col-md-12 text-right">
+                                            <button type="button" class="btn btn-base" onclick="DailyDeposit();"><i class="icon-save"></i> Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
-                    @*<div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-clean postClaim" id="btnSave"> Submit </button>
-                    </div>*@
-                    <!--</form>-->
                 </div>
             </div>
         </div>
@@ -1129,6 +941,9 @@
         if (title) {
             $("#modalTitle").html('<i class="widget-icon widget-icon-dark icon-plus"></i> ' + title);
         }
+
+        // Initialize and re-bind datepicker on all datepicker inputs in active form
+        $(id).find('.datepicker1').datepicker({ dateFormat: 'd-M-yy' });
 
         // Auto-fill active date in datepicker if empty
         var currentActiveDate = $("#activedate").val();

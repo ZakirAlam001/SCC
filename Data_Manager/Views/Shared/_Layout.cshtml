@@ -546,26 +546,45 @@
         </script>*@
     <script>
         //Loader Start
-
-        function closeIt() {
+        function showLoader() {
             $("#loa").show();
         }
-        window.onbeforeunload = closeIt;
 
+        function hideLoader() {
+            $("#loa").stop(true, true).fadeOut("fast", function () {
+                $(this).hide();
+            });
+        }
+
+        window.onbeforeunload = showLoader;
+
+        // AJAX Events
         $(document).ajaxStart(function () {
-            $("#loa").show();
+            showLoader();
         });
         $(document).ajaxStop(function () {
-            $("#loa").hide();
+            hideLoader();
+        });
+        $(document).ajaxError(function () {
+            hideLoader();
         });
 
-        $(window).load(function () {
-            $("#loa").fadeOut("slow", function () {
-                $("#loa").hide();
-                //   $("#loa").show();
-            });
+        // Window Load & DOM Ready
+        $(window).on("load", function () {
+            hideLoader();
         });
-             //Loader End
+        $(document).ready(function () {
+            setTimeout(hideLoader, 300);
+        });
+
+        // Fix: Hide loader on browser Back / Forward (BFCache restore) & Popstate
+        window.addEventListener("pageshow", function (event) {
+            hideLoader();
+        });
+        window.addEventListener("popstate", function (event) {
+            hideLoader();
+        });
+        //Loader End
     </script>
 
 
